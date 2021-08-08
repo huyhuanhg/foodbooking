@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*logo*/
+.logo-icon{
+    height: 80px;
+    width: 80px;
+    margin: auto;
+    background: url(https://forcky.com/assets/images/store-logo4.png) no-repeat;
+}
+/*color*/
+
+body{
+    font-size: 16px;
+}
+
+.logo-color{
+    color: green;
+}
+
+.blue{
+    color: blue;
+}
+
+/*weight*/
+.bold{
+    font-weight: bold;
+}
+/*width*/
+.w-100{
+    width: 100%;
+}
+
+/*link*/
+a:hover {
+    color: #059;
+    text-decoration: underline;
+}
+
+a:active, a:hover {
+    outline: 0;
+}
+a {
+    color: #07d;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*form*/
+
+.form-group{
+    position: relative;
+
+    margin-bottom: .5rem;
+}
+
+input{
+    height: 30px;
+    max-width: 100%;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #444;
+    -webkit-transition: all linear .2s;
+    transition: all linear .2s;
+    border-radius: 4px;
+    outline: none;
+}
+input:hover, input:focus{
+    border-color: #b1b1b1;
+}
+input[type=submit],input[type=reset],input[type=button]{
+    cursor: pointer;
+}
+input[type=submit]:hover,input[type=reset]:hover,input[type=button]:hover{
+    border-color: #bbb;
+ }
+
+button{
+    outline: none;
+}
