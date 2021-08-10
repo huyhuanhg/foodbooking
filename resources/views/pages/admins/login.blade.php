@@ -23,7 +23,7 @@
         <form method="post">
             <h3 class="login-title"><span class="bold">FOODBOOKING</span> || Quản lý Cửa Hàng</h3>
             <div class="form-group">
-                <input type="email" id="email" class="input w-100" name="email" placeholder="Tài khoản"/>
+                <input type="text" id="email" class="input w-100" name="email" placeholder="Tài khoản"/>
             </div>
             <div class="form-group">
                 <input type="password" id="password" class="input w-100" name="password" placeholder="Mật khẩu"/>

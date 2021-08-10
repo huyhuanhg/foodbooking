@@ -4231,3 +4231,12 @@ footer .footer-list li:last-child {
 footer .footer-bar, footer.footer-bar {
     border-top: 1px solid #2a3656
 }
+
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+textarea{
+    resize: none;
+}

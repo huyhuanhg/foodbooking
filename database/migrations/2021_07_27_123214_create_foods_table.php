@@ -23,12 +23,12 @@ class CreateFoodsTable extends Migration
             $table->string('food_not_mark', 200);
             $table->tinyInteger('food_active');
             $table->string('food_avatar', 50)->nullable();
-            $table->tinyInteger('promotion');
-            $table->float("price")->default(0);
+            $table->tinyInteger('promotion')->default(0);
+            $table->float("price");
             $table->float('food_profit')->default(0);//số tiền lợi nhuận
             $table->integer("food_consume")->default(0); //số lượng tiêu thụ
             $table->text("food_description");
-            $table->char("avg_rate", 5);
+            $table->char("avg_rate", 1)->default(0);
             $table->timestamps();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

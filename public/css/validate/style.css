@@ -1,0 +1,17 @@
+.form-group{
+    margin-bottom: 30px !important;
+}
+.form-group.invalid{
+    position: relative;
+}
+
+.form-group.invalid input, .form-group.invalid select{
+    border-color: red;
+}
+
+.invalid-feedback{
+    display: block;
+    position: absolute;
+    bottom: -20px;
+    color: red;
+}

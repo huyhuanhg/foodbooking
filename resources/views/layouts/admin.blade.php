@@ -30,9 +30,25 @@
 
     <!-- Css -->
     <link href="{{ asset('/css/pages/admin/style.css') }}" rel="stylesheet" type="text/css" id="theme-opt"/>
+
+    @yield('css_external')
     <style>
-        @yield('css')
+        @yield('css_inline')
     </style>
+
+
+    <!-- javascript -->
+    <script src="{{asset('/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- simplebar -->
+    <script src="{{asset('/js/simplebar.min.js')}}"></script>
+    <!-- Chart -->
+    {{--<script src="{{asset('/js/apexcharts.min.js')}}"></script>--}}
+    {{--<script src="{{asset('/js/columnchart.init.js')}}"></script>--}}
+<!-- Icons -->
+    <script src="{{asset('/js/feather.min.js')}}"></script>
+    <script src="{{asset('/js/library/library_common.js')}}"></script>
+
+    @yield('js_declare')
 </head>
 
 <body>
@@ -55,8 +71,7 @@
     <main class="page-content bg-light">
 
     {{view('blocks.admins.header')}}
-
-                @yield('main_content')
+    @yield('main_content')
     <!--end container-->
 
         <!-- Footer Start -->
@@ -151,17 +166,10 @@
 {{--        </ul><!--end icon-->--}}
 {{--    </div>--}}
 {{--</div>--}}
-<!-- javascript -->
-<script src="{{asset('/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- simplebar -->
-<script src="{{asset('/js/simplebar.min.js')}}"></script>
-<!-- Chart -->
-{{--<script src="{{asset('/js/apexcharts.min.js')}}"></script>--}}
-{{--<script src="{{asset('/js/columnchart.init.js')}}"></script>--}}
-<!-- Icons -->
-<script src="{{asset('/js/feather.min.js')}}"></script>
+
 <!-- Main Js -->
 <script src="{{asset('/js/app.js')}}"></script>
-@yield('js')
+
+@yield('js_inline')
 </body>
 </html>
