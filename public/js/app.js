@@ -29,7 +29,7 @@ window.onload = function loader() {
     }, 350);
 
     // Menus
-    activateMenu();
+    // activateMenu();
     activateSidebarMenu();
 }
 
@@ -73,60 +73,56 @@ function getClosest(elem, selector) {
 
 };
 
-// function activateMenu() {
-//     var menuItems = document.getElementsByClassName("sub-menu-item");
-//     if (menuItems) {
-//
-//         var matchingMenuItem = null;
-//         for (var idx = 0; idx < menuItems.length; idx++) {
-//             if (menuItems[idx].href === window.location.href) {
-//                 matchingMenuItem = menuItems[idx];
-//             }
-//         }
-//
-//         if (matchingMenuItem) {
-//             matchingMenuItem.classList.add('active');
-//             var immediateParent = getClosest(matchingMenuItem, 'li');
-//             if (immediateParent) {
-//                 immediateParent.classList.add('active');
-//             }
-//
-//             var parent = getClosest(matchingMenuItem, '.parent-menu-item');
-//             if (parent) {
-//                 parent.classList.add('active');
-//                 var parentMenuitem = parent.querySelector('.menu-item');
-//                 if (parentMenuitem) {
-//                     parentMenuitem.classList.add('active');
-//                 }
-//                 var parentOfParent = getClosest(parent, '.parent-parent-menu-item');
-//                 if (parentOfParent) {
-//                     parentOfParent.classList.add('active');
-//                 }
-//             } else {
-//                 var parentOfParent = getClosest(matchingMenuItem, '.parent-parent-menu-item');
-//                 if (parentOfParent) {
-//                     parentOfParent.classList.add('active');
-//                 }
-//             }
-//         }
-//     }
-// }
+function activateMenu() {
+    var menuItems = document.getElementsByClassName("sub-menu-item");
+    if (menuItems) {
+
+        var matchingMenuItem = null;
+        for (var idx = 0; idx < menuItems.length; idx++) {
+            if (menuItems[idx].href === window.location.href) {
+                matchingMenuItem = menuItems[idx];
+            }
+        }
+
+        if (matchingMenuItem) {
+            matchingMenuItem.classList.add('active');
+            var immediateParent = getClosest(matchingMenuItem, 'li');
+            if (immediateParent) {
+                immediateParent.classList.add('active');
+            }
+
+            var parent = getClosest(matchingMenuItem, '.parent-menu-item');
+            if (parent) {
+                parent.classList.add('active');
+                var parentMenuitem = parent.querySelector('.menu-item');
+                if (parentMenuitem) {
+                    parentMenuitem.classList.add('active');
+                }
+                var parentOfParent = getClosest(parent, '.parent-parent-menu-item');
+                if (parentOfParent) {
+                    parentOfParent.classList.add('active');
+                }
+            } else {
+                var parentOfParent = getClosest(matchingMenuItem, '.parent-parent-menu-item');
+                if (parentOfParent) {
+                    parentOfParent.classList.add('active');
+                }
+            }
+        }
+    }
+}
 
 
 //Admin Menu
 function activateSidebarMenu() {
     var current = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
     if (current !== "" && document.getElementById("sidebar")) {
-        var menuItems = document.querySelectorAll('#sidebar a');
+        var menuItems = document.querySelectorAll('.sidebar-menu a');
         for (var i = 0, len = menuItems.length; i < len; i++) {
-            if (menuItems[i].getAttribute("href").indexOf(current) !== -1) {
+            var page = menuItems[i].getAttribute("href").
+            substring(menuItems[i].getAttribute("href").lastIndexOf('/') + 1);
+            if (page === current) {
                 menuItems[i].parentElement.className += " active";
-                if (menuItems[i].closest(".sidebar-submenu")) {
-                    menuItems[i].closest(".sidebar-submenu").classList.add("d-block");
-                }
-                if (menuItems[i].closest(".sidebar-dropdown")) {
-                    menuItems[i].closest(".sidebar-dropdown").classList.add("active");
-                }
             }
         }
     }
@@ -216,20 +212,21 @@ if (document.getElementsByClassName("dd-menu")) {
 }
 
 // ACtive Sidebar
-(function () {
-    var url = location.pathname;
-    url = url[url.length - 1] === '/' ? url.substring(1, url.length - 1) : url.substring(1);
-    var current = url.substring(url.lastIndexOf('/') + 1);
-    if (current === "") return;
-    var menuItems = document.querySelectorAll('.sidebar-menu a');
-    for (var i = 0, len = menuItems.length; i < len; i++) {
-        var page = menuItems[i].getAttribute("href").
-        substring(menuItems[i].getAttribute("href").lastIndexOf('/') + 1);
-        if (page === current) {
-            menuItems[i].parentElement.className += " active";
-        }
-    }
-})();
+// (function () {
+//     var url = location.pathname;
+//     url = url[url.length - 1] === '/' ? url.substring(1, url.length - 1) : url.substring(1);
+//     var current = url.substring(url.lastIndexOf('/') + 1);
+//     if (current === "") return;
+//     var menuItems = document.querySelectorAll('.sidebar-menu a');
+//     for (var i = 0, len = menuItems.length; i < len; i++) {
+//         console.log(menuItems[i].getAttribute("href"));
+//         var page = menuItems[i].getAttribute("href").
+//         substring(menuItems[i].getAttribute("href").lastIndexOf('/') + 1);
+//         if (page === current) {
+//             menuItems[i].parentElement.className += " active";
+//         }
+//     }
+// })();
 
 
 //Validation Shop Checkouts
