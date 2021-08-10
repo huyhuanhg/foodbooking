@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/assets/pages/admin/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/pages/admin/login.css') }}">
     <!-- JS -->
     <!-- Styles -->
 

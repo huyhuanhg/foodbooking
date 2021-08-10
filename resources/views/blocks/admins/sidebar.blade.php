@@ -33,8 +33,8 @@
                                 </li>
 
                                 <li>
-                                    <a href="#">
-                                        <i class="uil uil-user me-2 d-inline-block"></i>
+                                    <a href="{{route('customers')}}">
+                                        <i class="fas fa-people-carry me-2 d-inline-block"></i>
                                         Quản lý khách hàng
                                     </a>
                                 </li>
@@ -67,42 +67,12 @@
                                         Quản lý khuyến mãi
                                     </a>
                                 </li>
-
-                                {{--                                <li class="sidebar-dropdown">--}}
-                                {{--                                    <a href="javascript:void(0)"><i--}}
-                                {{--                                            class="uil uil-file me-2 d-inline-block"></i>Pages</a>--}}
-                                {{--                                    <div class="sidebar-submenu">--}}
-                                {{--                                        <ul>--}}
-                                {{--                                            <li><a href="faqs.html">FAQs</a></li>--}}
-                                {{--                                            <li><a href="review.html">Reviews</a></li>--}}
-                                {{--                                            <li><a href="invoice-list.html">Invoice List</a></li>--}}
-                                {{--                                            <li><a href="invoice.html">Invoice</a></li>--}}
-                                {{--                                            <li><a href="terms.html">Terms &amp; Policy</a></li>--}}
-                                {{--                                            <li><a href="privacy.html">Privacy Policy</a></li>--}}
-                                {{--                                            <li><a href="error.html">404 !</a></li>--}}
-                                {{--                                            <li><a href="blank-page.html">Blank Page</a></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </li>--}}
-
-                                {{--                                <li class="sidebar-dropdown">--}}
-                                {{--                                    <a href="javascript:void(0)"><i class="uil uil-sign-in-alt me-2 d-inline-block"></i>Authentication</a>--}}
-                                {{--                                    <div class="sidebar-submenu">--}}
-                                {{--                                        <ul>--}}
-                                {{--                                            <li><a href="login.html">Login</a></li>--}}
-                                {{--                                            <li><a href="signup.html">Signup</a></li>--}}
-                                {{--                                            <li><a href="forgot-password.html">Forgot Password</a></li>--}}
-                                {{--                                            <li><a href="lock-screen.html">Lock Screen</a></li>--}}
-                                {{--                                            <li><a href="thankyou.html">Thank you...!</a></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </li>--}}
-
-                                {{--                                <li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a>--}}
-                                {{--                                </li>--}}
-
-                                {{--                                <li><a href="../landing/index-two.html" target="_blank"><i--}}
-                                {{--                                            class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li>--}}
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="uil uil-user me-2 d-inline-block"></i>
+                                        Quản lý người dùng
+                                    </a>
+                                </li>
                             </ul>
                             <!-- sidebar-menu  -->
                         </div>

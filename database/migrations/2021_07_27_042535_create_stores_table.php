@@ -21,7 +21,9 @@ class CreateStoresTable extends Migration
             $table->string("store_address", 200);
             $table->char('phone_contact', 15);
             $table->unsignedInteger("store_owner");
-            $table->char("avg_rate", 5);
+            $table->char("avg_rate", 1)->default(0);
+            $table->char("store_description", 1)->nullable();
+            $table->tinyInteger("store_status")->default(1);
             $table->timestamps();
             $table->foreign('store_owner')->references('id')->on('admins')->onDelete('cascade');
         });
