@@ -17,5 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware(['auth:api', 'auth:admin'])->namespace('App\Http\Controllers\Admin\Ajax')
-    ->get('/admin/categories/alert', 'AjaxController@index');
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'v1'
+], function () {
+    Route::post('/login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'login']);
+    Route::post('/logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout']);
+    Route::post('/refresh', [\App\Http\Controllers\Client\Auth\LoginController::class, 'refresh']);
+    Route::get('/user-profile', [\App\Http\Controllers\Client\Auth\LoginController::class, 'userProfile']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'v1/manager',
+    'namespace' => '\App\Http\Controllers\Admin\Api\Auth',
+], function () {
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout');
+    Route::post('/refresh', 'LoginController@refresh');
+    Route::get('/user-profile', 'LoginController@userProfile');
+});

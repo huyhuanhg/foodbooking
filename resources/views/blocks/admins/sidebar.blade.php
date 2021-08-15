@@ -28,13 +28,13 @@
                                     <a href="{{route('categories')}}">
                                         <i
                                             class="uil uil-apps me-2 d-inline-block"></i>
-                                        Quản lý thể loại
+                                        Quản lý danh mục
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="{{route('customers')}}">
-                                        <i class="fas fa-people-carry me-2 d-inline-block"></i>
+                                        <i class="uil uil-book-reader me-2 d-inline-block"></i>
                                         Quản lý khách hàng
                                     </a>
                                 </li>
@@ -47,14 +47,14 @@
                                 </li>
 
                                 <li>
-                                    <a href="javascript:void(0)">
-                                        <i class="uil uil-coffee me-2 d-inline-block"></i>
+                                    <a href="{{route('foods')}}">
+                                        <i class="uil uil-crockery me-2 d-inline-block"></i>
                                         Quản lý đồ ăn
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript:void(0)">
+                                    <a href="{{route('orders')}}">
                                         <i
                                             class="uil uil-shopping-cart me-2 d-inline-block"></i>
                                         Quản lý đơn hàng
@@ -62,8 +62,8 @@
                                 </li>
 
                                 <li>
-                                    <a href="javascript:void(0)">
-                                        <i class="uil uil-flip-h me-2 d-inline-block"></i>
+                                    <a href="{{route('promotions')}}">
+                                        <i class="uil uil-percentage me-2 d-inline-block"></i>
                                         Quản lý khuyến mãi
                                     </a>
                                 </li>

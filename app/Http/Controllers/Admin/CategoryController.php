@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class CategoryController extends Controller
 {
@@ -19,27 +21,31 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $data['categories'] = $this->objCategory->getAllCategories();
+        $data['categories'] = $this->objCategory->getAllCategoriesInfo();
         return view('pages.admins.categories.index', $data);
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validate([
-            'category_name' => 'required',
-            'category_active' => 'required',
-        ]);
-        $this->objCategory->create($request->all());
-        return redirect()->route('categories');
+        $response = $this->objCategory->create($request->all());
+        return redirect()->route('categories')->with($response['type'], $response['message']);
     }
-    public function update(Request $request)
+
+    public function update(CategoryRequest $request)
     {
-        $status = $this->objCategory->updateCategory($request->all());
-        return redirect()->route('categories');
+        $response = $this->objCategory->updateCategory($request->all());
+        return redirect()->route('categories')->with($response['type'], $response['message']);
     }
+
     public function delete(Request $request)
     {
-        $status = $this->objCategory->deleteCategory((int)$request->id);
-        return redirect()->route('categories');
+        $response = $this->objCategory->deleteCategory((int)$request->id);
+        return redirect()->route('categories')->with($response['type'], $response['message']);
+    }
+
+    public function toggleActive(Request $request)
+    {
+        $response = $this->objCategory->toggleActive((int)$request->id, $request->current_active);
+        return redirect()->route('categories')->with($response['type'], $response['message']);
     }
 }

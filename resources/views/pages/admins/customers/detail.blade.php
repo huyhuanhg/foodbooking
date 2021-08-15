@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('title', 'Quản lý khách hàng')
-@section('css')
+@section('css_inline')
 @endsection
-@section('js')
+@section('js_use')
 @stop
 
 @section('main_content')
@@ -38,7 +38,7 @@
                     @endif
                     <div class="mt-4 ms-3 pt-3">
                         <h5 class="mt-3 mb-1">{{"$customerInfo->first_name $customerInfo->last_name"}}</h5>
-                        <p class="text-muted mb-0">{{$customerInfo->is_register ? "Thành viên" : "Chưa đăng ký"}}</p>
+                        <p class="text-muted mb-0">Người tiêu dùng</p>
                     </div>
                 </div>
 
@@ -103,23 +103,24 @@
                                      aria-labelledby="overview-tab">
                                     <p class="text-muted">
                                         {{-- Description--}}
-                                        Mô tả khác hàng
+                                        {{$customerInfo->descripton}}
                                     </p>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
                                             <h6 class="mb-0">Thông tin khách hàng: </h6>
                                             <ul class="list-unstyled mt-4">
-{{--                                                <li class="mt-1">--}}
-{{--                                                    <i class="far fa-envelope text-primary mx-1" style="width: 18px;"></i>--}}
-{{--                                                    --}}{{--                                            /<i class="uil uil-arrow-right text-primary"></i>--}}
-{{--                                                    <span class="text-muted">Email:</span> {{$customerInfo->email}}--}}
-{{--                                                </li>--}}
-{{--                                                <li class="mt-1">--}}
-{{--                                                    <i class="fas fa-phone-alt text-primary mx-1" style="width: 18px;"></i>--}}
-{{--                                                    <span class="text-muted">Số điện thoại:</span> {{$customerInfo->phone}}--}}
-{{--                                                </li>--}}
+                                                {{--                                                <li class="mt-1">--}}
+                                                {{--                                                    <i class="far fa-envelope text-primary mx-1" style="width: 18px;"></i>--}}
+                                                {{--                                                    --}}{{--                                            /<i class="uil uil-arrow-right text-primary"></i>--}}
+                                                {{--                                                    <span class="text-muted">Email:</span> {{$customerInfo->email}}--}}
+                                                {{--                                                </li>--}}
+                                                {{--                                                <li class="mt-1">--}}
+                                                {{--                                                    <i class="fas fa-phone-alt text-primary mx-1" style="width: 18px;"></i>--}}
+                                                {{--                                                    <span class="text-muted">Số điện thoại:</span> {{$customerInfo->phone}}--}}
+                                                {{--                                                </li>--}}
                                                 <li class="mt-1">
-                                                    <i class="fas fa-venus-mars text-primary mx-1" style="width: 18px;"></i>
+                                                    <i class="fas fa-venus-mars text-primary mx-1"
+                                                       style="width: 18px;"></i>
                                                     <span
                                                         class="text-muted">Giới tính:</span> {{$customerInfo->gender === 1 ? "Nam" : "Nữ"}}
                                                 </li>

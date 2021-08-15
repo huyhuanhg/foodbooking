@@ -6,31 +6,35 @@
             <h5 class="mb-0">Bảng điều khiển</h5>
             <div class="row">
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-bed h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">558</h5>
-                                <p class="text-muted mb-0">Cửa hàng</p>
+                    <a href="{{route('stores')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-bed h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0">558</h5>
+                                    <p class="text-muted mb-0">Cửa hàng</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div><!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-file-medical-alt h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">$2164</h5>
-                                <p class="text-muted mb-0">Thể loại</p>
+                    <a href="{{route('categories')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-file-medical-alt h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0">{{$totalCategories}}</h5>
+                                    <p class="text-muted mb-0">Danh mục</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div><!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
@@ -63,33 +67,33 @@
                 </div>
                 <!--end col-->
 
-                {{--            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">--}}
-                {{--                <div class="card features feature-primary rounded border-0 shadow p-4">--}}
-                {{--                    <div class="d-flex align-items-center">--}}
-                {{--                        <div class="icon text-center rounded-md">--}}
-                {{--                            <i class="uil uil-medkit h3 mb-0"></i>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="flex-1 ms-2">--}}
-                {{--                            <h5 class="mb-0">220</h5>--}}
-                {{--                            <p class="text-muted mb-0">Appointment</p>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--            </div><!--end col-->--}}
+                <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                    <div class="card features feature-primary rounded border-0 shadow p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="icon text-center rounded-md">
+                                <i class="uil uil-medkit h3 mb-0"></i>
+                            </div>
+                            <div class="flex-1 ms-2">
+                                <h5 class="mb-0">220</h5>
+                                <p class="text-muted mb-0">Khách hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
 
-                {{--            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">--}}
-                {{--                <div class="card features feature-primary rounded border-0 shadow p-4">--}}
-                {{--                    <div class="d-flex align-items-center">--}}
-                {{--                        <div class="icon text-center rounded-md">--}}
-                {{--                            <i class="uil uil-medical-drip h3 mb-0"></i>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="flex-1 ms-2">--}}
-                {{--                            <h5 class="mb-0">10</h5>--}}
-                {{--                            <p class="text-muted mb-0">Operations</p>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--            </div><!--end col-->--}}
+                <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                    <div class="card features feature-primary rounded border-0 shadow p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="icon text-center rounded-md">
+                                <i class="uil uil-medical-drip h3 mb-0"></i>
+                            </div>
+                            <div class="flex-1 ms-2">
+                                <h5 class="mb-0">10</h5>
+                                <p class="text-muted mb-0">Người dùng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
             </div><!--end row-->
 
 

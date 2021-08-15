@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class Category extends Model
@@ -27,34 +28,31 @@ class Category extends Model
             ->get();
     }
 
-    public function getAllCategories()
+    public function getAllCategoriesInfo()
     {
-        return Category::get()->fresh();
+        return Category::select('categories.*', DB::raw('count(foods.id) as food_totals'))->
+        leftJoin('foods', function ($join) {
+            $join->on('categories.id', '=', 'foods.category_id');
+        })->groupBy('categories.id')->get();
     }
 
     public function create($dataCategory)
     {
         try {
-//            $categoryTable = new Category();
-//            $categoryTable->category_name = $dataCategory['category_name'];
-//            $categoryTable->category_not_mark = $dataCategory['category_name'];
-//            $categoryTable->category_description = $dataCategory['category_description'];
-//            $categoryTable->category_active = (int)$dataCategory['category_active'];
-//            $categoryTable->save();
             Category::insert([
                 'category_name' => $dataCategory['category_name'],
-                'category_not_mark' => $dataCategory['category_name'],
-                'category_description' => $dataCategory['category_description'],
+                'category_not_mark' => vi_not_mark($dataCategory['category_name']),
+                'category_description' => $dataCategory['category_description'] ?? '',
                 'category_active' => (int)$dataCategory['category_active'],
             ]);
             return [
-                'status' => true,
-                'data' => $dataCategory
+                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
+                'message' => Config::get('constants.category_message.ADD_SUCCESS')
             ];
         } catch (\Exception $e) {
             return [
-                'status' => false,
-                'message' => $e->getMessage(),
+                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
+                'message' => Config::get('constants.category_message.ADD_FAILURE')
             ];
         }
     }
@@ -62,26 +60,22 @@ class Category extends Model
     public function updateCategory($updateData)
     {
         try {
-//            Category::where(['id' => (int)$updateData['id']])->first()->update([
-//                "category_name" => $updateData['category_name'],
-//                'category_not_mark'=>$updateData['category_name'],
-//                "category_active" => (int)$updateData['category_active'],
-//                "category_description" => $updateData['category_description'],
-//            ]);
-            DB::table($this->table)->where('id', '=', (int)$updateData['id'])->update([
+            DB::table($this->table)->
+            where('id', '=', (int)$updateData['id'])->
+            update([
                 "category_name" => $updateData['category_name'],
-                'category_not_mark' => $updateData['category_name'],
+                'category_not_mark' => vi_not_mark($updateData['category_name']),
                 "category_active" => (int)$updateData['category_active'],
-                "category_description" => $updateData['category_description'],
+                "category_description" => $updateData['category_description'] ?? '',
             ]);
             return [
-                'status' => true,
-                'data' => $updateData
+                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
+                'message' => Config::get('constants.category_message.EDIT_SUCCESS')
             ];
         } catch (\Exception $e) {
             return [
-                'status' => false,
-                'message' => $e->getMessage(),
+                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
+                'message' => Config::get('constants.category_message.EDIT_FAILURE')
             ];
         }
     }
@@ -91,14 +85,37 @@ class Category extends Model
         try {
             DB::table($this->table)->where('id', '=', $id)->delete();
             return [
-                'status' => true,
-                'data' => $id
+                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
+                'message' => Config::get('constants.category_message.DELETE_SUCCESS')
             ];
         } catch (\Exception $e) {
             return [
-                'status' => false,
-                'message' => $e->getMessage(),
+                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
+                'message' => Config::get('constants.category_message.DELETE_FAILURE')
             ];
         }
+    }
+
+    public function toggleActive($id, $currentActive)
+    {
+        try {
+            DB::table($this->table)->where('id', '=', $id)->update([
+                'category_active' => $currentActive === '1' ? 0 : 1
+            ]);
+            return [
+                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
+                'message' => ($currentActive === '1' ? "Bỏ kích hoạt " : "Kích hoạt ") . Config::get('constants.category_message.TOGGLE_ACTIVE_SUCCESS'),
+            ];
+        } catch (\Exception $e) {
+            return [
+                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
+                'message' => ($currentActive === '1' ? "Bỏ kích hoạt " : "Kích hoạt ") . Config::get('constants.category_message.TOGGLE_ACTIVE_FAILURE')
+            ];
+        }
+    }
+
+    public function totalCategories()
+    {
+        return Category::select(DB::raw('COUNT(id) AS total'))->first();
     }
 }
