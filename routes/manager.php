@@ -14,10 +14,9 @@ Route::namespace('App\Http\Controllers\Admin')->middleware('auth:admin')
 
 //        Category
         Route::get('/categories', 'CategoryController@index')->name('categories');
-        Route::post('/category/store', 'CategoryController@store')->name('category.store');
+        Route::post('/category', 'CategoryController@store')->name('category.store');
         Route::put('/category/update', 'CategoryController@update')->name('category.update');
         Route::delete('/category/delete', 'CategoryController@delete')->name('category.delete');
-        Route::patch('/category/toggleActive', 'CategoryController@toggleActive')->name('category.toggleActive');
 
 //        Store
         Route::get('/shop', 'StoreController@index')->name('stores');
@@ -35,7 +34,13 @@ Route::namespace('App\Http\Controllers\Admin')->middleware('auth:admin')
 
 //        order
         Route::get('/orders', 'OrderController@index')->name('orders');
+        Route::post('/orders', 'OrderController@store')->name('orders.store');
+        Route::patch('/orders/{id}', 'OrderController@update')->name('orders.update');
+        Route::delete('/orders/{id}', 'OrderController@destroy')->name('orders.destroy');
+        Route::patch('/orders/toggle-state/{id}', 'OrderController@toggleState')->name('orders.toggle-state');
 
 //        khuyến mãi
         Route::get('/promotions', 'PromotionController@index')->name('promotions');
+        Route::patch('/promotions/{id}', 'PromotionController@update')->name('promotions.update');
+        Route::delete('/promotions/{id}', 'PromotionController@destroy')->name('promotions.destroy');
     });

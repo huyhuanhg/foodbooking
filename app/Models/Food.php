@@ -29,15 +29,23 @@ class Food extends Model
         'avg_rate',
     ];
 
-    public function getAll()
+    public function getAll($currentPage = 1, $limit = 10)
     {
-        return Food::select('foods.*', 'categories.category_name', 'stores.store_name',
-            'promotions.is_percent', 'promotions.discount', 'promotions.max_discount')->join('categories', function ($join) {
-            $join->on('foods.category_id', '=', 'categories.id');
-        })->join('stores', function ($join) {
-            $join->on('foods.store_id', '=', 'stores.id');
-        })->leftJoin('promotions', function ($join) {
-            $join->on('foods.id', '=', 'promotions.food_id');
-        })->get();
+        return Food::join('categories', 'foods.category_id', 'categories.id')
+            ->join('stores', 'foods.store_id', 'stores.id')->
+            leftJoin('promotions', 'foods.id', 'promotions.food_id')->
+            paginate(
+                $limit,
+                [
+                    'foods.*',
+                    'categories.category_name',
+                    'stores.store_name',
+                    'promotions.is_percent',
+                    'promotions.discount',
+                    'promotions.max_discount'
+                ],
+                'Quản lý món ăn',
+                $currentPage
+            );
     }
 }

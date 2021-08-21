@@ -28,8 +28,22 @@ class Store extends Model
 
     public function getStorePaginate($currentPage = 1, $limit = 10)
     {
-        return Store::join('admins', 'stores.store_owner', '=', 'admins.id')->orderBy('stores.id')
-            ->paginate($limit, ['stores.*', 'admins.first_name', 'admins.last_name'], null, $currentPage);
+        return Store::join('admins', 'stores.store_owner', 'admins.id')->orderBy('stores.id')
+            ->leftJoin('foods', 'foods.store_id', 'stores.id')->groupBy('stores.id')
+            ->paginate(
+                $limit,
+                [
+                    'stores.*',
+                    'admins.first_name',
+                    'admins.last_name',
+                    'admins.avatar',
+                    'admins.gender',
+                    DB::raw('count(foods.store_id) as total_food'),
+                    DB::raw('sum(foods.food_profit) as total_profit')
+                ],
+                "Quản lý cửa hàng",
+                $currentPage
+            );
     }
 
     public function create($storeData)

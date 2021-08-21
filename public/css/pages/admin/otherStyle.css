@@ -1,0 +1,16 @@
+.alert {
+    position: absolute;
+    z-index: 3;
+    right: 10px;
+    min-width: 20%;
+}
+
+.alert-dismissible .btn-close {
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+}
+
+.table-secondary-200 {
+    background-color: #E9ECEF;
+}

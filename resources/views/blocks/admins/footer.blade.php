@@ -9,7 +9,7 @@
                         by <a href="https://www.facebook.com/danlangvan/" target="_blank" class="text-reset">Hoàng Huy Huấn</a>.
                     </p>
                 </div>
-            </div><!--end col-->
-        </div><!--end row-->
-    </div><!--end container-->
+            </div>
+        </div>
+    </div>
 </footer>

@@ -30,6 +30,7 @@
 
     <!-- Css -->
     <link href="{{ asset('/css/pages/admin/style.css') }}" rel="stylesheet" type="text/css" id="theme-opt"/>
+    <link rel="stylesheet" href="{{asset('/css/pages/admin/otherStyle.css')}}">
 
     @yield('css_external')
     <style>
@@ -46,7 +47,7 @@
     {{--<script src="{{asset('/js/columnchart.init.js')}}"></script>--}}
 <!-- Icons -->
     <script src="{{asset('/js/feather.min.js')}}"></script>
-    <script src="{{asset('/js/library/library_common.js')}}"></script>
+    <script src="{{asset('/js/library/libCommon.js')}}"></script>
 
     @yield('js_declare')
 </head>
@@ -169,7 +170,7 @@
 
 <!-- Main Js -->
 <script src="{{asset('/js/app.js')}}"></script>
-
+@yield('js_external_body_bottom')
 @yield('js_inline')
 </body>
 </html>

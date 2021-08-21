@@ -96,24 +96,6 @@ class Category extends Model
         }
     }
 
-    public function toggleActive($id, $currentActive)
-    {
-        try {
-            DB::table($this->table)->where('id', '=', $id)->update([
-                'category_active' => $currentActive === '1' ? 0 : 1
-            ]);
-            return [
-                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
-                'message' => ($currentActive === '1' ? "Bỏ kích hoạt " : "Kích hoạt ") . Config::get('constants.category_message.TOGGLE_ACTIVE_SUCCESS'),
-            ];
-        } catch (\Exception $e) {
-            return [
-                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
-                'message' => ($currentActive === '1' ? "Bỏ kích hoạt " : "Kích hoạt ") . Config::get('constants.category_message.TOGGLE_ACTIVE_FAILURE')
-            ];
-        }
-    }
-
     public function totalCategories()
     {
         return Category::select(DB::raw('COUNT(id) AS total'))->first();
