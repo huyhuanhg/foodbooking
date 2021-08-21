@@ -14,7 +14,10 @@ if (!function_exists('currency_after_promotions')) {
     {
         if ($isPercent) {
             $discount = $price * $discount / 100;
-            return $discount < $maxDiscount ? currency_format($price - $discount) : currency_format($price - $maxDiscount);
+            if (!empty($maxDiscount)){
+                return $discount < $maxDiscount ? currency_format($price - $discount) : currency_format($price - $maxDiscount);
+            }
+            return currency_format($price - $discount);
         } else {
             return currency_format($price - $discount);
         }
@@ -40,5 +43,18 @@ if (!function_exists('vi_not_mark')) {
         $str = preg_replace("/(Đ)/", "D", $str);
         $str = str_replace(" ", "-", str_replace("&*#39;", "", $str));
         return strtolower($str);
+    }
+}
+
+if (!function_exists('paginate')) {
+    function paginate($lastPage, $currentPage, $path)
+    {
+        return view('/pages/admins/paginate-control',
+            [
+                'lastPage' => $lastPage,
+                'currentPage' => $currentPage,
+                'path' => $path
+            ]
+        );
     }
 }

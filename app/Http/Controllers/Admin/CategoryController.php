@@ -42,10 +42,4 @@ class CategoryController extends Controller
         $response = $this->objCategory->deleteCategory((int)$request->id);
         return redirect()->route('categories')->with($response['type'], $response['message']);
     }
-
-    public function toggleActive(Request $request)
-    {
-        $response = $this->objCategory->toggleActive((int)$request->id, $request->current_active);
-        return redirect()->route('categories')->with($response['type'], $response['message']);
-    }
 }

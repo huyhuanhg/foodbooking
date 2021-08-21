@@ -26,14 +26,16 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
+        $lastPage = $request->page ? (int)$request->page : 1;
         $response = $this->objStore->create($request->all());
-        return redirect()->route('stores')->with($response['type'], $response['message']);
+        return redirect()->route('stores', ['page' => $lastPage])->with($response['type'], $response['message']);
     }
 
     public function update(StoreRequest $request, $id)
     {
+        $currentPage = $request->page ? (int)$request->page : 1;
         $response = $this->objStore->updateStore($id, $request->all());
-        return redirect()->route('stores')->with($response['type'], $response['message']);
+        return redirect()->route('stores', ['page' => $currentPage])->with($response['type'], $response['message']);
     }
 
     public function destroy($id)

@@ -28,5 +28,26 @@ return [
 
         'TOGGLE_ACTIVE_SUCCESS' => 'thành công!',
         'TOGGLE_ACTIVE_FAILURE' => 'thất bại!',
+    ],
+    'order_message' => [
+        'ADD_SUCCESS' => 'Đăng ký thành công!',
+        'ADD_FAILURE' => 'Đăng ký thất bại',
+
+        'EDIT_SUCCESS' => 'Cập nhật thành công!',
+        'EDIT_FAILURE' => 'Cập nhật thất bại!',
+
+        'DELETE_SUCCESS' => 'Xóa thành công!',
+        'DELETE_FAILURE' => 'Xóa thất bại!',
+
+        'TOGGLE_STATUS_SUCCESS' => 'Đổi trạng thái thành công!',
+        'TOGGLE_STATUS_FAILURE' => 'Đổi trạng thái thất bại!',
+    ],
+    'promotion_message' => [
+
+        'EDIT_SUCCESS' => 'Cập nhật thành công!',
+        'EDIT_FAILURE' => 'Cập nhật thất bại!',
+
+        'DELETE_SUCCESS' => 'Xóa thành công!',
+        'DELETE_FAILURE' => 'Xóa thất bại!',
     ]
 ];

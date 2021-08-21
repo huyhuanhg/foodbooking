@@ -1,22 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Quản lý cửa hàng')
+@section('title', $storesPaginate->getPageName())
 
 @section('css_inline')
-    .alert{
-    position: absolute;
-    z-index: 3;
-    right: 10px;
-    min-width: 20%;
-    }
-    .alert-dismissible .btn-close {
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    }
-    .table-secondary-200{
-    background-color: #E9ECEF;
-    }
 @endsection
 
 @section('css_external')
@@ -24,8 +10,9 @@
 @endsection
 
 @section('js_declare')
-    <script src="{{asset('/js/library/library_validate.js')}}"></script>
-    <script src="{{asset('/js/library/library_native_objects.js')}}"></script>
+    <script src="{{asset('/js/library/formValidate.js')}}"></script>
+    <script src="{{asset('/js/library/libNativeObjects.js')}}"></script>
+    <script src="{{asset('/js/library/showModal.js')}}"></script>
 @endsection
 
 @section('main_content')
@@ -71,11 +58,14 @@
                                     @endif
                                 </div>
                                 <div class="form-group mb-3{{$errors->has('store_status') ? ' invalid' : ''}}">
-                                    <select class="form-select" id="storeStatus" name="store_status"
-                                            value="{{old('store_status')}}">
-                                        <option selected disabled hidden>Tình trạng</option>
-                                        <option value="1">Hoạt động</option>
-                                        <option value="0">Đóng cửa</option>
+                                    <select class="form-select" id="storeStatus" name="store_status">
+                                        <option {{old('store_status') === null || '' ? 'selected' : ''}} disabled hidden
+                                                value="">Tình trạng
+                                        </option>
+                                        <option value="1" {{old('store_status') === '1' ? 'selected' : ''}}>Hoạt động
+                                        </option>
+                                        <option value="0" {{old('store_status') === '0' ? 'selected' : ''}}>Đóng cửa
+                                        </option>
                                     </select>
                                     @if($errors->has('store_status'))
                                         <div class="invalid-feedback">{{ $errors->first('store_status') }}</div>
@@ -102,10 +92,66 @@
                 </div>
             </div>
 
+            {{--modal detail--}}
+            <div class="modal fade" id="modalDetail" tabindex="-1" aria-labelledby="modalDetail" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailLabel">Thông tin cửa hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-3 pt-4">
+                            <div class="d-flex align-items-center ms-5 mb-3 justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img src=""
+                                         class="avatar avatar-md-md rounded-circle shadow" alt=""
+                                         id="store_owner_avatar"
+                                    >
+                                    <div class="mb-0 ms-5">
+                                        <h4 id="store_name"></h4>
+                                        <h6 class="text-muted" id="store_owner_fullname"></h6>
+                                    </div>
+                                </div>
+                                <div class="mx-5">
+                                    <p class="text-muted col-8" id="store_status"></p>
+                                    <small class="text-muted" id="store_create_at"></small>
+                                    <p class="" id="store_rate"></p>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled mb-0 mt-4">
+                                <div class="row">
+                                    <li class="row col-8">
+                                        <h6 class="col-3">Điện thoại:</h6>
+                                        <p class="text-muted col-8" id="store_phone"></p>
+                                    </li>
+                                    <li class="row col-4">
+                                        <h6 class="col-5">Món ăn:</h6>
+                                        <p class="text-muted col-7" id="store_total_food"></p>
+                                    </li>
+                                </div>
+                                <div class="row">
+                                    <li class="row col-8">
+                                        <h6 class="col-3">Địa chỉ:</h6>
+                                        <p class="text-muted col-9" id="store_address"></p>
+                                    </li>
+                                    <li class="row col-4">
+                                        <h6 class="col-5">Lợi thu:</h6>
+                                        <p class="text-muted col-7" id="store_profit"></p>
+                                    </li>
+                                </div>
+                            </ul>
+                            <div class="mt-3 mb-4" style="width: 90%; margin-left: 5%">
+                                <p class="text-muted ms-2 mb-0 d-inline-block" id="store_description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="row mb-4">
                 <div class="col-7">
-                    <h5 class="mb-0">Quản lý danh sách cửa hàng</h5>
+                    <h5 class="mb-0">{{$storesPaginate->getPageName()}}</h5>
                 </div>
                 {{--                @if(auth('admin')->user()->role_id === 0)--}}
                 <div class="col-5" style="text-align: right">
@@ -146,19 +192,51 @@
                                         data-store-address="{{$store->store_address}}"
                                         data-store-phone="{{$store->phone_contact}}"
                                         data-store-desc="{{$store->store_description}}"
+                                        data-store-rate="{{$store->avg_rate}}"
                                         data-store-status="{{$store->store_status}}"
+                                        data-owner-fullname="{{"$store->first_name $store->last_name"}}"
+                                        @if($store['avatar'])
+                                        data-owner-avatar="{{asset($store['avatar'])}}"
+                                        @else
+                                        data-owner-avatar="{{
+                                                        $store['gender'] === 1 ?
+                                                        asset('/images/default/no-image-male.jpeg') :
+                                                        asset('/images/default/no-image-female.jpeg')
+                                                        }}"
+                                        @endif
+                                        data-store-total-food="{{$store['total_food']}}"
+                                        data-store-create-at="{{$store['created_at']}}"
+                                        data-store-profit="{{currency_format($store['total_profit'])}}"
                                     >
                                         <th class="p-2" scope="row">{{$store['id']}}</th>
-                                        <td class="p-2" scope="row">
-                                            <a key="{{$storeKey}}">
-                                                {{$store->store_name}}
+                                        <td class="p-2" style="max-width: 200px" scope="row">
+                                            <a href="#" class="text-dark show-modal-detail" data-bs-toggle="modal"
+                                               data-bs-target="#modalDetail"
+                                               key="{{$storeKey}}">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="ms-2 ellipsis"
+                                                          data-bs-toggle="tooltip"
+                                                          data-bs-placement="bottom"
+                                                          title="{{$store->store_name}}"
+                                                    >
+                                                        {{$store->store_name}}
+                                                    </span>
+                                                </div>
                                             </a>
                                         </td>
-                                        <td class="p-2" scope="row">{{$store->store_address}}</td>
+                                        <td class="p-2 ellipsis" style="max-width: 250px"
+                                            scope="row"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom"
+                                            title="{{$store->store_address}}"
+                                        >
+                                            {{$store->store_address}}
+                                        </td>
                                         <td class="p-2" scope="row">{{$store->phone_contact}}</td>
                                         <td class="p-2" scope="row">{{"$store->first_name $store->last_name"}}</td>
                                         <td class="p-2" scope="row">{{$store->avg_rate}}</td>
-                                        <td class="p-2" scope="row">{{$store->store_description}}</td>
+                                        <td class="p-2 ellipsis" style="max-width: 300px"
+                                            scope="row">{{$store->store_description}}</td>
                                         <td class="p-2" scope="row">
                                             @if($store->store_status === 1)
                                                 <span class="badge bg-soft-success">Hoạt động</span>
@@ -167,9 +245,10 @@
                                             @endif
                                         </td>
                                         <td class="p-2" scope="row">
-                                            <a href="#" class="btn btn-icon btn-pills btn-soft-primary"
+                                            <a href="#"
+                                               class="btn btn-icon btn-pills btn-soft-primary show-modal-detail-icon"
                                                data-bs-toggle="modal"
-                                               data-bs-target="#viewprofile"
+                                               data-bs-target="#modalDetail"
                                                key="{{$storeKey}}"
                                             >
                                                 <i class="uil uil-eye"></i>
@@ -196,7 +275,7 @@
                                                     </div>
                                                     <div class="card-footer text-center">
                                                         <form method="post"
-                                                              action="{{route('stores')}}/{{$store['id']}}"
+                                                              action="{{route('stores')}}/{{$store['id']}}}}"
                                                               style="margin-bottom: 0"
                                                         >
                                                             @csrf
@@ -217,35 +296,7 @@
                             </table>
                         </div>
                         {{--paginate--}}
-                        @if($storesPaginate->lastPage() > 1)
-                            <nav aria-label="Page navigation example" class="mt-3">
-                                <ul class="pagination justify-content-end pagination-sm">
-                                    @if($storesPaginate->currentPage() > 1)
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                               href="{{route('stores', ['page'=> $storesPaginate->currentPage() - 1])}}"
-                                               aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @for($i = 1; $i <= $storesPaginate->lastPage(); $i++)
-                                        <li class="page-item {{$storesPaginate->currentPage() === $i ? 'active' : ''}}">
-                                            <a class="page-link" href="{{route('stores', ['page'=> $i])}}">{{$i}}</a>
-                                        </li>
-                                    @endfor
-                                    @if($storesPaginate->currentPage() < $storesPaginate->lastPage())
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                               href="{{route('stores', ['page'=> $storesPaginate->currentPage() + 1])}}"
-                                               aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </nav>
-                        @endif
+                        {{paginate($storesPaginate->lastPage(), $storesPaginate->currentPage(), $storesPaginate->path())}}
                         {{--paginate--}}
                     @endif
                 </div>
@@ -258,99 +309,37 @@
     </div>
 @endsection
 
+@section('js_external_body_bottom')
+    <script src="{{asset('/js/admins/storesScript/initial.js')}}"></script>
+    <script src="{{asset('/js/admins/storesScript/validate.js')}}"></script>
+    <script src="{{asset('/js/admins/storesScript/eventSetElement.js')}}"></script>
+@endsection
+
 @section('js_inline')
     <script>
-
-        $('.show-edit-form').forEach(btn => {
-            btn.onclick = e => {
-                let key = e.target.getAttribute('key') || e.target.parentElement.getAttribute('key');
-                let rowData = document.querySelectorAll(".row-store-info")[key];
-
-                $('#titleForm').innerText = "Sửa thông tin cửa hàng";
-                $('#btnSubmit').innerText = "Sửa";
-
-                let formElm = $('#storeForm');
-                formElm.action = `{{route('stores')}}/${rowData.getAttribute('data-store-id')}`
-                formElm.querySelector('input[name=_method]').value = 'put';
-                formElm.querySelector('input[name=id]').value = rowData.getAttribute('data-store-id');
-
-                $('#storeName').value = rowData.getAttribute('data-store-name');
-                $('#phone').value = rowData.getAttribute('data-store-phone');
-                $('#storeAddress').value = rowData.getAttribute('data-store-address');
-                $('#storeStatus').value = rowData.getAttribute('data-store-status');
-                $('#storeDescription').value = rowData.getAttribute('data-store-desc')
-            }
-        })
-
         $('#btnAdd').onclick = () => {
             $('#titleForm').innerText = "Thêm cửa hàng";
             $('#btnSubmit').innerText = "Thêm";
             let formElm = $('#storeForm');
             formElm.reset();
-            formElm.action = '{{route('stores.create')}}'
+            formElm.action = '{{route(
+    'stores.create',
+        ['page' => $storesPaginate->total() % 10 !== 0 || $storesPaginate->total() === 0 ?
+        $storesPaginate->lastPage() : $storesPaginate->lastPage() + 1]
+)}}';
             formElm.querySelector('input[name=_method]').value = 'post';
             $('#phone').value = '{{auth('admin')->user()->phone}}';
             $('#storeAddress').value = '{{auth('admin')->user()->address}}';
         }
 
-        // Load modal
-        let isError = {{$errors->any() ? 'true' : 'false'}};
-        if (isError) {
-            new bootstrap.Modal($('#formModal'), {
-                keyboard: false
-            }).show();
-        }
-        //validate
-        $('#storeForm').validate({
-            formGroup: '.form-group',
-            rules: {
-                "#storeName": {
-                    required: true,
-                },
-                "#phone": {
-                    required: true,
-                    regex: /^(0|\+84)[3|5|7|8|9][\d+]{8}$/,
-                },
-                "#storeAddress": {
-                    required: true,
-                },
-                "#storeStatus": {
-                    required: true,
-                },
-            },
-
-            message: {
-                "#storeName": {
-                    required: "Vui lòng nhập tên cửa hàng!",
-                },
-                "#phone": {
-                    required: "Vui lòng nhập số điện thoại!",
-                    regex: 'Định dạng: 0... / +84...'
-                },
-                "#storeAddress": {
-                    required: "Vui lòng nhập địa chỉ!",
-                },
-                "#storeStatus": {
-                    required: "Vui lòng chọn trạng thái!",
-                },
-            },
-        });
-        $('#formModal').addEventListener('hidden.bs.modal', function (event) {
-            $('#storeForm').resetValidate();
+        $('.show-modal-detail').forEach((btn, index) => {
+            let allRowStoreInfo = $('.row-store-info');
+            btn.onmouseover = () => {
+                setValueModalDetail(allRowStoreInfo[index]);
+            }
+            $('.show-modal-detail-icon')[index].onmouseover = () => {
+                setValueModalDetail(allRowStoreInfo[index]);
+            }
         })
-
-        //alert
-        let alertList = document.querySelectorAll('.alert')
-        alertList.forEach(function (alert) {
-            new bootstrap.Alert(alert)
-        })
-        let alertNode = document.querySelector('.alert');
-        if (alertNode) {
-            let alert = bootstrap.Alert.getInstance(alertNode)
-            setTimeout(function () {
-                alert.close();
-            }, 2500)
-        }
-
     </script>
 @endsection

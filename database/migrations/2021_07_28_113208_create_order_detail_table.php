@@ -13,18 +13,18 @@ class CreateOrderDetailTable extends Migration
      */
     public function up()
     {
-//        Schema::create('order_detail', function (Blueprint $table) {
-//            $table->charset = 'utf8';
-//            $table->collation = 'utf8_general_ci';
-//            $table->unsignedInteger("order_id");
-//            $table->unsignedInteger("food_id");
-//            $table->float("uni_price");
-//            $table->integer("quantity");
-//            $table->float("discount");
-//            $table->primary(array('order_id', 'food_id'));
-//            $table->foreign('order_id')->references('id')->on('orders');
-//            $table->foreign('food_id')->references('id')->on('foods');
-//        });
+        Schema::create('order_detail', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            $table->unsignedInteger("order_id");
+            $table->unsignedInteger("food_id");
+            $table->float("uni_price");
+            $table->integer("quantity");
+            $table->float("discount");
+            $table->primary(array('order_id', 'food_id'));
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+        });
     }
 
     /**

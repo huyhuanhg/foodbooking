@@ -3,20 +3,6 @@
 @section('title', 'Quản lý danh mục')
 
 @section('css_inline')
-    .alert{
-    position: absolute;
-    z-index: 3;
-    right: 10px;
-    min-width: 20%;
-    }
-    .alert-dismissible .btn-close {
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    }
-    .table-secondary-200{
-    background-color: #E9ECEF;
-    }
 @endsection
 
 @section('css_external')
@@ -24,8 +10,9 @@
 @endsection
 
 @section('js_declare')
-    <script src="{{asset('/js/library/library_validate.js')}}"></script>
-    <script src="{{asset('/js/library/library_native_objects.js')}}"></script>
+    <script src="{{asset('/js/library/formValidate.js')}}"></script>
+    <script src="{{asset('/js/library/libNativeObjects.js')}}"></script>
+    <script src="{{asset('/js/library/showModal.js')}}"></script>
 @endsection
 
 @section('main_content')
@@ -56,11 +43,10 @@
                                     @endif
                                 </div>
                                 <div class="form-group mb-3 {{$errors->has('category_active') ? 'invalid' : ''}}">
-                                    <select class="form-select" id="categoryActive" name="category_active"
-                                            value="{{ old('category_active') }}">
-                                        <option selected disabled hidden value="">Tình trạng</option>
-                                        <option value="1">Hoạt động</option>
-                                        <option value="0">Chưa hoạt động</option>
+                                    <select class="form-select" id="categoryActive" name="category_active">
+                                        <option {{ old('category_active') === null || '' ? 'selected' : ''}} disabled hidden value="">Tình trạng</option>
+                                        <option value="1" {{ old('category_active') === '1' ? 'selected' : ''}}>Hoạt động</option>
+                                        <option value="0"{{ old('category_active') === '0' ? 'selected' : ''}}>Chưa hoạt động</option>
                                     </select>
                                     @if($errors->has('category_active'))
                                         <div class="invalid-feedback">{{ $errors->first('category_active') }}</div>
@@ -189,78 +175,16 @@
     </div>
 @endsection
 
+@section('js_external_body_bottom')
+    <script src="{{asset('/js/admins/categoryScript/initial.js')}}"></script>
+    <script src="{{asset('/js/admins/categoryScript/validate.js')}}"></script>
+    <script src="{{asset('/js/admins/categoryScript/eventSetElement.js')}}"></script>
+@endsection
+
 @section('js_inline')
     <script>
-
-        $('.show-edit-form').forEach(btn => {
-            btn.onclick = e => {
-                $('#titleForm').innerText = "Sửa danh mục món ăn";
-                $('#btnSubmit').innerText = "Sửa";
-                let formElm = $('#categoryForm');
-                formElm.action = '{{route('category.update')}}'
-                formElm.querySelector('input[name=_method]').value = 'put';
-                $('#categoryId').value = e.target.getAttribute('data-cate-id') ||
-                    e.target.parentElement.getAttribute('data-cate-id');
-                $('#categoryName').value = e.target.getAttribute('data-cate-name') ||
-                    e.target.parentElement.getAttribute('data-cate-name');
-                $('#categoryActive').value = e.target.getAttribute('data-cate-active') ||
-                    e.target.parentElement.getAttribute('data-cate-active');
-                $('#categoryDescription').value = e.target.getAttribute('data-cate-desc') ||
-                    e.target.parentElement.getAttribute('data-cate-desc');
-            }
-        })
-        $('#btnAdd').onclick = () => {
-            $('#titleForm').innerText = "Thêm danh mục món ăn";
-            $('#btnSubmit').innerText = "Thêm";
-            let formElm = $('#categoryForm');
-            formElm.reset();
-            formElm.action = '{{route('category.store')}}'
-            formElm.querySelector('input[name=_method]').value = 'post';
-        }
-
-        // Load modal
-        let isError = {{$errors->any() ? 'true' : 'false'}};
-        if (isError) {
-            new bootstrap.Modal($('#formModal'), {
-                keyboard: false
-            }).show();
-        }
-        //validate
-        $('#categoryForm').validate({
-            formGroup: '.form-group',
-            rules: {
-                "#categoryName": {
-                    required: true,
-                },
-                "#categoryActive": {
-                    required: true,
-                },
-            },
-            message: {
-                "#categoryName": {
-                    required: "Vui lòng nhập danh mục!",
-                },
-                "#categoryActive": {
-                    required: "Vui lòng chọn tình trạng!",
-                },
-            },
-        });
-        $('#formModal').addEventListener('hidden.bs.modal', function (event) {
+        $('#formModal').addEventListener('hidden.bs.modal', function () {
             $('#categoryForm').resetValidate();
         })
-
-        //alert
-        let alertList = document.querySelectorAll('.alert')
-        alertList.forEach(function (alert) {
-            new bootstrap.Alert(alert)
-        })
-        let alertNode = document.querySelector('.alert');
-        if (alertNode) {
-            let alert = bootstrap.Alert.getInstance(alertNode)
-            setTimeout(function () {
-                alert.close();
-            }, 2500)
-        }
-
     </script>
 @endsection
