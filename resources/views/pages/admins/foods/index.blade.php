@@ -3,15 +3,24 @@
 @section('title', $foods->getPageName())
 
 @section('css_inline')
+    .loading-img{
+    position: absolute;
+    top: calc(50% - 14.1125px);
+    left: calc(50% - 14.1125px);
+    }
 @endsection
 
 @section('css_external')
     <link rel="stylesheet" href="{{asset('/css/validate/style.css')}}">
 @endsection
+@section('js_before_declare')
+    <script src="{{asset('/js/library/Ajax.js')}}"></script>
+@endsection
 
 @section('js_declare')
     <script src="{{asset('/js/library/formValidate.js')}}"></script>
     <script src="{{asset('/js/library/libNativeObjects.js')}}"></script>
+    <script src="{{asset('/js/library/showModal.js')}}"></script>
 @endsection
 
 @section('main_content')
@@ -21,60 +30,134 @@
         @include('flash-message')
 
         <!-- Modal Form -->
-                        <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="titleForm">
-                                            {{old('_method') === 'put' ? 'Sửa' : 'Thêm'}} món ăn
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true"
+                 aria-initial-show="{{$errors->any()}}">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="titleForm">
+                                {{old('_method') === 'put' ? 'Sửa' : 'Thêm'}} món ăn
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="foodForm"
+                                  action="{{route('foods')}}{{old('_method') === 'put' ? '/' . old('id') : ''}}"
+                                  method="post">
+                                @csrf
+                                <input type="hidden" name="_method" value="{{old('_method')}}">
+                                <input type="hidden" name="id" id="foodId" value="{{old('id')}}">
+                                <input type="hidden" name="food_avatar" id="foodAvatarPath" value="{{old('food_avatar')}}">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group mb-3 {{$errors->has('food_name') ? 'invalid' : ''}}">
+                                            <input class="form-control" id="foodName" type="text"
+                                                   name="food_name"
+                                                   placeholder="Tên món ăn" value="{{ old('food_name') }}">
+                                            @if($errors->has('food_name'))
+                                                <div class="invalid-feedback">{{ $errors->first('food_name') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="form-group mb-3 {{$errors->has('price') ? 'invalid' : ''}}">
+                                            <input class="form-control" id="price" type="number" name="price"
+                                                   placeholder="Giá bán" value="{{ old('price') }}">
+                                            @if($errors->has('price'))
+                                                <div
+                                                    class="invalid-feedback">{{ $errors->first('price') }}</div>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <form id="categoryForm" action="{{route('category.update')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="{{old('_method')}}">
-                                            <input type="hidden" name="id" id="categoryId" value="{{old('id')}}">
-                                            <div class="form-group mb-3 {{$errors->has('category_name') ? 'invalid' : ''}}">
-                                                <input class="form-control" id="categoryName" type="text" name="category_name"
-                                                       placeholder="Tên danh mục" value="{{ old('category_name') }}">
-                                                @if($errors->has('category_name'))
-                                                    <div class="invalid-feedback">{{ $errors->first('category_name') }}</div>
+                                    <div class="col-4">
+                                        <label for="foodAvatar" id="foodAvatarLabel"
+                                               style="display: block; position: relative; width: 110px; height: 110px; cursor: pointer">
+                                            <img
+                                                @if(old('food_avatar'))
+                                                    src="{{old('food_avatar')}}"
+                                                @else
+                                                    src="{{asset(session('foodAvatarCurrent') ?? '/images/default/no-image-food.jpg')}}"
                                                 @endif
-                                            </div>
-                                            <div class="form-group mb-3 {{$errors->has('category_active') ? 'invalid' : ''}}">
-                                                <select class="form-select" id="categoryActive" name="category_active"
-                                                        value="{{ old('category_active') }}">
-                                                    <option selected disabled hidden value="">Tình trạng</option>
-                                                    <option value="1">Hoạt động</option>
-                                                    <option value="0">Chưa hoạt động</option>
-                                                </select>
-                                                @if($errors->has('category_active'))
-                                                    <div class="invalid-feedback">{{ $errors->first('category_active') }}</div>
-                                                @endif
-                                            </div>
-                                            <div class="form-group mb-4">
-                                                <textarea class="form-control" id="categoryDescription"
-                                                          name="category_description" style="resize: none;"
-                                                          placeholder="Mô tả">{{ old('category_description') }}</textarea>
-                                            </div>
-                                            <div class="form-group mb-2 row text-center">
-                                                <div class="col-6">
-                                                    <button id="btnSubmit" type="submit" class="btn btn-primary w-75">
-                                                        {{old('_method') === 'put' ? 'Sửa' : 'Thêm'}}
-                                                    </button>
-                                                </div>
-                                                <div class="col-6">
-                                                    <button type="button" class="btn btn-secondary w-75" data-bs-dismiss="modal">
-                                                        Hủy
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                                class="avatar avatar-medium rounded shadow" alt=""
+                                                id="foodAvatarImg">
+                                            <input type="file" id="foodAvatar" style="display: none">
+                                        </label>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group mb-3 {{$errors->has('category') ? 'invalid' : ''}}">
+                                    <select class="form-select" id="category" name="category">
+                                        <option {{old('category') === null || '' ? 'selected' : ''}} disabled hidden
+                                                value="">Chọn danh mục
+                                        </option>
+                                        @foreach($categories as $catygory)
+                                            <option
+                                                value="{{$catygory->id}}" {{old('category') === $catygory->id ? 'selected' : ''}}>
+                                                {{$catygory->category_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('category'))
+                                        <div class="invalid-feedback">{{ $errors->first('category') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group mb-3 {{$errors->has('category') ? 'invalid' : ''}}"
+                                     style="{{count($stores) === 1 ? 'display:none': ""}}">
+                                    <select class="form-select" id="store" name="store">
+                                        @if(count($stores) === 1 )
+                                            <option value="{{$stores[0]->id}}" selected></option>
+                                        @else
+                                            <option {{old('store') === null || '' ? 'selected' : ''}} disabled hidden
+                                                    value="">Chọn cửa hàng
+                                            </option>
+                                            @foreach($stores as $store)
+                                                <option
+                                                    value="{{$store->id}}" {{old('store') === $store->id ? 'selected' : ''}}>
+                                                    {{$store->store_name}}
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if($errors->has('store'))
+                                        <div class="invalid-feedback">{{ $errors->first('store') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group mb-3 {{$errors->has('food_active') ? 'invalid' : ''}}">
+                                    <select class="form-select" id="foodActive" name="food_active">
+                                        <option {{old('food_active') === null || '' ? 'selected' : ''}} disabled hidden
+                                                value="">Tình trạng
+                                        </option>
+                                        <option value="1" {{old('food_active') === '1' ? 'selected' : ''}}>Kích hoạt
+                                        </option>
+                                        <option value="0" {{old('food_active') === '0' ? 'selected' : ''}}>Chưa Kích
+                                            hoạt
+                                        </option>
+                                    </select>
+                                    @if($errors->has('food_active'))
+                                        <div class="invalid-feedback">{{ $errors->first('food_active') }}</div>
+                                    @endif
+                                </div>
+                                <div class="form-group mb-4">
+                                                <textarea class="form-control" id="foodDescription"
+                                                          name="food_description" style="resize: none;"
+                                                          placeholder="Mô tả">{{ old('food_description') }}</textarea>
+                                </div>
+                                <div class="form-group mb-2 row text-center">
+                                    <div class="col-6">
+                                        <button id="btnSubmit" type="submit" class="btn btn-primary w-75">
+                                            {{old('_method') === 'put' ? 'Sửa' : 'Thêm'}}
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary w-75" data-bs-dismiss="modal">
+                                            Hủy
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                    </div>
+                </div>
+            </div>
 
             {{--            main--}}
             <div class="row mb-4">
@@ -112,14 +195,24 @@
                         </thead>
                         <tbody>
                         @foreach($foods as $food)
-                            <tr>
+                            <tr class="row-food-info"
+                                data-food-id="{{$food['id']}}"
+                                data-food-name="{{$food['food_name']}}"
+                                data-food-avatar="{{$food['food_avatar'] ? $food['food_avatar'] : '/images/default/no-image-food.jpg'}}"
+                                data-food-price="{{$food['price']}}"
+                                data-food-store-id="{{$food['store_id']}}"
+                                data-food-category-id="{{$food['category_id']}}"
+                                data-food-store-name="{{$food['store_name']}}"
+                                data-food-active="{{$food['food_active']}}"
+                                data-food-description="{{$food['food_description']}}"
+                            >
                                 <th class="p-2">{{$food['id']}}</th>
                                 <td class="p-2">
                                     <a href="#" class="text-dark">
                                         <div class="d-flex align-items-center">
                                             <img
                                                 src="{{$food['food_avatar'] ? asset($food['food_avatar']) : asset('/images/default/no-image-food.jpg')}}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                class="avatar avatar-md-sm rounded shadow" alt="">
                                             <span class="ms-2">{{$food['food_name']}}</span>
                                         </div>
                                     </a>
@@ -142,9 +235,9 @@
 
                                 <td class="p-2">
                                     @if($food['food_active'] === 1)
-                                        <span class="badge bg-soft-success">Hoạt động</span>
+                                        <span class="badge bg-soft-success">Kích hoạt</span>
                                     @else
-                                        <span class="badge badge bg-soft-warning">Không hoạt động</span>
+                                        <span class="badge badge bg-soft-warning">Chưa kích hoạt</span>
                                     @endif
                                 </td>
                                 <td class="p-2 text-center">
@@ -172,7 +265,7 @@
                                                 Bạn muốn xóa {{$food['food_name']}}?
                                             </div>
                                             <div class="card-footer text-center">
-                                                <form method="post" action="{{route('category.delete')}}"
+                                                <form method="post" action="{{route('foods')}}/{{$food['id']}}"
                                                       style="margin-bottom: 0"
                                                 >
                                                     @csrf
@@ -196,13 +289,7 @@
                 </div>
 
                 {{--paginate--}}
-                {{view('/pages/admins/paginate-control',
-[
-'lastPage' => $foods->lastPage(),
-'currentPage' => $foods->currentPage(),
-'path' => $foods->path()
-]
-)}}
+                {{paginate($foods->lastPage(), $foods->currentPage(), $foods->path())}}
                 {{--paginate--}}
             @endif
 
@@ -210,66 +297,82 @@
     </div>
 @endsection
 
-@section('js_use')
+@section('js_inline')
     <script>
+        function setFormEdit(data) {
+            var id = data.getAttribute('data-food-id');
+            let formElm = $('#foodForm');
+            formElm.action = `/manager/foods/${id}`
+            formElm.querySelector('input[name=_method]').value = 'put';
+            $('#foodId').value = id;
+            $('#foodName').value = data.getAttribute('data-food-name');
+            $('#price').value = data.getAttribute('data-food-price');
+            $('#foodAvatarImg').src = data.getAttribute('data-food-avatar');
+            $('#category').value = data.getAttribute('data-food-category-id');
+            $('#store').value = data.getAttribute('data-food-store-id');
+            $('#foodActive').value = data.getAttribute('data-food-active');
+            $('#foodDescription').value = data.getAttribute('data-food-description');
+        }
 
-        $('.show-edit-form').forEach(btn => {
+        $('.show-edit-form').forEach((btn, index) => {
             btn.onclick = e => {
-                $('#titleForm').innerText = "Sửa danh mục món ăn";
+                $('#titleForm').innerText = "Sửa món ăn";
                 $('#btnSubmit').innerText = "Sửa";
-                let formElm = $('#categoryForm');
-                formElm.action = '{{route('category.update')}}'
-                formElm.querySelector('input[name=_method]').value = 'put';
-                $('#categoryId').value = e.target.getAttribute('data-cate-id') ||
-                    e.target.parentElement.getAttribute('data-cate-id');
-                $('#categoryName').value = e.target.getAttribute('data-cate-name') ||
-                    e.target.parentElement.getAttribute('data-cate-name');
-                $('#categoryActive').value = e.target.getAttribute('data-cate-active') ||
-                    e.target.parentElement.getAttribute('data-cate-active');
-                $('#categoryDescription').value = e.target.getAttribute('data-cate-desc') ||
-                    e.target.parentElement.getAttribute('data-cate-desc');
+                let rowData = $('.row-food-info')[index];
+                setFormEdit(rowData);
             }
         })
+
+        function resetField(form) {
+            form.querySelectorAll('input[name], textarea[name], select[name]').forEach((field) => {
+                if (field.type !== 'hidden') {
+                    if (field.parentElement.style.display !== 'none') {
+                        field.value = '';
+                    }
+                }
+            })
+        }
+
         $('#btnAdd').onclick = () => {
-            $('#titleForm').innerText = "Thêm danh mục món ăn";
+            $('#titleForm').innerText = "Thêm món ăn";
             $('#btnSubmit').innerText = "Thêm";
-            let formElm = $('#categoryForm');
-            formElm.reset();
-            formElm.action = '{{route('category.store')}}'
+            let formElm = $('#foodForm');
+            formElm.action = `/manager/foods`
+            resetField(formElm);
             formElm.querySelector('input[name=_method]').value = 'post';
         }
 
-        // Load modal
-        let isError = {{$errors->any() ? 'true' : 'false'}};
-        if (isError) {
-            new bootstrap.Modal($('#formModal'), {
-                keyboard: false
-            }).show();
-        }
-        //validate
-        $('#categoryForm').validate({
-            formGroup: '.form-group',
-            rules: {
-                "#categoryName": {
-                    required: true,
-                },
-                "#categoryActive": {
-                    required: true,
-                },
-            },
-            message: {
-                "#categoryName": {
-                    required: "Vui lòng nhập danh mục!",
-                },
-                "#categoryActive": {
-                    required: "Vui lòng chọn tình trạng!",
-                },
-            },
-        });
-        $('#formModal').addEventListener('hidden.bs.modal', function (event) {
-            $('#categoryForm').resetValidate();
-        })
+        {{--// Load modal--}}
+        {{--let isError = {{$errors->any() ? 'true' : 'false'}};--}}
+        {{--if (isError) {--}}
+        {{--    new bootstrap.Modal($('#formModal'), {--}}
+        {{--        keyboard: false--}}
+        {{--    }).show();--}}
+        {{--}--}}
 
+        {{--//validate--}}
+        {{--$('#categoryForm').validate({--}}
+        {{--    formGroup: '.form-group',--}}
+        {{--    rules: {--}}
+        {{--        "#categoryName": {--}}
+        {{--            required: true,--}}
+        {{--        },--}}
+        {{--        "#categoryActive": {--}}
+        {{--            required: true,--}}
+        {{--        },--}}
+        {{--    },--}}
+        {{--    message: {--}}
+        {{--        "#categoryName": {--}}
+        {{--            required: "Vui lòng nhập danh mục!",--}}
+        {{--        },--}}
+        {{--        "#categoryActive": {--}}
+        {{--            required: "Vui lòng chọn tình trạng!",--}}
+        {{--        },--}}
+        {{--    },--}}
+        {{--});--}}
+
+        // Load modal
+        loadModal($('#formModal'));
         //alert
         let alertList = document.querySelectorAll('.alert')
         alertList.forEach(function (alert) {
@@ -283,5 +386,67 @@
             }, 2500)
         }
 
+
+        // ajax
+        function deleteImageRequest(token) {
+            var path = $('#foodAvatarPath').value;
+            if (path) {
+                ajax({
+                    url: '/api/v1/manager/deleteFoodAvatar',
+                    method: 'post',
+                    header: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    data: {
+                        path,
+                    },
+                    success: (data) => {
+                        return data;
+                    },
+                })
+            }
+        }
+
+        $('#formModal').addEventListener('hidden.bs.modal', function (event) {
+            $('#foodForm').resetValidate();
+            deleteImageRequest("{{access_token()}}");
+            $('#foodAvatarPath').value = null;
+            $('#foodAvatarLabel').removeAttribute('file-name');
+            $('#foodAvatarImg').src = '/images/default/no-image-food.jpg';
+        })
+        $('#foodAvatar').onchange = function (e) {
+            deleteImageRequest("{{access_token()}}")
+            if (e.target.files.length !== 0) {
+                var loadingSpan = document.createElement('div');
+                loadingSpan.classList.add("visually-hidden");
+                var loading = document.createElement('div');
+                loading.className = 'spinner-border text-primary loading-img';
+                loading.setAttribute('role', 'status');
+                loading.append(loadingSpan);
+                ajax({
+                    url: '/api/v1/manager/uploadFoodAvatar',
+                    method: 'post',
+                    header: {
+                        'Authorization': `Bearer {{access_token()}}}`
+                    },
+                    data: {'food_avatar': $('#foodAvatar').files[0]},
+                    success: (data) => {
+                        $('#foodAvatarImg').removeAttribute('scr');
+                        $('#foodAvatarImg').setAttribute('src', data.path);
+                        $('#foodAvatarPath').value = data.path;
+                        loading.remove();
+                        e.target.removeAttribute('disabled')
+                    },
+                    loading: () => {
+                        $('#foodAvatarLabel').append(loading);
+                        e.target.setAttribute('disabled', 'true');
+                    },
+                    failure: () => {
+                        loading.remove();
+                        e.target.removeAttribute('disabled')
+                    }
+                })
+            }
+        }
     </script>
 @endsection

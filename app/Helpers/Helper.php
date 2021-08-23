@@ -14,7 +14,7 @@ if (!function_exists('currency_after_promotions')) {
     {
         if ($isPercent) {
             $discount = $price * $discount / 100;
-            if (!empty($maxDiscount)){
+            if (!empty($maxDiscount)) {
                 return $discount < $maxDiscount ? currency_format($price - $discount) : currency_format($price - $maxDiscount);
             }
             return currency_format($price - $discount);
@@ -58,3 +58,12 @@ if (!function_exists('paginate')) {
         );
     }
 }
+
+
+if (!function_exists('access_token')) {
+    function access_token()
+    {
+        return Illuminate\Support\Facades\Cookie::get('access_token');
+    }
+}
+

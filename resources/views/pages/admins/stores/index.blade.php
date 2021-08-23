@@ -60,7 +60,9 @@
                                 <div class="form-group mb-3{{$errors->has('store_status') ? ' invalid' : ''}}">
                                     <select class="form-select" id="storeStatus" name="store_status">
                                         <option {{old('store_status') === null || '' ? 'selected' : ''}} disabled hidden
-                                                value="">Tình trạng
+                                                value=""
+                                        >
+                                            Tình trạng
                                         </option>
                                         <option value="1" {{old('store_status') === '1' ? 'selected' : ''}}>Hoạt động
                                         </option>

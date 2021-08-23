@@ -35,7 +35,7 @@ class PromotionController extends Controller
             'max_discount.regex' => 'Định dạng phải là số',
         ]);
         if ($validator->fails()) {
-            $foodCurrent = $this->objPromotion->getFoodCurent($request->id);
+            $foodCurrent = $this->objPromotion->getFoodCurent($id);
             return redirect()->back()->withErrors($validator)->withInput($request->all())->with('foodCurrent', $foodCurrent);
         }
         $response = $this->objPromotion->updatePromotion($id, $request->all());
@@ -44,6 +44,7 @@ class PromotionController extends Controller
 
     public function destroy($id)
     {
-
+        $response = $this->objPromotion->destroyPromotion($id);
+        return redirect()->route('promotions')->with($response['type'], $response['message']);
     }
 }

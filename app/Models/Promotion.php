@@ -63,6 +63,22 @@ class Promotion extends Model
         }
     }
 
+    public function destroyPromotion($id)
+    {
+        try {
+            Promotion::destroy($id);
+            return [
+                'type' => Config::get('constants.NOTIFICATION_TYPE_SUCCESS'),
+                'message' => Config::get('constants.promotion_message.DELETE_SUCCESS')
+            ];
+        } catch (\Exception $e) {
+            return [
+                'type' => Config::get('constants.NOTIFICATION_TYPE_FAILURE'),
+                'message' => Config::get('constants.promotion_message.DELETE_FAILURE'),
+            ];
+        }
+    }
+
     public function getFoodCurent($id)
     {
         return Promotion::select(
@@ -72,5 +88,10 @@ class Promotion extends Model
             'foods.price',
             'foods.food_avatar')->
         join('foods', 'promotions.food_id', 'foods.id')->find($id);
+    }
+
+    public function totalPromotions()
+    {
+        return Promotion::select(DB::raw('COUNT(food_id) AS total'))->first();
     }
 }

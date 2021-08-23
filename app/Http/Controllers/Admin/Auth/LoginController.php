@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -25,6 +26,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         if (Auth::guard('admin')->attempt($credentials)) {
+            Cookie::queue('access_token', auth('admin-api')->attempt($credentials), 1000);
             return redirect()->route('dashboard');
         } else {
             return redirect()->back()->withInput();
@@ -34,7 +36,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Session::flush();
-        Auth::logout();
+        Auth::guard('admin')->logout();
         return redirect()->route('manager.login');
     }
 }

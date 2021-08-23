@@ -10,10 +10,10 @@
                         <div class="card features feature-primary rounded border-0 shadow p-4">
                             <div class="d-flex align-items-center">
                                 <div class="icon text-center rounded-md">
-                                    <i class="uil uil-bed h3 mb-0"></i>
+                                    <i class="uil uil-store h3 mb-0"></i>
                                 </div>
                                 <div class="flex-1 ms-2">
-                                    <h5 class="mb-0">558</h5>
+                                    <h5 class="mb-0 text-dark">{{$totalStores}}</h5>
                                     <p class="text-muted mb-0">Cửa hàng</p>
                                 </div>
                             </div>
@@ -26,10 +26,10 @@
                         <div class="card features feature-primary rounded border-0 shadow p-4">
                             <div class="d-flex align-items-center">
                                 <div class="icon text-center rounded-md">
-                                    <i class="uil uil-file-medical-alt h3 mb-0"></i>
+                                    <i class="uil uil-apps h3 mb-0"></i>
                                 </div>
                                 <div class="flex-1 ms-2">
-                                    <h5 class="mb-0">{{$totalCategories}}</h5>
+                                    <h5 class="mb-0 text-dark">{{$totalCategories}}</h5>
                                     <p class="text-muted mb-0">Danh mục</p>
                                 </div>
                             </div>
@@ -38,61 +38,68 @@
                 </div><!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-social-distancing h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">112</h5>
-                                <p class="text-muted mb-0">Món ăn</p>
+                    <a href="{{route('foods')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-crockery h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0 text-dark">{{$totalFoods}}</h5>
+                                    <p class="text-muted mb-0">Món ăn</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div><!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-ambulance h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">16</h5>
-                                <p class="text-muted mb-0">Đơn hàng</p>
+                    <a href="{{route('orders')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-calender h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0 text-dark">{{$totalOrders}}</h5>
+                                    <p class="text-muted mb-0">Đơn hàng</p>
+                                </div>
                             </div>
                         </div>
-
-                    </div>
+                    </a>
                 </div>
                 <!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-medkit h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">220</h5>
-                                <p class="text-muted mb-0">Khách hàng</p>
+                    <a href="{{route('customers')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-chat-bubble-user h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0 text-dark">{{$totalUsers}}</h5>
+                                    <p class="text-muted mb-0">Khách hàng</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div><!--end col-->
 
                 <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                    <div class="card features feature-primary rounded border-0 shadow p-4">
-                        <div class="d-flex align-items-center">
-                            <div class="icon text-center rounded-md">
-                                <i class="uil uil-medical-drip h3 mb-0"></i>
-                            </div>
-                            <div class="flex-1 ms-2">
-                                <h5 class="mb-0">10</h5>
-                                <p class="text-muted mb-0">Người dùng</p>
+                    <a href="{{route('promotions')}}">
+                        <div class="card features feature-primary rounded border-0 shadow p-4">
+                            <div class="d-flex align-items-center">
+                                <div class="icon text-center rounded-md">
+                                    <i class="uil uil-user h3 mb-0"></i>
+                                </div>
+                                <div class="flex-1 ms-2">
+                                    <h5 class="mb-0 text-dark">{{$totalPromotions}}</h5>
+                                    <p class="text-muted mb-0">Khuyến mãi</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div><!--end col-->
             </div><!--end row-->
 
@@ -192,6 +199,7 @@
             {{--            </div><!--end col-->--}}
             {{--        </div><!--end row-->--}}
             {{----}}
+            <div>{{access_token()}}</div>
             <div class="row">
                 <div class="col-xl-4 col-lg-6 mt-4">
                     <div class="card border-0 shadow rounded">

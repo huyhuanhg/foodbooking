@@ -23,7 +23,7 @@ class CreatePromotionsTable extends Migration
             $table->tinyInteger("is_percent")->default(1);
             $table->float("discount")->default(0);
             $table->float("max_discount")->nullable();
-            $table->foreign('food_id')->references('id')->on('foods');
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
         });
     }
 

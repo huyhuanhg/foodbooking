@@ -46,6 +46,11 @@ class Store extends Model
             );
     }
 
+    public function getStoreOwner()
+    {
+        return Store::select('id', 'store_name', 'store_owner')->get();
+    }
+
     public function create($storeData)
     {
         try {
@@ -105,5 +110,10 @@ class Store extends Model
                 'message' => Config::get('constants.store_message.DELETE_FAILURE'),
             ];
         }
+    }
+
+    public function totalStores()
+    {
+        return Store::select(DB::raw('COUNT(id) AS total'))->first();
     }
 }

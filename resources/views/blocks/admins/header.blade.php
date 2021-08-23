@@ -176,7 +176,7 @@
                         <form id="logout" method="post" action="{{route('manager.logout')}}">
                             @csrf
                         </form>
-                        <a class="dropdown-item text-dark" href="{{route('manager.logout')}}"
+                        <a class="dropdown-item text-dark" href=""
                            onclick="event.preventDefault();
                            document.getElementById('logout').submit()">
                             <span class="mb-0 d-inline-block me-1">

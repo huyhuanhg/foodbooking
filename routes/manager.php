@@ -30,6 +30,9 @@ Route::namespace('App\Http\Controllers\Admin')->middleware('auth:admin')
 
 //        food
         Route::get('/foods', 'FoodController@index')->name('foods');
+        Route::post('/foods', 'FoodController@store')->name('foods.store');
+        Route::put('/foods/{id}', 'FoodController@update')->name('foods.update');
+        Route::delete('/foods/{id}', 'FoodController@destroy')->name('foods.destroy');
 //        user
 
 //        order
