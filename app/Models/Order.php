@@ -111,4 +111,9 @@ class Order extends Model
             ];
         }
     }
+
+    public function totalOrders()
+    {
+        return Order::select(DB::raw('COUNT(id) AS total'))->first();
+    }
 }

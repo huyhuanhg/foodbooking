@@ -72,7 +72,7 @@
                                     <div class="d-flex align-items-center col">
                                         <img
                                             src="{{asset(session('foodCurrent')->food_avatar ?? '/images/default/no-image-food.jpg')}}"
-                                            class="avatar avatar-md-sm rounded-circle shadow" alt=""
+                                            class="avatar avatar-md-sm rounded shadow" alt=""
                                             id="foodAvatar"
                                         />
                                         <span class="ms-2" id="foodName">{{session('foodCurrent')->food_name ?? ''}}</span>
@@ -151,7 +151,7 @@
                                         <div class="d-flex align-items-center">
                                             <img
                                                 src="{{$promotion['food_avatar'] ? asset($promotion['food_avatar']) : asset('/images/default/no-image-food.jpg')}}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                class="avatar avatar-md-sm rounded shadow" alt="">
                                             <span class="ms-2">{{$promotion['food_name']}}</span>
                                         </div>
                                     </a>
@@ -189,13 +189,11 @@
                                                 Bạn muốn xóa khuyến mãi này?
                                             </div>
                                             <div class="card-footer text-center">
-                                                <form method="post" action="{{route('category.delete')}}"
+                                                <form method="post" action="{{route('promotions')}}/{{$promotion['food_id']}}"
                                                       style="margin-bottom: 0"
                                                 >
                                                     @csrf
                                                     @method('delete')
-                                                    <input type="hidden" name="id"
-                                                           value="{{$promotion['food_id']}}">
                                                     <button type="submit" class="btn btn-danger btn-sm">Xóa
                                                     </button>
                                                     <button type="button" class="btn btn-dark btn-sm">

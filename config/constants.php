@@ -49,5 +49,18 @@ return [
 
         'DELETE_SUCCESS' => 'Xóa thành công!',
         'DELETE_FAILURE' => 'Xóa thất bại!',
+    ],
+    'food_message' => [
+        'ADD_SUCCESS' => 'Thêm món ăn thành công!',
+        'ADD_FAILURE' => 'Thêm món ăn thất bại',
+
+        'EDIT_SUCCESS' => 'Cập nhật thành công!',
+        'EDIT_FAILURE' => 'Cập nhật thất bại!',
+
+        'DELETE_SUCCESS' => 'Xóa thành công!',
+        'DELETE_FAILURE' => 'Xóa thất bại!',
+
+        'TOGGLE_STATUS_SUCCESS' => 'Đổi trạng thái thành công!',
+        'TOGGLE_STATUS_FAILURE' => 'Đổi trạng thái thất bại!',
     ]
 ];

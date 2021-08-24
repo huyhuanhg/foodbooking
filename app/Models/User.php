@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -50,6 +51,11 @@ class User extends Authenticatable implements JWTSubject
     public function getCustomerById($id)
     {
         return User::where('id', '=', $id)->first();
+    }
+
+    public function totalUsers()
+    {
+        return User::select(DB::raw('COUNT(id) AS total'))->first();
     }
 
     /**

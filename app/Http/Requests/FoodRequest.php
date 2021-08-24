@@ -13,7 +13,7 @@ class FoodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,23 @@ class FoodRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'food_name' => 'required',
+            'price' => ['required', 'regex:/^\d+$/'],
+            'category' => 'required',
+            'store' => 'required',
+            'food_active' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'food_name.required' => 'Vui lòng nhập tên món ăn!',
+            'price.regex' => 'Định dạng phải là số',
+            'price.required' => 'Vui lòng nhập giá món ăn!',
+            'category.required' => 'Vui lòng chọn danh mục món ăn!',
+            'store.required' => 'Vui lòng chọn cửa hàng!',
+            'food_active.required' => 'Vui lòng chọn tình trạng!',
         ];
     }
 }

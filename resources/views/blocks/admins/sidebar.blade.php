@@ -26,15 +26,14 @@
                                 </li>
                                 <li>
                                     <a href="{{route('categories')}}">
-                                        <i
-                                            class="uil uil-apps me-2 d-inline-block"></i>
+                                        <i class="uil uil-apps me-2 d-inline-block"></i>
                                         Quản lý danh mục
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="{{route('customers')}}">
-                                        <i class="uil uil-book-reader me-2 d-inline-block"></i>
+                                        <i class="uil uil-chat-bubble-user me-2 d-inline-block"></i>
                                         Quản lý khách hàng
                                     </a>
                                 </li>

@@ -22,10 +22,9 @@ class Category extends Model
         'category_active',
     ];
 
-    public function getAllCategoriesActive()
+    public function getList()
     {
-        return Category::where('category_active', 1)
-            ->get();
+        return Category::select('id', 'category_name')->get();
     }
 
     public function getAllCategoriesInfo()

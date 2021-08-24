@@ -18,3 +18,8 @@ Route::group([
 ], function () {
     Route::resource('category-api', 'CategoryController')->except(['show', 'edit', 'create']);
 });
+
+Route::namespace('App\Http\Controllers\Admin')->middleware('auth:admin-api')->group(function () {
+    Route::post('/uploadFoodAvatar', 'FoodController@uploadFoodAvatar');
+    Route::post('/deleteFoodAvatar', 'FoodController@deleteFoodAvatar');
+});

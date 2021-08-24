@@ -46,6 +46,9 @@
     {{--<script src="{{asset('/js/apexcharts.min.js')}}"></script>--}}
     {{--<script src="{{asset('/js/columnchart.init.js')}}"></script>--}}
 <!-- Icons -->
+
+    @yield('js_before_declare')
+
     <script src="{{asset('/js/feather.min.js')}}"></script>
     <script src="{{asset('/js/library/libCommon.js')}}"></script>
 
