@@ -27,7 +27,9 @@ class UpdateTypeColumn extends Migration
 //        }
 
 //        DB::statement('ALTER TABLE orders MODIFY order_status  TINYINT;');
-        DB::statement('ALTER TABLE `orders` CHANGE COLUMN `order_status` `order_status` TINYINT NOT NULL DEFAULT 0;');
+//        DB::statement('ALTER TABLE `orders` CHANGE COLUMN `order_status` `order_status` TINYINT NOT NULL DEFAULT 0;');
+        DB::statement('ALTER TABLE users DROP CONSTRAINT users_phone_unique;');
+
     }
 
     /**
