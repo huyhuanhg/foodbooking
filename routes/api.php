@@ -14,17 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
 Route::group([
     'middleware' => 'api',
-    'prefix' => 'v1'
+    'prefix' => 'v1',
+    'namespace' => '\App\Http\Controllers\Client\Api\Auth',
 ], function () {
-    Route::post('/login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'login']);
-    Route::post('/logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout']);
-    Route::post('/refresh', [\App\Http\Controllers\Client\Auth\LoginController::class, 'refresh']);
-    Route::get('/user-profile', [\App\Http\Controllers\Client\Auth\LoginController::class, 'userProfile']);
+    //auth user
+    Route::post('/login', 'LoginController@login');
+    Route::post('/email-exist', 'LoginController@checkEmailExist');
+    Route::post('/register', 'LoginController@register');
+    Route::post('/logout', 'LoginController@logout');
+    Route::post('/refresh', 'LoginController@refresh');
+    Route::get('/user-profile', 'LoginController@userProfile');
 });
 
 Route::group([
@@ -32,6 +37,7 @@ Route::group([
     'prefix' => 'v1/manager',
     'namespace' => '\App\Http\Controllers\Admin\Api\Auth',
 ], function () {
+    //auth admin
     Route::post('/login', 'LoginController@login');
     Route::post('/logout', 'LoginController@logout');
     Route::post('/refresh', 'LoginController@refresh');
