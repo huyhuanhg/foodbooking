@@ -16,7 +16,11 @@ class UserAuthRepository implements UserAuthInterface
 
     public function register(array $dataRegister)
     {
-        return $this->user->create($dataRegister);
+        try {
+            return $this->user->create($dataRegister);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function checkEmailExist(string $email)

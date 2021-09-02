@@ -7,6 +7,7 @@ use App\Http\Requests\Api\ApiUserLoginRequest;
 use App\Http\Requests\Api\ApiUserRegisterRequest;
 use App\Http\Requests\Api\EmailRequest;
 use App\Services\AuthService;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -24,31 +25,47 @@ class AuthController extends Controller
      */
     public function login(ApiUserLoginRequest $request)
     {
-        return $this->authService->login($request->all());
+        if (!$token = $this->authService->token($request->all())) {
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+        }
+        return $this->createToken($token);
     }
 
     public function register(ApiUserRegisterRequest $request)
     {
-        return $this->authService->register($request->all());
+        $response = $this->authService->register($request->all());
+        return response()->json($response, $response["status"] ?? Response::HTTP_OK);
     }
 
     public function checkEmailExist(EmailRequest $request)
     {
-        return $this->authService->checkEmailExist($request->email);
+        $response = $this->authService->checkEmailExist($request->email);
+        return response()->json($response, $response['status'] ?? Response::HTTP_OK);
     }
 
     public function logout()
     {
-        return $this->authService->logout();
+        auth()->logout();
+        return response()->json(['message' => 'User successfully signed out']);
     }
 
     public function refresh()
     {
-        return $this->authService->refresh();
+        return $this->createToken(auth()->refresh());
     }
 
     public function userProfile()
     {
-        return $this->authService->getUserProfile();
+        return response()->json(auth()->user());
+    }
+
+    protected function createToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'expire' => $this->authService->expriceToken(),
+            'user' => auth()->user()
+        ]);
     }
 }

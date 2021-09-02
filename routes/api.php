@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'v1',
@@ -30,9 +26,8 @@ Route::group([
     Route::post('/logout', 'AuthController@logout');
     Route::post('/refresh', 'AuthController@refresh');
     Route::get('/user-profile', 'AuthController@userProfile');
-
-
 });
+
 
 Route::group([
     'middleware' => 'api',
@@ -45,3 +40,14 @@ Route::group([
 //    Route::post('/refresh', 'AuthController@refresh');
 //    Route::get('/user-profile', 'AuthController@userProfile');
 });
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'v1',
+    'namespace' => 'App\Http\Controllers\Client\Api',
+], function () {
+
+    Route::get('/get-data-section-listed', 'OtherController@getDataSectionListed');
+});
+
