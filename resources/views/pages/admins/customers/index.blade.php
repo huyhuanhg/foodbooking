@@ -72,7 +72,7 @@
                                                     alt=""
                                                 >
                                             @else
-                                                <img src="{{asset('images/uploads/userAvatar/'.$customer->avatar)}}"
+                                                <img src="{{asset('images/uploads/user-avatar/'.$customer->avatar)}}"
                                                      class="img-fluid" alt="">
                                             @endif
                                             <ul class="list-unstyled team-like">

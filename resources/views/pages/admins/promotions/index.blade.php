@@ -266,7 +266,7 @@
             $('#discount').value = row.getAttribute('promotion-food-discount');
             let isPercent = row.getAttribute('promotion-food-is_percent');
             displayMaxDiscount(isPercent, row.getAttribute('promotion-food-max-discount'));
-            $('#foodAvatar').src = row.getAttribute('promotion-food-avatar');
+            $('#food-avatar').src = row.getAttribute('promotion-food-avatar');
             $('#foodName').innerText = row.getAttribute('promotion-food-name');
             let price = row.getAttribute('promotion-food-price').replace('đ', '').replaceAll(',', '');
             $('#foodPrice').innerText = price;

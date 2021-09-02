@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::namespace('App\Http\Controllers\Admin\Auth')->group(function () {
-    Route::get('/login', 'LoginController@login')->name('manager.login');
-    Route::post('/login', 'LoginController@doLogin')->name('manager.dologin');
-    Route::post('logout', 'LoginController@logout')->name('manager.logout');
-});
+//Route::namespace('App\Http\Controllers\Admin\Auth')->group(function () {
+//    Route::get('/login', 'AuthController@login')->name('manager.login');
+//    Route::post('/login', 'AuthController@doLogin')->name('manager.dologin');
+//    Route::post('logout', 'AuthController@logout')->name('manager.logout');
+//});
 
 Route::namespace('App\Http\Controllers\Admin')->middleware('auth:admin')
     ->group(function () {

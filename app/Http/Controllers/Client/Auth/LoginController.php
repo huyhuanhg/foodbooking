@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Client\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\UserLoginRequest\UserLoginRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    private $userObj;
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'do_login']]);
     }
 
     /**
@@ -24,12 +23,14 @@ class LoginController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function login(Request $request)
+    public function login()
     {
-        if ($request->getMethod() == 'GET') {
-            return view('pages.clients.login');
-        }
+        return view('pages.clients.login');
 
+
+    }
+    public function do_login(UserLoginRequest $request){
+        dd($request->all());
         $credentials = $request->only(['email', 'password']);
         if (Auth::attempt($credentials)) {
             return redirect()->route('home');

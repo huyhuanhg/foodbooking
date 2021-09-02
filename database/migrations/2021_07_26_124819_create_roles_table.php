@@ -8,7 +8,7 @@ class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Phân quyền
      * @return void
      */
     public function up()
@@ -17,8 +17,8 @@ class CreateRolesTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
-            $table->string('role_type', 20);
-            $table->string('role_description')->nullable();
+            $table->string('role_type', 20);//loại phân quyền (ADMIN/SHOP)
+            $table->string('role_description')->nullable();//mô tả
         });
     }
 
