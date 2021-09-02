@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::namespace('App\Http\Controllers\Client\Auth')->group(function () {
-    Route::match(['get', 'post'], '/login', 'LoginController@login')->name('login');
 });
+Route::get('/login', 'App\Http\Controllers\Client\Auth\LoginController@login')->name('login');
+Route::post('/do-login', 'App\Http\Controllers\Client\Auth\LoginController@do_login')->name('client-login');
 
 Route::namespace('App\Http\Controllers\Client')->middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -24,7 +25,7 @@ Route::namespace('App\Http\Controllers\Client')->middleware('auth')->group(funct
 //    Route::get('/admin/login', 'UserController@getLogin')->name('login');
 //    Route::post('/admin/login', 'UserController@postLogin');
 //});
-//Route::match(['get', 'post'], '/admin/login', 'App\Http\Controllers\Admin\LoginController@login')->name('login');
+//Route::match(['get', 'post'], '/admin/login', 'App\Http\Controllers\Admin\AuthController@login')->name('login');
 
 //Route::get('/', function () {
 //    return view('pages.clients.homes.index');

@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->increments("id");
             $table->unsignedInteger("customer_id");
+            $table->string("order_name");
             $table->string("order_phone");
             $table->string("order_address", 300);
             $table->string("order_note", 1000);

@@ -33,7 +33,7 @@
                             src="{{$customerInfo->gender === 0 ? asset('images/default/no-image-female.jpeg') : asset('images/default/no-image-male.jpeg')}}"
                             class="rounded-circle shadow-md avatar avatar-medium" alt="">
                     @else
-                        <img src="{{asset('images/uploads/userAvatar/'.$customerInfo->avatar)}}"
+                        <img src="{{asset('images/uploads/user-avatar/'.$customerInfo->avatar)}}"
                              class="rounded-circle shadow-md avatar avatar-medium" alt="">
                     @endif
                     <div class="mt-4 ms-3 pt-3">

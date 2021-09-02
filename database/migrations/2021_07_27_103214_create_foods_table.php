@@ -17,21 +17,20 @@ class CreateFoodsTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments("id");
-            $table->unsignedInteger("store_id");
-            $table->unsignedInteger("category_id");
+
+            $table->unsignedInteger("store_id");//của cửa hàng
             $table->string('food_name', 200);
-            $table->string('food_not_mark', 200);
-            $table->tinyInteger('food_active');
+            $table->tinyInteger('food_active')->default(1);//tình trạng
             $table->string('food_avatar', 50)->nullable();
-            $table->tinyInteger('promotion')->default(0);
-            $table->float("price");
+            $table->tinyInteger('promotion')->default(0);//đang khuyến mãi không?
+            $table->float("price");//giá bán trước khuyến mãi
+
             $table->float('food_profit')->default(0);//số tiền lợi nhuận
             $table->integer("food_consume")->default(0); //số lượng tiêu thụ
-            $table->text("food_description");
-            $table->char("avg_rate", 1)->default(0);
+            $table->text("food_description")->nullable();
+
             $table->timestamps();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

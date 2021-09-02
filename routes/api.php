@@ -21,15 +21,17 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'api',
     'prefix' => 'v1',
-    'namespace' => '\App\Http\Controllers\Client\Api\Auth',
+    'namespace' => 'App\Http\Controllers\Client\Api\Auth',
 ], function () {
     //auth user
-    Route::post('/login', 'LoginController@login');
-    Route::post('/email-exist', 'LoginController@checkEmailExist');
-    Route::post('/register', 'LoginController@register');
-    Route::post('/logout', 'LoginController@logout');
-    Route::post('/refresh', 'LoginController@refresh');
-    Route::get('/user-profile', 'LoginController@userProfile');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/email-exist', 'AuthController@checkEmailExist');
+    Route::post('/register', 'AuthController@register');
+    Route::post('/logout', 'AuthController@logout');
+    Route::post('/refresh', 'AuthController@refresh');
+    Route::get('/user-profile', 'AuthController@userProfile');
+
+
 });
 
 Route::group([
@@ -38,8 +40,8 @@ Route::group([
     'namespace' => '\App\Http\Controllers\Admin\Api\Auth',
 ], function () {
     //auth admin
-    Route::post('/login', 'LoginController@login');
-    Route::post('/logout', 'LoginController@logout');
-    Route::post('/refresh', 'LoginController@refresh');
-    Route::get('/user-profile', 'LoginController@userProfile');
+//    Route::post('/login', 'AuthController@login');
+//    Route::post('/logout', 'AuthController@logout');
+//    Route::post('/refresh', 'AuthController@refresh');
+//    Route::get('/user-profile', 'AuthController@userProfile');
 });

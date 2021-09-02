@@ -414,7 +414,7 @@
             $('#foodAvatarLabel').removeAttribute('file-name');
             $('#foodAvatarImg').src = '/images/default/no-image-food.jpg';
         })
-        $('#foodAvatar').onchange = function (e) {
+        $('#food-avatar').onchange = function (e) {
             deleteImageRequest("{{access_token()}}")
             if (e.target.files.length !== 0) {
                 var loadingSpan = document.createElement('div');
@@ -429,7 +429,7 @@
                     header: {
                         'Authorization': `Bearer {{access_token()}}}`
                     },
-                    data: {'food_avatar': $('#foodAvatar').files[0]},
+                    data: {'food_avatar': $('#food-avatar').files[0]},
                     success: (data) => {
                         $('#foodAvatarImg').removeAttribute('scr');
                         $('#foodAvatarImg').setAttribute('src', data.path);

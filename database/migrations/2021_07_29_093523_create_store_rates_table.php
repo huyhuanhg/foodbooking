@@ -13,15 +13,17 @@ class CreateStoreRatesTable extends Migration
      */
     public function up()
     {
-//        Schema::create('store_rates', function (Blueprint $table) {
-//            $table->charset = 'utf8';
-//            $table->collation = 'utf8_general_ci';
-//            $table->unsignedInteger("store_id");
-//            $table->unsignedInteger("person_id");
-//            $table->char("rate", 1);
-//            $table->foreign('store_id')->references('id')->on('stores');
-//            $table->foreign('person_id')->references('id')->on('persons');
-//        });
+        Schema::create('store_rates', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+
+            $table->unsignedInteger("store_id");
+            $table->unsignedInteger("user_id");
+            $table->char("rate", 1);
+            $table->primary(array('user_id', 'store_id'));
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
