@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Client\Api;
 
+use App\Http\Controllers\Controller;
 use App\Services\OtherService;
 
-class OtherController
+class OtherController extends Controller
 {
     protected $otherService;
 

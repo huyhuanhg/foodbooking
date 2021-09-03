@@ -19,9 +19,7 @@ class Food extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'store_id',
-        'category_id',
         'food_name',
-        'food_not_mark',
         'food_active',
         'food_avatar',
         'promotion',
@@ -29,8 +27,12 @@ class Food extends Model
         'food_profit',
         'food_consume',
         'food_description',
-        'avg_rate',
     ];
+
+    public function store()
+    {
+        return $this->hasOne(Store::class, 'store_id');
+    }
 
     public function getAll($currentPage = 1, $limit = 10)
     {

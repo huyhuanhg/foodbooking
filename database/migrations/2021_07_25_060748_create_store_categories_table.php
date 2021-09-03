@@ -20,6 +20,7 @@ class CreateStoreCategoriesTable extends Migration
             $table->string('store_cate_name', 200);//tên thể loại cửa hàng
             $table->string('category_description')->nullable();//mô tả
             $table->tinyInteger('category_active');//tình trang
+            $table->timestamps();
         });
     }
 

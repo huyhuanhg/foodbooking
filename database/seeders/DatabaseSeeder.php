@@ -90,8 +90,9 @@ class DatabaseSeeder extends Seeder
             StoresCategoriesTableSeeder::class,
             StoresTableSeeder::class,
             FoodsTableSeeder::class,
-            FoodTabsTableSeeder ::class,
-            FoodTabDetailTableSeeder::class,
+            FoodTagsTableSeeder ::class,
+            FoodTagDetailTableSeeder::class,
+            PromotionTableSeeder::class,
         ]);
     }
 }

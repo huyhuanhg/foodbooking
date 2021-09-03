@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface StoreInterface
+interface OrderInterface
 {
     public function getTotalCount();
     public function getStores(int $limit);

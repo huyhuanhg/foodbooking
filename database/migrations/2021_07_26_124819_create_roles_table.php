@@ -19,6 +19,7 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('role_type', 20);//loại phân quyền (ADMIN/SHOP)
             $table->string('role_description')->nullable();//mô tả
+            $table->timestamps();
         });
     }
 

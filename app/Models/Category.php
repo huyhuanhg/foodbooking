@@ -13,11 +13,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'categories';
+    protected $table = 'store_categories';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'category_name',
-        'category_not_mark',
+        'store_cate_name',
         'category_description',
         'category_active',
     ];

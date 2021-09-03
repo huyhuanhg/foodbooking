@@ -1,24 +1,20 @@
 <?php
 
-
 namespace App\Models;
-
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class FoodTag extends Model
 {
-
     use HasFactory;
 
-    protected $table = 'comments';
+    protected $table = 'food_tags';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'store_id',
-        'user_id',
-        'content',
-        'created_at',
+        'tag_name',
+        'tag_description',
+        'tag_active',
     ];
 
 }

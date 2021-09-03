@@ -20,6 +20,7 @@ class CreateStoreRatesTable extends Migration
             $table->unsignedInteger("store_id");
             $table->unsignedInteger("user_id");
             $table->char("rate", 1);
+            $table->timestamps();
             $table->primary(array('user_id', 'store_id'));
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

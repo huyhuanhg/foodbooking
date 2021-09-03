@@ -20,7 +20,6 @@ class CreateCommentsTable extends Migration
             $table->unsignedInteger("store_id");
             $table->unsignedInteger("user_id");
             $table->text("content");
-            $table->timestamp("create_at");
             $table->timestamps();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

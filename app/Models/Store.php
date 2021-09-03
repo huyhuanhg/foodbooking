@@ -18,13 +18,26 @@ class Store extends Model
 
     protected $fillable = [
         'store_name',
+        'store_not_mark',
+        'store_category',
+        'store_avatar',
         'store_address',
+        'store_province_code',
+        'store_district_code',
+        'store_ward_code',
+        'store_specific_address',
+        'open_time',
+        'close_time',
         'phone_contact',
-        'store_owner',
+        'owner',
         'avg_rate',
         'store_description',
-        'store_status'
+        'store_active'
     ];
+
+    public function foods(){
+        return $this->hasMany(Food::class, 'store_id');
+    }
 
     public function getStorePaginate($currentPage = 1, $limit = 10)
     {

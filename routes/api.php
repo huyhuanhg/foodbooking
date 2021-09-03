@@ -48,6 +48,11 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Client\Api',
 ], function () {
 
-    Route::get('/get-data-section-listed', 'OtherController@getDataSectionListed');
-});
+    Route::get('/foods', 'FoodController@index');
+    Route::get('/stores', 'StoreController@index');
+    Route::get('/stores/{store}', 'StoreController@show');
+    Route::get('/food-promotions', 'FoodController@promotions');
 
+    Route::get('/listed', 'OtherController@getDataSectionListed');
+
+});

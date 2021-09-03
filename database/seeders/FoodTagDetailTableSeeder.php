@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FoodTabDetailTableSeeder extends Seeder
+class FoodTagDetailTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,49 +14,49 @@ class FoodTabDetailTableSeeder extends Seeder
      */
     public function run()
     {
-        $foodTabDetail = [
+        $foodTagDetail = [
             [
-                'tab_id' => 8,
+                'tag_id' => 8,
                 'food_id'=> 1,
             ],
             [
-                'tab_id' => 1,
+                'tag_id' => 1,
                 'food_id'=> 1,
             ],
             [
-                'tab_id' => 1,
+                'tag_id' => 1,
                 'food_id'=> 2,
             ],
             [
-                'tab_id' => 10,
+                'tag_id' => 10,
                 'food_id'=> 2,
             ],
             [
-                'tab_id' => 1,
+                'tag_id' => 1,
                 'food_id'=> 3,
             ],
             [
-                'tab_id' => 12,
+                'tag_id' => 12,
                 'food_id'=> 3,
             ],
             [
-                'tab_id' => 1,
+                'tag_id' => 1,
                 'food_id'=> 4,
             ],
             [
-                'tab_id' => 1,
+                'tag_id' => 1,
                 'food_id'=> 5,
             ],
             [
-                'tab_id' => 2,
+                'tag_id' => 2,
                 'food_id'=> 6,
             ],
             [
-                'tab_id' => 12,
+                'tag_id' => 12,
                 'food_id'=> 6,
             ],
         ];
 
-        DB::table('food_tab_detail')->insert($foodTabDetail);
+        DB::table('food_tag_detail')->insert($foodTagDetail);
     }
 }
