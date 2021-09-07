@@ -47,6 +47,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function carts()
+    {
+        return $this->hasOne(Cart::class, 'id');
+    }
     public function getAllCustomers($currentPage = 1, $limit = 8)
     {
         return User::paginate($limit, ['*'], null, $currentPage);

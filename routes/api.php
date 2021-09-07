@@ -56,3 +56,13 @@ Route::group([
     Route::get('/listed', 'OtherController@getDataSectionListed');
 
 });
+
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix' => 'v1',
+    'namespace' => 'App\Http\Controllers\Client\Api',
+], function () {
+
+    Route::get('/carts', 'CartController@index');
+
+});

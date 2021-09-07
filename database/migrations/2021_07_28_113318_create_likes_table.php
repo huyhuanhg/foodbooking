@@ -17,10 +17,12 @@ class CreateLikesTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->unsignedInteger("store_id");
+            $table->unsignedInteger("food_id");
             $table->unsignedInteger("user_id");
             $table->timestamps();
-            $table->primary(array('user_id', 'store_id'));
+            $table->primary(array('user_id', 'food_id'));
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

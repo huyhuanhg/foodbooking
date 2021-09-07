@@ -18,10 +18,11 @@ class CreateCartDetailTable extends Migration
             $table->unsignedInteger("store_id");
             $table->unsignedInteger("food_id");
             $table->integer("quantity");//số lượng
-            $table->primary(array('cart_id', 'store_id', 'food_id'));
-            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->primary(array('cart_id', 'food_id'));
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -2,28 +2,23 @@
 
 namespace App\Repositories;
 
-use App\Models\Store;
+use App\Models\Cart;
+use App\Models\User;
 use App\Repositories\Interfaces\CartInterface;
-use App\Repositories\Interfaces\CategoryInterface;
-use App\Repositories\Interfaces\StoreInterface;
-use Illuminate\Support\Facades\DB;
 
 class CartRepository implements CartInterface
 {
-    protected $store;
+    protected $cart;
 
-    public function __construct(Store $store)
+    public function __construct(Cart $cart)
     {
-        $this->store = $store;
+        $this->cart = $cart;
     }
 
-    public function getTotalCount()
+    public function getList(User $user)
     {
-        return $this->store->select(DB::raw('COUNT(id) AS total_stores'))->first();
+        $cartUser = $this->cart->where('user_id', $user->id)->first();
+        return $cartUser->foods()->get();
     }
 
-    public function getStores(int $limit)
-    {
-        return $this->store->select('id' , 'store_name', 'store_not_mark', 'store_category', 'store_avatar', 'avg_rate' )->limit($limit)->get();
-    }
 }

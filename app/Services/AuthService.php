@@ -56,5 +56,8 @@ class AuthService
             return ['message' => 'Email đã tồn tại!', 'status' => Response::HTTP_FORBIDDEN];
         }
     }
+    public function getTotalCart($user){
+        return $this->userAuthInterface->getTotalCart($user);
+    }
 
 }

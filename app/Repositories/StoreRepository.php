@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Store;
+use App\Models\User;
 use App\Repositories\Interfaces\StoreInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -35,7 +36,33 @@ class StoreRepository implements StoreInterface
             ->leftJoin('comments', 'comments.store_id', 'stores.id')
             ->leftJoin('foods', 'foods.store_id', 'stores.id')
             ->groupBy('stores.id')->limit($limit)->get();
+    }
 
+    public function getCategoryName(Store $store)
+    {
+        return $store->category()->select('store_cate_name')->first();
+    }
 
+    public function getTotalInfo(Store $store)
+    {
+        return collect([
+            'total_comment' => $store->comments()->count(),
+            'total_food' => $store->foods()->count(),
+            'total_rating' => $store->rates()->count()
+        ]);
+    }
+
+    public function userRate(Store $store, int $userId)
+    {
+        foreach ($store->userRate as $rows) {
+            if ($rows->pivot->user_id === $userId) {
+                return ['user_rate' => $rows->pivot->rate];
+            }
+        }
+    }
+
+    public function getByIds(array $ids)
+    {
+        return $this->store->select('id', 'store_not_mark', 'store_name')->whereIn('id', $ids)->get();
     }
 }

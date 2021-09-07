@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Repositories\Interfaces\CategoryInterface;
 use App\Repositories\Interfaces\CommentInterface;
 use App\Repositories\Interfaces\StoreInterface;
@@ -40,10 +39,13 @@ class StoreService
 
     public function getStoreDetail($store, $request)
     {
-        return [
-            'stores' => $store,
-            'users' => User::find($request->id)
-        ];
+        $total = $this->store->getTotalInfo($store)->merge($store);
+        $categoryName = $this->store->getCategoryName($store);
+        $userRate = null;
+        if ($request->user) {
+            $userRate = $this->store->userRate($store, $request->user);
+        }
+        return $total->merge($categoryName)->merge($userRate);
     }
 
     protected function addLastComment($storeList, $commentList)

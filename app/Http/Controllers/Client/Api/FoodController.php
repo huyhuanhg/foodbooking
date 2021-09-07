@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Client\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\FoodService;
-use Illuminate\Support\Facades\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class FoodController extends Controller
 {
@@ -21,9 +21,9 @@ class FoodController extends Controller
         return response()->json($this->foodService->getPromotionInitial());
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->foodService->getFoodList());
+        return response()->json($this->foodService->getFoodList($request));
     }
 
     public function store()

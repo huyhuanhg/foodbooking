@@ -35,8 +35,30 @@ class Store extends Model
         'store_active'
     ];
 
-    public function foods(){
+    public function category()
+    {
+        return $this->belongsto(Category::class, 'store_category');
+    }
+
+    public function foods()
+    {
         return $this->hasMany(Food::class, 'store_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'store_id');
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rating::class, 'store_id');
+    }
+
+    public function userRate()
+    {
+        return $this->belongstoMany(User::class, 'store_rates', 'store_id', 'user_id')
+            ->withPivot('rate');
     }
 
     public function getStorePaginate($currentPage = 1, $limit = 10)

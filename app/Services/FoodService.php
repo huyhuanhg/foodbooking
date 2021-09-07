@@ -17,9 +17,18 @@ class FoodService
         $this->promotion = $promotion;
     }
 
-    public function getFoodList($limit = 12)
+    public function getFoodList($request, $limit = 12)
     {
-        $foodsList = $this->food->getFoods($limit);
+        $foodsList = $this->food->getFoods(
+            $request->store ?? -1,
+            $request->group ?? "",
+            $request->sort ?? "id",
+            $request->sort_type ?? 0,
+            json_decode($request->tags) ?? [],
+            $request->page ?? 1,
+            $limit,
+            $request->user ?? -1
+        );
 
         $foodIdList = $foodsList;
         $foodIdList = $foodIdList->pluck('id')->toArray();
@@ -33,7 +42,6 @@ class FoodService
         return [
             'foods' => $foodsList,
             'tags' => $foodTags,
-
         ];
     }
 

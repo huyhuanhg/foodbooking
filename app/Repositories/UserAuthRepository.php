@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\Interfaces\UserAuthInterface;
+use Illuminate\Support\Facades\DB;
 
 class UserAuthRepository implements UserAuthInterface
 {
@@ -26,5 +27,13 @@ class UserAuthRepository implements UserAuthInterface
     public function checkEmailExist(string $email)
     {
         return $this->user->select('email')->where('email', '=', $email)->count();
+    }
+    public function getTotalCart(User $user)
+    {
+        return $user->carts()
+            ->select(DB::raw('SUM(quantity) `count`'))
+            ->join('cart_detail', 'cart_detail.cart_id', 'carts.id')
+            ->groupBy('cart_detail.cart_id')
+            ->first();
     }
 }

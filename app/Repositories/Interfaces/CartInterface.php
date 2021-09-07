@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Models\User;
+
 interface CartInterface
 {
-    public function getTotalCount();
-    public function getStores(int $limit);
+    public function getList(User $user);
 }

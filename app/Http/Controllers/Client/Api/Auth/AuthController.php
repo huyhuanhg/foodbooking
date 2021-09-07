@@ -7,6 +7,7 @@ use App\Http\Requests\Api\ApiUserLoginRequest;
 use App\Http\Requests\Api\ApiUserRegisterRequest;
 use App\Http\Requests\Api\EmailRequest;
 use App\Services\AuthService;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -56,7 +57,9 @@ class AuthController extends Controller
 
     public function userProfile()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        $total_cart = $this->authService->getTotalCart($user);
+        return response()->json($user->setAttribute('carts' , $total_cart));
     }
 
     protected function createToken($token)
