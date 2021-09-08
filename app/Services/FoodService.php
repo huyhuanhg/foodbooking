@@ -22,20 +22,14 @@ class FoodService
         $foodsList = $this->food->getFoods(
             $request->store ?? -1,
             $request->group ?? "",
-            $request->sort ?? "id",
+            $request->sort ?? "created_at",
             $request->sort_type ?? 0,
             json_decode($request->tags) ?? [],
             $request->page ?? 1,
             $limit,
-            $request->user ?? -1
+            $request->user ?? -1,
+            $request->search ?? ''
         );
-
-        $foodIdList = $foodsList;
-        $foodIdList = $foodIdList->pluck('id')->toArray();
-
-        $promotions = $this->promotion->findByFoodId($foodIdList);
-
-        $this->addDiscount($foodsList, $promotions);
 
         $foodTags = $this->foodTab->getTags();
 

@@ -21,21 +21,58 @@ class StoreRepository implements StoreInterface
         return $this->store->select(DB::raw('COUNT(id) AS total_stores'))->first();
     }
 
-    public function getStores(int $limit)
+    public function getStores(
+        string $group,
+        string $sort,
+        int    $sortType,
+        int    $category,
+        int    $page,
+        int    $limit,
+        int    $userId,
+        string $search
+    )
     {
-        return $this->store->select(
-            'stores.id',
-            'stores.store_name',
-            'stores.store_not_mark',
-            'stores.store_category',
-            'stores.store_address',
-            'stores.store_avatar',
-            'stores.avg_rate',
-            DB::raw('count(comments.id) as total_comment'),
-            DB::raw('count(foods.store_id) as total_food'))
-            ->leftJoin('comments', 'comments.store_id', 'stores.id')
+        $stores = $this->store->leftJoin('comments', 'comments.store_id', 'stores.id')
             ->leftJoin('foods', 'foods.store_id', 'stores.id')
-            ->groupBy('stores.id')->limit($limit)->get();
+            ->leftJoin('order_detail', 'order_detail.store_id', 'stores.id')
+            ->groupBy('stores.id');
+        if ($group === 'bookmark' && $userId > 0) {
+            $stores = $stores->join('bookmarks', 'bookmarks.store_id', 'stores.id')
+                ->where('bookmarks.user_id', $userId);
+        }
+        if ($search) {
+            $stores = $stores->where('stores.store_name', 'LIKE', "%$search%");
+        }
+        if ($category > 0) {
+            $stores = $stores->where('stores.store_category', $category);
+        }
+        if ($search) {
+            $stores = $stores->where('stores.store_name', 'LIKE', "%$search%");
+        }
+        if ($sort) {
+            if ($sort === 'total_order'){
+                $stores = $stores->orderBy("$sort", $sortType !== -1 ? "DESC" : "ASC");
+            } else{
+                $stores = $stores->orderBy("stores.$sort", $sortType !== -1 ? "DESC" : "ASC");
+            }
+        }
+        return $stores->paginate(
+            $limit,
+            [
+                'stores.id',
+                'stores.store_name',
+                'stores.store_not_mark',
+                'stores.store_category',
+                'stores.store_address',
+                'stores.store_avatar',
+                'stores.avg_rate',
+                DB::raw('count(comments.id) as total_comment'),
+                DB::raw('count(foods.store_id) as total_food'),
+                DB::raw('count(order_detail.store_id) as total_order')
+            ],
+            'Danh sách cửa hàng',
+            $page
+        );
     }
 
     public function getCategoryName(Store $store)

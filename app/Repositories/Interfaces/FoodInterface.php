@@ -14,7 +14,8 @@ interface FoodInterface
         array  $tags,
         int    $page,
         int    $limit,
-        int    $userId
+        int    $userId,
+        string $search
     );
 
     public function findByIds(array $idList);

@@ -22,14 +22,24 @@ class StoreService
     }
 
 
-    public function getStoreList($limit = 12)
+    public function getStoreList($request, $limit = 12)
     {
-        $stores = $this->store->getStores($limit);
-
-        $storeIdList = $stores;
-        $storeIdList = $storeIdList->pluck('id')->toArray();
-        $lastComment = $this->comment->lastCommentByIds($storeIdList);
-        $this->addLastComment($stores, $lastComment);
+        $stores = $this->store->getStores(
+            $request->group ?? '',
+            $request->sort ?? 'created_at',
+            $request->sort_type ?? -1,
+            $request->category ?? 0,
+            $request->page ?? 1,
+            $limit,
+            $request->user ?? 0,
+            $request->search ?? ''
+        );
+        if (count($stores) > 0) {
+            $storeIdList = $stores;
+            $storeIdList = $storeIdList->pluck('id')->toArray();
+            $lastComment = $this->comment->lastCommentByIds($storeIdList);
+            $this->addLastComment($stores, $lastComment);
+        }
         $categories = $this->category->getCategories();
         return [
             'stores' => $stores,
