@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Food;
 use App\Repositories\Interfaces\CartInterface;
 use App\Repositories\Interfaces\PromotionInterface;
 use App\Repositories\Interfaces\StoreInterface;
@@ -25,40 +26,36 @@ class CartService
     public function getList()
     {
         $carts = $this->cart->getList(auth()->user());
-        $foodIds = $carts->pluck('id')->toArray();
-        $promotions = $this->promotion->findByFoodId($foodIds);
-        $this->addDiscount($carts, $promotions);
+        $totalInfo = $this->getTotalCart($carts);
+        return collect(['cart_list' => $carts])->merge($totalInfo);
+    }
+
+    public function update($request)
+    {
+        $detail = $this->cart->update(Food::find($request['food']), $request['action'] ?? 1);
+        $detail['pivot']['quantity'] += $request['action'] ?? 1;
+        $detail['pivot'] = $detail['pivot']->only('quantity');
+        $carts = $this->cart->getList(auth()->user());
+        $totalInfo = $this->getTotalCart($carts);
+        return collect(['cart_update' => $detail])->merge($totalInfo);
+    }
+
+    public function delete($foodId)
+    {
+        return $this->cart->delete($foodId ?? -1);
+    }
+
+    protected function getTotalCart($carts)
+    {
         $totalMoney = 0;
         $total = 0;
         foreach ($carts as $cart) {
-            $money = $cart->discount ? $cart->discount['value'] : $cart->price;
-            $totalMoney += $money * $cart->pivot->quantity;
+            $totalMoney += $cart->discount * $cart->pivot->quantity;
             $total += $cart->pivot->quantity;
         }
         return [
-            'cart_list' => $carts,
             'total_money' => $totalMoney,
             'total' => $total
         ];
-    }
-
-    protected function addDiscount($carts, $promotions)
-    {
-        foreach ($carts as $cart) {
-            $promotion = $promotions->where('food_id', $cart->id)->first();
-            if (!empty($promotion)) {
-                $priceAfterDiscount = discount_calculate(
-                    $cart->price,
-                    $promotion->discount,
-                    $promotion->max_discount,
-                    $promotion->is_percent === 1
-                );
-                $cart->setAttribute('discount', [
-                    'value' => $priceAfterDiscount,
-                    'start_time' => $promotion->start_time,
-                    'end_time' => $promotion->end_time,
-                ]);
-            }
-        }
     }
 }

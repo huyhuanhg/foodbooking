@@ -64,5 +64,6 @@ Route::group([
 ], function () {
 
     Route::get('/carts', 'CartController@index');
-
+    Route::post('/carts', 'CartController@update');
+    Route::delete('/carts', 'CartController@destroy');
 });

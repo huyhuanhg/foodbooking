@@ -129,5 +129,26 @@ class Food extends Model
     {
         return Food::select(DB::raw('COUNT(id) AS total'))->first();
     }
+    public function addDiscount(){
+        return $this->join(DB::raw("
+                (SELECT child.id, (
+                    CASE
+                    	WHEN promotions.is_percent = 1
+                        THEN (
+                        	CASE
+                            	WHEN (price * promotions.discount / 100) < promotions.max_discount
+                            	THEN (price - price * promotions.discount / 100)
+                            	ELSE promotions.max_discount
+                            END
+                        )
+                        ELSE
+                    		(case
+                    				WHEN promotions.is_percent = 0
+                                    then (price - promotions.discount)
+                                    else child.price
+                    		end)
 
+                    END) discount FROM `foods` child
+                    LEFT JOIN promotions ON promotions.food_id = child.id) sub"), 'sub.id', 'foods.id');
+    }
 }
