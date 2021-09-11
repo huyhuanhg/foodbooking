@@ -19,4 +19,5 @@ interface FoodInterface
     );
 
     public function findByIds(array $idList);
+    public function updateConsume(array $foodIds, array $foodInfo);
 }

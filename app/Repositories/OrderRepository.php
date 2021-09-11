@@ -2,27 +2,45 @@
 
 namespace App\Repositories;
 
-use App\Models\Store;
+use App\Models\Order;
 use App\Repositories\Interfaces\OrderInterface;
-use App\Repositories\Interfaces\StoreInterface;
-use Illuminate\Support\Facades\DB;
+use Exception;
 
 class OrderRepository implements OrderInterface
 {
-    protected $store;
+    protected $order;
 
-    public function __construct(Store $store)
+    public function __construct(Order $order)
     {
-        $this->store = $store;
+        $this->$order = $order;
     }
 
-    public function getTotalCount()
+    public function create(string $fullName, string $numberPhone, string $address, string $note)
     {
-        return $this->store->select(DB::raw('COUNT(id) AS total_stores'))->first();
+        try {
+            $order = new Order();
+            $order->customer_id = auth()->user()->id;
+            $order->order_name = $fullName;
+            $order->order_phone = $numberPhone;
+            $order->order_address = $address;
+            if ($note) {
+                $order->order_note = $note;
+            }
+            $order->save();
+            return $order->id;
+        } catch (Exception $e) {
+            return [
+                'status' => 403,
+                'message' => $e->getMessage(),
+            ];
+        }
     }
-
-    public function getStores(int $limit)
+    public function addDetail(int $orderId, array $foodIds, array $cartInfo)
     {
-        return $this->store->select('id' , 'store_name', 'store_not_mark', 'store_category', 'store_avatar', 'avg_rate' )->limit($limit)->get();
+        $order = Order::find($orderId);
+        foreach ($foodIds as $foodKey => $foodId) {
+            $order->orderDetail()->attach($foodId, $cartInfo[$foodKey]);
+        }
+        return $order;
     }
 }

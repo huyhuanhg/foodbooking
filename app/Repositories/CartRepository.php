@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Cart;
 use App\Models\Food;
-use App\Models\User;
 use App\Repositories\Interfaces\CartInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,9 +18,9 @@ class CartRepository implements CartInterface
         $this->food = $food;
     }
 
-    public function getList(User $user)
+    public function getList()
     {
-        $cartUser = $this->cart->where('user_id', $user->id)->first();
+        $cartUser = $this->cart->where('user_id', auth()->user()->id)->first();
         return $cartUser->foods()->withPivot('quantity', 'store_id')->get();
     }
 

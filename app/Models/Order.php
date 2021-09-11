@@ -4,12 +4,33 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
+    use HasFactory;
+
+    protected $table = 'orders';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'customer_id',
+        'order_name',
+        'order_phone',
+        'order_address',
+        'order_note',
+        'order_status'
+    ];
+
+    public function orderDetail(){
+        return $this
+            ->belongstoMany(Food::class, 'order_detail', 'order_id', 'food_id');
+    }
+
     public function getOrderPaginate($currentPage = 1, $limit = 10)
     {
         $orders = Order::join('users', 'orders.customer_id', 'users.id')

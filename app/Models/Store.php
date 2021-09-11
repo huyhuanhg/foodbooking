@@ -52,7 +52,7 @@ class Store extends Model
 
     public function rates()
     {
-        return $this->hasMany(Rating::class, 'store_id');
+        return $this->hasMany(Rate::class, 'store_id');
     }
 
     public function userRate()

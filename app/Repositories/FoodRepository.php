@@ -116,4 +116,12 @@ class FoodRepository implements FoodInterface
             ->whereIn('foods.id', $idList)->get();
     }
 
+    public function updateConsume(array $foodIds, array $foodInfo)
+    {
+        foreach ($foodIds as $foodKey => $foodId) {
+            $food = Food::find($foodId);
+            $food->food_consume = $food->food_consume + $foodInfo[$foodKey]['quantity'];
+            $food->save();
+        }
+    }
 }

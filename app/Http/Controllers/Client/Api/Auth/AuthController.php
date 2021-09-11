@@ -29,7 +29,7 @@ class AuthController extends Controller
         if (!$token = $this->authService->token($request->all())) {
             return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
-        return $this->createToken($token);
+        return $this->createToken($token, true);
     }
 
     public function register(ApiUserRegisterRequest $request)
@@ -62,13 +62,18 @@ class AuthController extends Controller
         return response()->json($user->setAttribute('carts' , $total_cart));
     }
 
-    protected function createToken($token)
+    protected function createToken($token, $cartTotal = null)
     {
+        $user = auth()->user();
+        if ($cartTotal){
+            $total_cart = $this->authService->getTotalCart($user);
+            $user = $user->setAttribute('carts' , $total_cart);
+        }
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expire' => $this->authService->expriceToken(),
-            'user' => auth()->user()
+            'user' => $user
         ]);
     }
 }

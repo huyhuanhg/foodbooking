@@ -12,13 +12,17 @@ use App\Repositories\Interfaces\CategoryInterface;
 use App\Repositories\Interfaces\CommentInterface;
 use App\Repositories\Interfaces\FoodInterface;
 use App\Repositories\Interfaces\FoodTagInterface;
+use App\Repositories\Interfaces\LikeInterface;
 use App\Repositories\Interfaces\OrderInterface;
 use App\Repositories\Interfaces\PromotionInterface;
+use App\Repositories\Interfaces\RateInterface;
 use App\Repositories\Interfaces\StoreInterface;
 use App\Repositories\Interfaces\UserAuthInterface;
 use App\Repositories\Interfaces\UserInterface;
+use App\Repositories\LikeRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PromotionRepository;
+use App\Repositories\RateRepository;
 use App\Repositories\StoreRepository;
 use App\Repositories\UserAuthRepository;
 use App\Repositories\UserRepository;
@@ -43,6 +47,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CartInterface::class, CartRepository::class);
         $this->app->bind(CommentInterface::class, CommentRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
+        $this->app->bind(RateInterface::class, RateRepository::class);
+        $this->app->bind(LikeInterface::class, LikeRepository::class);
     }
 
     /**

@@ -102,4 +102,10 @@ class StoreRepository implements StoreInterface
     {
         return $this->store->select('id', 'store_not_mark', 'store_name')->whereIn('id', $ids)->get();
     }
+    public function updateAvgRate(int $storeId, float $avgRate)
+    {
+        $store = $this->store->find($storeId);
+        $store->avg_rate = $avgRate;
+        $store->save();
+    }
 }

@@ -25,7 +25,7 @@ class CartService
 
     public function getList()
     {
-        $carts = $this->cart->getList(auth()->user());
+        $carts = $this->cart->getList();
         $totalInfo = $this->getTotalCart($carts);
         return collect(['cart_list' => $carts])->merge($totalInfo);
     }
@@ -35,7 +35,7 @@ class CartService
         $detail = $this->cart->update(Food::find($request['food']), $request['action'] ?? 1);
         $detail['pivot']['quantity'] += $request['action'] ?? 1;
         $detail['pivot'] = $detail['pivot']->only('quantity');
-        $carts = $this->cart->getList(auth()->user());
+        $carts = $this->cart->getList();
         $totalInfo = $this->getTotalCart($carts);
         return collect(['cart_update' => $detail])->merge($totalInfo);
     }

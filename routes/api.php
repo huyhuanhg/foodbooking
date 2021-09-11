@@ -55,6 +55,9 @@ Route::group([
 
     Route::get('/listed', 'OtherController@getDataSectionListed');
 
+    Route::get('/address', 'OtherController@address');
+    Route::get('/districts', 'OtherController@districts');
+    Route::get('/wards', 'OtherController@wards');
 });
 
 Route::group([
@@ -66,4 +69,12 @@ Route::group([
     Route::get('/carts', 'CartController@index');
     Route::post('/carts', 'CartController@update');
     Route::delete('/carts', 'CartController@destroy');
+
+    Route::post('/order', 'OrderController@store');
+    Route::post('/rate', 'RateController@store');
+
+    Route::get('/like', 'LikeController@index');
+    Route::post('/like', 'LikeController@update');
+
+    Route::post('/comment', 'CommentController@store');
 });

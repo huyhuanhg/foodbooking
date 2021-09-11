@@ -7,7 +7,7 @@ use App\Models\User;
 
 interface CartInterface
 {
-    public function getList(User $user);
+    public function getList();
     public function update(Food $food, int $action);
     public function delete(int $foodId);
 }
