@@ -58,6 +58,8 @@ Route::group([
     Route::get('/address', 'OtherController@address');
     Route::get('/districts', 'OtherController@districts');
     Route::get('/wards', 'OtherController@wards');
+
+    Route::get('/comment', 'CommentController@index');
 });
 
 Route::group([
@@ -70,6 +72,7 @@ Route::group([
     Route::post('/carts', 'CartController@update');
     Route::delete('/carts', 'CartController@destroy');
 
+    Route::get('/order', 'OrderController@index');
     Route::post('/order', 'OrderController@store');
     Route::post('/rate', 'RateController@store');
 
@@ -77,4 +80,12 @@ Route::group([
     Route::post('/like', 'LikeController@update');
 
     Route::post('/comment', 'CommentController@store');
+
+    Route::resource('/bookmark', 'BookmarkController')->except(['edit', 'create', 'update']);
+    Route::patch('/bookmark', 'BookmarkController@update');
+
+    Route::post('/user-avatar', 'UserController@uploadAvatar');
+    Route::post('/comment-pictures', 'CommentController@uploadPicture');
+    Route::post('/comment-pictures-d', 'CommentController@deletePictures');
+    Route::post('/comment-picture-d', 'CommentController@deletePicture');
 });

@@ -2,16 +2,13 @@
 
 namespace App\Providers;
 
-use App\Repositories\CartRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\CommentRepository;
-use App\Repositories\FoodRepository;
-use App\Repositories\FoodTagRepository;
+use App\Repositories\ImageRepository;
 use App\Repositories\Interfaces\CartInterface;
 use App\Repositories\Interfaces\CategoryInterface;
 use App\Repositories\Interfaces\CommentInterface;
 use App\Repositories\Interfaces\FoodInterface;
 use App\Repositories\Interfaces\FoodTagInterface;
+use App\Repositories\Interfaces\ImageInterface;
 use App\Repositories\Interfaces\LikeInterface;
 use App\Repositories\Interfaces\OrderInterface;
 use App\Repositories\Interfaces\PromotionInterface;
@@ -19,6 +16,13 @@ use App\Repositories\Interfaces\RateInterface;
 use App\Repositories\Interfaces\StoreInterface;
 use App\Repositories\Interfaces\UserAuthInterface;
 use App\Repositories\Interfaces\UserInterface;
+use App\Repositories\Interfaces\BookmarkInterface;
+use App\Repositories\BookmarkRepository;
+use App\Repositories\CartRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\CommentRepository;
+use App\Repositories\FoodRepository;
+use App\Repositories\FoodTagRepository;
 use App\Repositories\LikeRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PromotionRepository;
@@ -49,6 +53,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(OrderInterface::class, OrderRepository::class);
         $this->app->bind(RateInterface::class, RateRepository::class);
         $this->app->bind(LikeInterface::class, LikeRepository::class);
+        $this->app->bind(BookmarkInterface::class, BookmarkRepository::class);
+        $this->app->bind(ImageInterface::class, ImageRepository::class);
     }
 
     /**

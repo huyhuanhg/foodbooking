@@ -23,12 +23,8 @@ class CommentRequest extends Request
     public function rules()
     {
         return [
-        ];
-    }
-
-    public function messages()
-    {
-        return [
+            'store_id' => 'required|exists:stores,id',
+            'content' => 'required',
         ];
     }
 }
