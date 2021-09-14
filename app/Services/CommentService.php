@@ -63,10 +63,11 @@ class CommentService
             $pictures = $pictureList->filter(function ($imageItem) use ($comment) {
                 return $comment->comment_id == $imageItem->comment_id;
             });
-            $pictures = $pictures->map(function ($imageItem) {
-                return $imageItem->picture_path;
-            });
-            $comment->setAttribute('pictures', $pictures);
+            $newPictures = [];
+            foreach ($pictures as $imageItem){
+                array_push($newPictures, $imageItem->picture_path);
+            }
+            $comment->setAttribute('pictures', $newPictures);
         }
     }
 }

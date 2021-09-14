@@ -34,13 +34,12 @@ class CommentRepository implements CommentInterface
                 [
                     DB::raw('users.id user_id'),
                     'comments.store_id',
-                    DB::raw('comments.id comment_id'),
+                    'comments.id',
                     'comments.created_at',
                     DB::raw('users.avatar user_avatar'),
                     'users.first_name',
                     'users.last_name',
                     'comments.content',
-                    'stores.id',
                     'stores.store_not_mark',
                     'stores.store_name',
                     'stores.store_avatar',
@@ -89,6 +88,6 @@ class CommentRepository implements CommentInterface
             }
             $comment->commentPictures()->attach($pictureComment);
         }
-        return $comment->commentPictures()->get();
+        return $comment;
     }
 }
