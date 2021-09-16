@@ -19,6 +19,7 @@ class UserRepository implements UserInterface
     {
         return $this->user->select(DB::raw('COUNT(id) AS total_users'))->first();
     }
+
     public function changeAvatar(string $path)
     {
         $user = $this->user->find(auth()->user()->id);
@@ -26,5 +27,10 @@ class UserRepository implements UserInterface
         $user->avatar = $path;
         $user->save();
         return $currentPathAvatar;
+    }
+
+    public function updateUserInfo(array $updateData)
+    {
+
     }
 }

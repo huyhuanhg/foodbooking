@@ -20,10 +20,14 @@ class Comment extends Model
         'content',
         'created_at',
     ];
-    public function commentPictures(){
+
+    public function commentPictures()
+    {
         return $this->belongstoMany(CommentPicture::class, 'comment_picture_detail', 'comment_id', 'comment_picture_id');
     }
-    public function users(){
+
+    public function users()
+    {
         return $this->belongsto(User::class, 'user_id');
     }
 }

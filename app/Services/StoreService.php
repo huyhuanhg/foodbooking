@@ -58,6 +58,11 @@ class StoreService
         return $total->merge($categoryName)->merge($userRate);
     }
 
+    public function getPictures($store, $request, $limit = 20)
+    {
+        return $this->store->getCommentPictures($store, $request->page ?? 1, $limit);
+    }
+
     protected function addLastComment($storeList, $commentList)
     {
         foreach ($storeList as $store) {

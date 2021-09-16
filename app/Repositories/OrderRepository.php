@@ -57,6 +57,7 @@ class OrderRepository implements OrderInterface
         if ($storeId === 0) {
             $select = array_merge($select, [
                 DB::raw('stores.id store_id'),
+                DB::raw('(discount * quantity) AS total_money'),
                 'stores.store_name',
                 'stores.store_avatar',
                 'stores.store_not_mark',

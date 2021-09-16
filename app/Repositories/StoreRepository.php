@@ -50,9 +50,9 @@ class StoreRepository implements StoreInterface
             $stores = $stores->where('stores.store_name', 'LIKE', "%$search%");
         }
         if ($sort) {
-            if ($sort === 'total_order'){
+            if ($sort === 'total_order') {
                 $stores = $stores->orderBy("$sort", $sortType !== -1 ? "DESC" : "ASC");
-            } else{
+            } else {
                 $stores = $stores->orderBy("stores.$sort", $sortType !== -1 ? "DESC" : "ASC");
             }
         }
@@ -102,10 +102,26 @@ class StoreRepository implements StoreInterface
     {
         return $this->store->select('id', 'store_not_mark', 'store_name')->whereIn('id', $ids)->get();
     }
+
     public function updateAvgRate(int $storeId, float $avgRate)
     {
         $store = $this->store->find($storeId);
         $store->avg_rate = $avgRate;
         $store->save();
+    }
+
+    public function getCommentPictures(Store $store, int $page, int $limit)
+    {
+        $foodPictures = $store->foods()->select('food_avatar');
+        return $store->comments()
+            ->select('picture_path')
+            ->join('comment_picture_detail', 'comments.id', 'comment_picture_detail.comment_id')
+            ->join('comment_picture', 'comment_picture.id', 'comment_picture_detail.comment_picture_id')
+            ->union($foodPictures)->paginate(
+                $limit,
+                ['picture_path'],
+                'Danh sách hình ảnh',
+                $page
+            );;
     }
 }

@@ -51,6 +51,7 @@ Route::group([
     Route::get('/foods', 'FoodController@index');
     Route::get('/stores', 'StoreController@index');
     Route::get('/stores/{store}', 'StoreController@show');
+    Route::get('/stores/{store}/pictures', 'StoreController@showPictures');
     Route::get('/food-promotions', 'FoodController@promotions');
 
     Route::get('/listed', 'OtherController@getDataSectionListed');
@@ -67,6 +68,10 @@ Route::group([
     'prefix' => 'v1',
     'namespace' => 'App\Http\Controllers\Client\Api',
 ], function () {
+    Route::patch('/user', 'UserController@update');
+    Route::patch('/user-email', 'UserController@updateEmail');
+    Route::patch('/user-phone', 'UserController@updatePhone');
+    Route::patch('/user-full-name', 'UserController@updateFullName');
 
     Route::get('/carts', 'CartController@index');
     Route::post('/carts', 'CartController@update');

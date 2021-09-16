@@ -22,4 +22,14 @@ class UserService
         $this->imageInterface->delete($currentPath);
         return $imageInfo['path'];
     }
+
+    public function validateUpdateRequest($updateData)
+    {
+        return $updateData;
+    }
+
+    public function updateUserInfo($updateData)
+    {
+        return $updateData;
+    }
 }

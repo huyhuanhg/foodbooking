@@ -17,12 +17,12 @@ class CommentRepository implements CommentInterface
         $this->commentPicture = $commentPicture;
     }
 
-    public function getComments(int $storeId, int $limit, int $page)
+    public function getComments(int $storeId, int $userId, int $limit, int $page)
     {
         $comment = $this->comment;
         if ($storeId === -1) {
-            if (auth()->check()) {
-                $comment = $comment->where('user_id', auth()->user()->id);
+            if ($userId !== -1) {
+                $comment = $comment->where('user_id', $userId);
             }
         } else {
             $comment = $comment->where('comments.store_id', $storeId);
@@ -49,13 +49,14 @@ class CommentRepository implements CommentInterface
             );;
     }
 
-    public function getPictures(array $storeIds)
+    public function getPictures(array $commentIds)
     {
         return DB::table('comment_picture_detail')
             ->select('comment_id', 'picture_path')
             ->join('comment_picture', 'comment_picture_id', 'id')
-            ->whereIn('comment_id', $storeIds)->get();
+            ->whereIn('comment_id', $commentIds)->get();
     }
+
 
     public function lastCommentByIds(array $storeIdList)
     {

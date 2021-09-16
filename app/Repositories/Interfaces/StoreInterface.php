@@ -26,5 +26,8 @@ interface StoreInterface
     public function userRate(Store $store, int $userId);
 
     public function getByIds(array $ids);
-    public function updateAvgRate(int $storeId,float $avgRate);
+
+    public function updateAvgRate(int $storeId, float $avgRate);
+
+    public function getCommentPictures(Store $store, int $page, int $limit);
 }

@@ -18,10 +18,15 @@ class CommentService
 
     public function getList($request, $limit = 10)
     {
-        $comments = $this->comment->getComments($request->store ?? -1, $limit, $request->page ?? 1);
+        $comments = $this->comment->getComments(
+            $request->store ?? -1,
+            $request->user_id ?? -1,
+            $limit,
+            $request->page ?? 1
+        );
         $ids = [];
         foreach ($comments as $comment) {
-            array_push($ids, $comment->comment_id);
+            array_push($ids, $comment->id);
         }
         $pictures = $this->comment->getPictures($ids);
         $this->syncPicture($comments, $pictures);
@@ -61,10 +66,10 @@ class CommentService
         }
         foreach ($comments as $comment) {
             $pictures = $pictureList->filter(function ($imageItem) use ($comment) {
-                return $comment->comment_id == $imageItem->comment_id;
+                return $comment->id == $imageItem->comment_id;
             });
             $newPictures = [];
-            foreach ($pictures as $imageItem){
+            foreach ($pictures as $imageItem) {
                 array_push($newPictures, $imageItem->picture_path);
             }
             $comment->setAttribute('pictures', $newPictures);

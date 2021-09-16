@@ -17,10 +17,18 @@ class StoreController extends Controller
         $this->storeService = $storeService;
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return response()->json($this->storeService->getStoreList($request));
     }
-    public function show(Request $request, Store $store){
+
+    public function show(Request $request, Store $store)
+    {
         return response()->json($this->storeService->getStoreDetail($store, $request));
+    }
+
+    public function showPictures(Request $request, Store $store)
+    {
+        return response()->json($this->storeService->getPictures($store, $request));
     }
 }

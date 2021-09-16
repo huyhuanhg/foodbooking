@@ -24,7 +24,7 @@ class OrderService
         $this->foodInterface = $foodInterface;
     }
 
-    public function getList($request, $userId = 0, $limit = 5)
+    public function getList($request, $userId = 0, $limit = 10)
     {
         $storeId = $request->store_id ?? 0;
         $orders = $this->orderInterface->getList(
@@ -81,33 +81,31 @@ class OrderService
         if ($storeId === 0) {
             foreach ($details as $detailKey => $detail) {
                 foreach ($detail as $detailItem) {
-                    $foodInfo =
-                        [
-                            'food_name' => $detailItem->food_name,
-                            'food_avatar' => $detailItem->food_avatar,
-                            'food_id' => $detailItem->food_id,
-                            'quantity' => $detailItem->pivot->quantity,
-                            'price' => $detailItem->pivot->uni_price,
-                            'discount' => $detailItem->pivot->discount,
-                        ];
-                    $storeInfo = collect([
+                    $foodInfo = collect([
+                        'total_money' => $detailItem->total_money,
+                        'food_name' => $detailItem->food_name,
+                        'food_avatar' => $detailItem->food_avatar,
+                        'food_id' => $detailItem->food_id,
+                        'quantity' => $detailItem->pivot->quantity,
+                        'price' => $detailItem->pivot->uni_price,
+                        'discount' => $detailItem->pivot->discount,
+                    ]);
+                    $storeInfo = [
                         'store_id' => $detailItem->store_id,
+                        'total_money' => $detailItem->total_money,
                         'store_name' => $detailItem->store_name,
                         'store_avatar' => $detailItem->store_avatar,
                         'store_not_mark' => $detailItem->store_not_mark,
                         'store_address' => $detailItem->store_address,
-                    ]);
+                    ];
                     if (empty($orderDetails[$detailKey])) {
+                        $newDetail = [];
+                        $storeInfo['foods'] = [$foodInfo];
+                        array_push($newDetail, $storeInfo);
                         $orderDetails[$detailKey] = [
                             'order_id' => $detailItem->pivot->order_id,
-                            'detail' => [[
-                                'store_id' => $detailItem->store_id,
-                                'store_name' => $detailItem->store_name,
-                                'store_avatar' => $detailItem->store_avatar,
-                                'store_not_mark' => $detailItem->store_not_mark,
-                                'store_address' => $detailItem->store_address,
-                                'foods' => [$foodInfo]
-                            ]]
+                            'total_money' => $detailItem->total_money,
+                            'detail' => $newDetail
                         ];
                     } else {
                         $storeId = $detailItem->store_id;
@@ -119,8 +117,12 @@ class OrderService
                             }
                         }
                         if ($index === -1) {
-                            array_push($orderDetails[$detailKey]['detail'], $storeInfo->merge(['foods' => [$foodInfo]]));
+                            $orderDetails[$detailKey]['total_money'] += $detailItem->total_money;
+                            $storeInfo['foods'] = [$foodInfo];
+                            array_push($orderDetails[$detailKey]['detail'], $storeInfo);
                         } else {
+                            $orderDetails[$detailKey]['total_money'] += $detailItem->total_money;
+                            $orderDetails[$detailKey]['detail'][$index]['total_money'] += $detailItem->total_money;
                             array_push($orderDetails[$detailKey]['detail'][$index]['foods'], $foodInfo);
                         }
                     }
@@ -130,13 +132,16 @@ class OrderService
         }
         return $orderDetails;
     }
-    protected function syncDetail($orders, $orderDetails){
+
+    protected function syncDetail($orders, $orderDetails)
+    {
         foreach ($orders as $order) {
             $orderId = $order->id;
-            $orderDetail = array_filter($orderDetails , function ($orderDetail) use ($orderId) {
+            $orderDetail = array_filter($orderDetails, function ($orderDetail) use ($orderId) {
                 return $orderDetail['order_id'] === $orderId;
             });
             $orderDetail = collect(...$orderDetail);
+            $order->setAttribute('total_money', $orderDetail['total_money']);
             $order->setAttribute('detail', $orderDetail['detail']);
         }
     }
