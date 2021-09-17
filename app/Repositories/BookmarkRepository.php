@@ -15,11 +15,32 @@ class BookmarkRepository implements BookmarkInterface
         $this->bookmark = $bookmark;
     }
 
-    public function getList()
+    public function getList(array $storeIds, int $page, int $limit)
     {
-        return $this->bookmark
-            ->join('stores', 'stores.id', 'bookmarks.store_id')
-            ->where('user_id', auth()->user()->id)->get();
+        $bookmarks = $this->bookmark->join('stores', 'stores.id', 'bookmarks.store_id')
+            ->join('store_categories', 'store_categories.id', 'stores.store_category')
+            ->where('user_id', auth()->user()->id);
+        if (!empty($storeIds)) {
+            return $bookmarks
+                ->select('store_id')
+                ->whereIn('stores.id', $storeIds)->get();
+        }
+        return $bookmarks->orderBy('bookmarks.created_at', 'DESC')->paginate(
+            $limit,
+            [
+                'store_id',
+                'store_name',
+                'store_not_mark',
+                'store_avatar',
+                'store_address',
+                'store_description',
+                'store_categories.store_cate_name',
+                'description',
+                'bookmarks.created_at',
+            ],
+            'Danh sách bộ sưu tập',
+            $page
+        );
     }
 
     public function getByStoreId(int $storeId)

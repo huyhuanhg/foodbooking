@@ -60,7 +60,7 @@ class StoreService
 
     public function getPictures($store, $request, $limit = 20)
     {
-        return $this->store->getCommentPictures($store, $request->page ?? 1, $limit);
+        return $this->store->getPictures($store, $request->page ?? 1, $limit);
     }
 
     protected function addLastComment($storeList, $commentList)

@@ -16,6 +16,30 @@ class RateRepository implements RateInterface
         $this->rate = $rate;
     }
 
+    public function getList(int $page, int $limit)
+    {
+        return $this->rate
+            ->join('stores', 'stores.id', 'store_rates.store_id')
+            ->join('store_categories', 'store_categories.id', 'stores.store_category')
+            ->orderBy('store_rates.created_at', 'DESC')->paginate(
+                $limit,
+                [
+                    'stores.id',
+                    'stores.store_name',
+                    'stores.store_not_mark',
+                    'stores.store_avatar',
+                    'stores.store_address',
+                    'stores.store_description',
+                    'store_categories.store_cate_name',
+                    'store_rates.rate',
+                    'store_rates.created_at',
+
+                ],
+                'Đánh giá của bạn',
+                $page
+            );
+    }
+
     public function create(int $storeId, int $rateIndex)
     {
         $this->rate->insert([

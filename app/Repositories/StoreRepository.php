@@ -110,14 +110,14 @@ class StoreRepository implements StoreInterface
         $store->save();
     }
 
-    public function getCommentPictures(Store $store, int $page, int $limit)
+    public function getPictures(Store $store, int $page, int $limit)
     {
-        $foodPictures = $store->foods()->select('food_avatar');
-        return $store->comments()
+        $commentPictures = $store->comments()
             ->select('picture_path')
             ->join('comment_picture_detail', 'comments.id', 'comment_picture_detail.comment_id')
-            ->join('comment_picture', 'comment_picture.id', 'comment_picture_detail.comment_picture_id')
-            ->union($foodPictures)->paginate(
+            ->join('comment_picture', 'comment_picture.id', 'comment_picture_detail.comment_picture_id');
+        return $store->foods()->select(DB::raw('food_avatar picture_path'))
+            ->union($commentPictures)->paginate(
                 $limit,
                 ['picture_path'],
                 'Danh sách hình ảnh',

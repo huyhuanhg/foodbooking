@@ -29,5 +29,5 @@ interface StoreInterface
 
     public function updateAvgRate(int $storeId, float $avgRate);
 
-    public function getCommentPictures(Store $store, int $page, int $limit);
+    public function getPictures(Store $store, int $page, int $limit);
 }

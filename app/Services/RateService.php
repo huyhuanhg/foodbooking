@@ -15,6 +15,11 @@ class RateService
         $this->store = $store;
     }
 
+    public function getList($request, $limit = 20)
+    {
+        return $this->rate->getList($request['page'] ?? 1, $limit);
+    }
+
     public function create($request)
     {
         $storeId = $request->store_id;

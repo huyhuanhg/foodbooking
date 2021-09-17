@@ -23,7 +23,7 @@ class UserUpdateRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => ['required', 'regex:/^(0|\+84)[3|5|7|8|9][\d+]{8}$/'],

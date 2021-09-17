@@ -19,9 +19,9 @@ class BookmarkController extends Controller
         $this->bookmarkService = $bookmarkService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $response = $this->bookmarkService->getBookmarks();
+        $response = $this->bookmarkService->getBookmarks($request->only('page', 'store_ids'));
         return response()->json($response, $response['status'] ?? Response::HTTP_OK);
     }
 

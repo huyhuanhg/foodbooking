@@ -72,6 +72,7 @@ Route::group([
     Route::patch('/user-email', 'UserController@updateEmail');
     Route::patch('/user-phone', 'UserController@updatePhone');
     Route::patch('/user-full-name', 'UserController@updateFullName');
+    Route::patch('/user-change-password', 'UserController@changePassword');
 
     Route::get('/carts', 'CartController@index');
     Route::post('/carts', 'CartController@update');
@@ -79,7 +80,9 @@ Route::group([
 
     Route::get('/order', 'OrderController@index');
     Route::post('/order', 'OrderController@store');
+
     Route::post('/rate', 'RateController@store');
+    Route::get('/rate', 'RateController@index');
 
     Route::get('/like', 'LikeController@index');
     Route::post('/like', 'LikeController@update');

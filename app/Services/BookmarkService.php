@@ -14,9 +14,9 @@ class BookmarkService
         $this->bookmark = $bookmark;
     }
 
-    public function getBookmarks()
+    public function getBookmarks($request, $limit = 20)
     {
-        return $this->bookmark->getList();
+        return $this->bookmark->getList($request['store_ids'] ?? [],$request['page'] ?? 1, $limit);
     }
 
     public function getBookmarkById($store)

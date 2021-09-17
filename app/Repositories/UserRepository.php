@@ -31,6 +31,15 @@ class UserRepository implements UserInterface
 
     public function updateUserInfo(array $updateData)
     {
-
+        $user = auth()->user();
+        foreach ($updateData as $key => $value) {
+            if ($key === 'password') {
+                $user->$key = bcrypt($value);
+            } else {
+                $user->$key = $value;
+            }
+        }
+        $user->save();
+        return $user;
     }
 }
