@@ -10,7 +10,6 @@ use App\Http\Requests\Api\FullNameRequest;
 use App\Http\Requests\Api\PasswordRequest;
 use App\Http\Requests\Api\PhoneRequest;
 use App\Services\UserService;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller

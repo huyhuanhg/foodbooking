@@ -51,7 +51,7 @@ class OrderRepository implements OrderInterface
     {
         $select = [
             'foods.food_name',
-            'foods.food_avatar',
+            'foods.food_image',
             DB::raw('foods.id food_id')
         ];
         if ($storeId === 0) {
@@ -59,7 +59,7 @@ class OrderRepository implements OrderInterface
                 DB::raw('stores.id store_id'),
                 DB::raw('(discount * quantity) AS total_money'),
                 'stores.store_name',
-                'stores.store_avatar',
+                'stores.store_image',
                 'stores.store_not_mark',
                 'stores.store_address'
             ]);

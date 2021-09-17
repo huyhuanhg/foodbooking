@@ -64,7 +64,7 @@ class StoreRepository implements StoreInterface
                 'stores.store_not_mark',
                 'stores.store_category',
                 'stores.store_address',
-                'stores.store_avatar',
+                'stores.store_image',
                 'stores.avg_rate',
                 DB::raw('count(comments.id) as total_comment'),
                 DB::raw('count(foods.store_id) as total_food'),
@@ -116,7 +116,7 @@ class StoreRepository implements StoreInterface
             ->select('picture_path')
             ->join('comment_picture_detail', 'comments.id', 'comment_picture_detail.comment_id')
             ->join('comment_picture', 'comment_picture.id', 'comment_picture_detail.comment_picture_id');
-        return $store->foods()->select(DB::raw('food_avatar picture_path'))
+        return $store->foods()->select(DB::raw('food_image picture_path'))
             ->union($commentPictures)->paginate(
                 $limit,
                 ['picture_path'],

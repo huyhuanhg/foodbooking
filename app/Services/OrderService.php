@@ -84,7 +84,7 @@ class OrderService
                     $foodInfo = collect([
                         'total_money' => $detailItem->total_money,
                         'food_name' => $detailItem->food_name,
-                        'food_avatar' => $detailItem->food_avatar,
+                        'food_image' => $detailItem->food_image,
                         'food_id' => $detailItem->food_id,
                         'quantity' => $detailItem->pivot->quantity,
                         'price' => $detailItem->pivot->uni_price,
@@ -94,7 +94,7 @@ class OrderService
                         'store_id' => $detailItem->store_id,
                         'total_money' => $detailItem->total_money,
                         'store_name' => $detailItem->store_name,
-                        'store_avatar' => $detailItem->store_avatar,
+                        'store_image' => $detailItem->store_image,
                         'store_not_mark' => $detailItem->store_not_mark,
                         'store_address' => $detailItem->store_address,
                     ];

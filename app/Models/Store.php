@@ -20,7 +20,7 @@ class Store extends Model
         'store_name',
         'store_not_mark',
         'store_category',
-        'store_avatar',
+        'store_image',
         'store_address',
         'store_province_code',
         'store_district_code',

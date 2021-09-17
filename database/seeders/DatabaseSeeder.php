@@ -82,16 +82,17 @@ class DatabaseSeeder extends Seeder
         ];
 
 
-        DB::table('roles')->insert($role);
-        DB::table('users')->insert($defaultUser);
-        DB::table('admins')->insert($defaultSupperUser);
+//        DB::table('roles')->insert($role);
+//        DB::table('users')->insert($defaultUser);
+//        DB::table('admins')->insert($defaultSupperUser);
 
         $this->call([
-            StoresCategoriesTableSeeder::class,
-            StoresTableSeeder::class,
-            FoodsTableSeeder::class,
-            FoodTagsTableSeeder ::class,
-            FoodTagDetailTableSeeder::class,
+//            StoresCategoriesTableSeeder::class,
+//            FoodTagsTableSeeder ::class,
+//            StoresTableSeeder::class,
+
+//            FoodsTableSeeder::class,
+//            FoodTagDetailTableSeeder::class,
             PromotionTableSeeder::class,
         ]);
     }

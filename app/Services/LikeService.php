@@ -15,7 +15,7 @@ class LikeService
 
     public function checkLikeList($request)
     {
-        $foodIds = $request->food_ids ? json_decode($request->food_ids) : [];
+        $foodIds = $request->food_ids ?? [];
         $likes = $this->like->getLikes($foodIds);
         if ($likes) {
             return $likes->map(function($like){

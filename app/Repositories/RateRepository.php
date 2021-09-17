@@ -27,7 +27,7 @@ class RateRepository implements RateInterface
                     'stores.id',
                     'stores.store_name',
                     'stores.store_not_mark',
-                    'stores.store_avatar',
+                    'stores.store_image',
                     'stores.store_address',
                     'stores.store_description',
                     'store_categories.store_cate_name',

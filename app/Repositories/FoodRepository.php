@@ -47,6 +47,16 @@ class FoodRepository implements FoodInterface
         if ($storeId > 0) {
             $food = $food->where('foods.store_id', $storeId);
         }
+
+        if (!empty($tags)) {
+            $tags = implode(',', $tags);
+            $food = $food->join(
+                DB::raw("(SELECT ftd.food_id FROM food_tag_detail ftd WHERE ftd.tag_id in (${tags})  GROUP BY ftd.food_id) f_tags"),
+                'f_tags.food_id', 'foods.id'
+            );
+
+        }
+
         $food = $food->join(DB::raw("
                 (SELECT child.id, (
                     CASE
@@ -59,14 +69,15 @@ class FoodRepository implements FoodInterface
                             END
                         )
                         ELSE
-                    		(case
+                    		(CASE
                     				WHEN promotions.is_percent = 0
-                                    then (price - promotions.discount)
-                                    else child.price
-                    		end)
+                                    THEN (price - promotions.discount)
+                                    ELSE child.price
+                    		END)
 
                     END) discount FROM `foods` child
-                    LEFT JOIN promotions ON promotions.food_id = child.id) sub"), 'sub.id', 'foods.id');
+                LEFT JOIN promotions ON promotions.food_id = child.id) sub"), 'sub.id', 'foods.id');
+
         if ($sort && $sortType !== 0) {
             if ($sort === 'price') {
                 $food = $food->orderBy('discount', $sortType < 0 ? "DESC" : "ASC");
@@ -74,31 +85,28 @@ class FoodRepository implements FoodInterface
                 $food = $food->orderBy("foods.$sort", $sortType < 0 ? "DESC" : "ASC");
             }
         }
-        if (!empty($tags)) {
-            $food = $food->join('food_tag_detail', 'food_tag_detail.food_id', 'foods.id'
-            )->whereIn('food_tag_detail.tag_id', $tags);
-        }
+
         if ($search) {
             $food = $food->where('foods.food_name', 'LIKE', "%$search%");
         }
-        return
-            $food->paginate(
-                $limit,
-                [
-                    'foods.id',
-                    'foods.store_id',
-                    'foods.food_name',
-                    'foods.food_avatar',
-                    'foods.price',
-                    'foods.food_consume',
-                    'foods.food_description',
-                    'stores.store_name',
-                    'stores.store_not_mark',
-                    'sub.discount',
-                ],
-                'Danh sách món ăn',
-                $page
-            );
+//        return $search;
+        return $food->paginate(
+            $limit,
+            [
+                'foods.id',
+                'foods.store_id',
+                'foods.food_name',
+                'foods.food_image',
+                'foods.price',
+                'foods.food_consume',
+                'foods.food_description',
+                'stores.store_name',
+                'stores.store_not_mark',
+                'sub.discount',
+            ],
+            'Danh sách món ăn',
+            $page
+        );
     }
 
     public function findByIds(array $idList)
@@ -107,7 +115,7 @@ class FoodRepository implements FoodInterface
             'foods.id',
             'foods.store_id',
             'foods.food_name',
-            'foods.food_avatar',
+            'foods.food_image',
             'foods.price',
             'foods.food_description',
             'stores.store_name',

@@ -21,7 +21,7 @@ class Food extends Model
         'store_id',
         'food_name',
         'food_active',
-        'food_avatar',
+        'food_image',
         'promotion',
         'price',
         'food_profit',
@@ -33,7 +33,9 @@ class Food extends Model
     {
         return $this->hasOne(Store::class, 'store_id');
     }
-
+    public function foodTags(){
+        return $this->belongstoMany(FoodTag::class, 'food_tag_detail', 'food_id', 'tag_id');
+    }
     public function getAll($currentPage = 1, $limit = 10)
     {
         return Food::join('categories', 'foods.category_id', 'categories.id')

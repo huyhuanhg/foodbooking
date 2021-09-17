@@ -24,7 +24,7 @@ class FoodService
             $request->group ?? "",
             $request->sort ?? "created_at",
             $request->sort_type ?? 0,
-            json_decode($request->tags) ?? [],
+            $request->tags ?? [],
             $request->page ?? 1,
             $limit,
             $request->user ?? -1,

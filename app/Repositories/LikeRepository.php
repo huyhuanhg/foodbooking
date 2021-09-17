@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Food;
 use App\Models\Like;
 use App\Repositories\Interfaces\LikeInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class LikeRepository implements LikeInterface
 {

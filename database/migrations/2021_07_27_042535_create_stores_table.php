@@ -24,7 +24,7 @@ class CreateStoresTable extends Migration
 
             $table->unsignedInteger('store_category');
 
-            $table->string('store_avatar', 50)->nullable();
+            $table->string('store_image', 100)->nullable();
 
             $table->string("store_address")->nullable();//địa chỉ cụ thể
             $table->integer("store_province_code")->nullable();//mã tỉnh

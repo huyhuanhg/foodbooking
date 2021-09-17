@@ -14,48 +14,25 @@ class FoodTagDetailTableSeeder extends Seeder
      */
     public function run()
     {
-        $foodTagDetail = [
-            [
-                'tag_id' => 8,
-                'food_id'=> 1,
-            ],
-            [
-                'tag_id' => 1,
-                'food_id'=> 1,
-            ],
-            [
-                'tag_id' => 1,
-                'food_id'=> 2,
-            ],
-            [
-                'tag_id' => 10,
-                'food_id'=> 2,
-            ],
-            [
-                'tag_id' => 1,
-                'food_id'=> 3,
-            ],
-            [
-                'tag_id' => 12,
-                'food_id'=> 3,
-            ],
-            [
-                'tag_id' => 1,
-                'food_id'=> 4,
-            ],
-            [
-                'tag_id' => 1,
-                'food_id'=> 5,
-            ],
-            [
-                'tag_id' => 2,
-                'food_id'=> 6,
-            ],
-            [
-                'tag_id' => 12,
-                'food_id'=> 6,
-            ],
-        ];
+        $foodTagDetail = [];
+
+        for ($i = 1; $i < 31; $i++) {
+            $tagId1 = rand(1, 12);
+            $tagId2 = rand(1, 12);
+            while ($tagId1 === $tagId2) {
+                $tagId2 = rand(1, 12);
+            }
+            $tag1 = [
+                'tag_id' => $tagId1,
+                'food_id' => $i,
+            ];
+            $tag2 = [
+                'tag_id' => $tagId2,
+                'food_id' => $i,
+            ];
+            array_push($foodTagDetail, $tag1);
+            array_push($foodTagDetail, $tag2);
+        }
 
         DB::table('food_tag_detail')->insert($foodTagDetail);
     }
