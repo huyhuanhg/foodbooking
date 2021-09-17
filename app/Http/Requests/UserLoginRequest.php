@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-
-
 class UserLoginRequest extends Request
 {
     /**

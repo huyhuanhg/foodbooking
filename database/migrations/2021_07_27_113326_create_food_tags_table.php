@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFoodTabsTable extends Migration
+class CreateFoodTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateFoodTabsTable extends Migration
      */
     public function up()
     {
-        Schema::create('food_tabs', function (Blueprint $table) {
+        Schema::create('food_tags', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments("id");
-            $table->string('tab_name', 200);//tên tabs
-            $table->string('tab_description')->nullable();//mô tả
-            $table->tinyInteger('tab_active');//tình trang
+            $table->string('tag_name', 200);//tên tabs
+            $table->string('tag_description')->nullable();//mô tả
+            $table->tinyInteger('tag_active');//tình trang
+            $table->timestamps();
         });
     }
 
@@ -30,6 +31,6 @@ class CreateFoodTabsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food_tabs');
+        Schema::dropIfExists('food_tags');
     }
 }

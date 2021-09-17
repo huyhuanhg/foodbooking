@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string("order_phone");
             $table->string("order_address", 300);
             $table->string("order_note", 1000);
-            $table->tinyInteger("order_status")->default(0);
+            $table->unsignedInteger("order_status")->default(0);
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });

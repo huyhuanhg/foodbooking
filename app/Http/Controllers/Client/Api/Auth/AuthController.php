@@ -7,6 +7,7 @@ use App\Http\Requests\Api\ApiUserLoginRequest;
 use App\Http\Requests\Api\ApiUserRegisterRequest;
 use App\Http\Requests\Api\EmailRequest;
 use App\Services\AuthService;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -28,7 +29,7 @@ class AuthController extends Controller
         if (!$token = $this->authService->token($request->all())) {
             return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
-        return $this->createToken($token);
+        return $this->createToken($token, true);
     }
 
     public function register(ApiUserRegisterRequest $request)
@@ -56,16 +57,23 @@ class AuthController extends Controller
 
     public function userProfile()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        $total_cart = $this->authService->getTotalCart($user);
+        return response()->json($user->setAttribute('carts' , $total_cart));
     }
 
-    protected function createToken($token)
+    protected function createToken($token, $cartTotal = null)
     {
+        $user = auth()->user();
+        if ($cartTotal){
+            $total_cart = $this->authService->getTotalCart($user);
+            $user = $user->setAttribute('carts' , $total_cart);
+        }
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expire' => $this->authService->expriceToken(),
-            'user' => auth()->user()
+            'user' => $user
         ]);
     }
 }

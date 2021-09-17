@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
 
             $table->tinyInteger('gender')->nullable();
             $table->date("birthday")->nullable();
-            $table->string("avatar", 50)->nullable();
+            $table->string("avatar", 100)->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('active')->default(0);
             $table->timestamps();

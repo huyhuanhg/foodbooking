@@ -18,13 +18,48 @@ class Store extends Model
 
     protected $fillable = [
         'store_name',
+        'store_not_mark',
+        'store_category',
+        'store_image',
         'store_address',
+        'store_province_code',
+        'store_district_code',
+        'store_ward_code',
+        'store_specific_address',
+        'open_time',
+        'close_time',
         'phone_contact',
-        'store_owner',
+        'owner',
         'avg_rate',
         'store_description',
-        'store_status'
+        'store_active'
     ];
+
+    public function category()
+    {
+        return $this->belongsto(Category::class, 'store_category');
+    }
+
+    public function foods()
+    {
+        return $this->hasMany(Food::class, 'store_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'store_id');
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class, 'store_id');
+    }
+
+    public function userRate()
+    {
+        return $this->belongstoMany(User::class, 'store_rates', 'store_id', 'user_id')
+            ->withPivot('rate');
+    }
 
     public function getStorePaginate($currentPage = 1, $limit = 10)
     {

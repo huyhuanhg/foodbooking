@@ -21,11 +21,16 @@ class CreatePromotionsTable extends Migration
             $table->collation = 'utf8_general_ci';
 
             $table->increments("id");
+            $table->unsignedInteger("store_id");
+            $table->unsignedInteger("food_id");
             $table->tinyInteger("is_percent")->default(1);
             $table->float("discount")->default(0);
             $table->float("max_discount")->nullable();
             $table->dateTime("start_time");
             $table->dateTime("end_time")->nullable();
+            $table->timestamps();
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
         });
     }
 

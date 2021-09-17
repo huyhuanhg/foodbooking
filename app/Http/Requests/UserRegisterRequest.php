@@ -30,7 +30,7 @@ class UserRegisterRequest extends Request
             'last_name' => 'required',
             'phone' => ['required', 'regex:/^(0|\+84)[3|5|7|8|9][\d+]{8}$/'],
             'gender' => ['required', 'regex:/^[0|1]$/'],
-            'confirm_password' => 'min:6',
+            'confirm_password' => 'required|min:6',
         ];
     }
     public function messages()

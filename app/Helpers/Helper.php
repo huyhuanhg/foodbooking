@@ -24,6 +24,22 @@ if (!function_exists('currency_after_promotions')) {
     }
 }
 
+
+if (!function_exists('discount_calculate')) {
+    function discount_calculate($price, $discount, $maxDiscount, $isPercent = true)
+    {
+        if ($isPercent) {
+            $discount = $price * $discount / 100;
+            if (!empty($maxDiscount)) {
+                return $discount < $maxDiscount ? $price - $discount : $price - $maxDiscount;
+            }
+            return $price - $discount;
+        } else {
+            return $price - $discount;
+        }
+    }
+}
+
 if (!function_exists('vi_not_mark')) {
     function vi_not_mark($str)
     {

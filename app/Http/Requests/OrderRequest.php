@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class OrderRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +23,19 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_number_phone' => ['required', 'regex:/^(0|\+84)[3|5|7|8|9][\d+]{8}$/'],
-            'order_address' => 'required',
-            'order_status' => 'required',
+            'phone' => ['required', 'regex:/^(0|\+84)[3|5|7|8|9][\d+]{8}$/'],
+            'address' => 'required',
+            'full_name'=> 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'order_number_phone.required' => 'Vui lòng nhập số điện thoại!',
-            'order_number_phone.regex' => 'Định dạng: 0... / +84...',
-            'order_address.required' => 'Vui lòng nhập địa chỉ!',
-            'order_status.required' => 'Vui lòng chọn trạng thái!',
+            'phone.required' => 'Vui lòng nhập số điện thoại!',
+            'phone.regex' => 'Định dạng: 0... / +84...',
+            'address.required' => 'Vui lòng nhập địa chỉ!',
+            'full_name.required' => 'Vui lòng nhập họ tên!',
         ];
     }
 }
