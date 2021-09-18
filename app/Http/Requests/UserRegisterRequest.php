@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 
-
 class UserRegisterRequest extends Request
 {
     /**
@@ -33,6 +32,7 @@ class UserRegisterRequest extends Request
             'confirm_password' => 'required|min:6',
         ];
     }
+
     public function messages()
     {
         return [
@@ -53,9 +53,4 @@ class UserRegisterRequest extends Request
             'gender.regex' => 'Giới tính không hợp lệ!',
         ];
     }
-//    protected function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));
-//    }
-
 }

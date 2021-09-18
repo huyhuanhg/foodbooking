@@ -6,7 +6,6 @@ use App\Models\Food;
 use App\Repositories\Interfaces\CartInterface;
 use App\Repositories\Interfaces\PromotionInterface;
 use App\Repositories\Interfaces\StoreInterface;
-use Illuminate\Support\Facades\DB;
 
 class CartService
 {

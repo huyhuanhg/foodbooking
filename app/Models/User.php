@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -51,6 +49,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Cart::class, 'user_id');
     }
+
     public function getAllCustomers($currentPage = 1, $limit = 8)
     {
         return User::paginate($limit, ['*'], null, $currentPage);

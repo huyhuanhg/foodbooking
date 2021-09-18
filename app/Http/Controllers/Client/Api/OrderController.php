@@ -18,10 +18,12 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $response = $this->orderService->getList($request, auth()->user()->id);
         return response()->json($response, $response['status'] ?? Response::HTTP_OK);
     }
+
     public function store(ApiOrderRequest $request)
     {
         $response = $this->orderService->create($request);

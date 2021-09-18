@@ -52,9 +52,4 @@ class UserUpdateRequest extends Request
             'gender.regex' => 'Giới tính không hợp lệ!',
         ];
     }
-//    protected function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(response($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY));
-//    }
-
 }

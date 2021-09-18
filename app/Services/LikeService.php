@@ -18,7 +18,7 @@ class LikeService
         $foodIds = $request->food_ids ?? [];
         $likes = $this->like->getLikes($foodIds);
         if ($likes) {
-            return $likes->map(function($like){
+            return $likes->map(function ($like) {
                 return $like->food_id;
             });
         }

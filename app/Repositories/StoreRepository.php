@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Store;
-use App\Models\User;
 use App\Repositories\Interfaces\StoreInterface;
 use Illuminate\Support\Facades\DB;
 

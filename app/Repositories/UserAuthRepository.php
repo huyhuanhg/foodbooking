@@ -28,6 +28,7 @@ class UserAuthRepository implements UserAuthInterface
     {
         return $this->user->select('email')->where('email', '=', $email)->count();
     }
+
     public function getTotalCart(User $user)
     {
         return $user->carts()

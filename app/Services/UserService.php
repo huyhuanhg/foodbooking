@@ -12,8 +12,8 @@ class UserService
     protected $userInterface, $imageInterface, $userAuthInterface;
 
     public function __construct(
-        UserInterface $userInterface,
-        ImageInterface $imageInterface,
+        UserInterface     $userInterface,
+        ImageInterface    $imageInterface,
         UserAuthInterface $userAuthInterface
     )
     {
@@ -37,11 +37,11 @@ class UserService
 
     public function updateUserInfo($updateData)
     {
-        if (!empty($updateData['email'])){
+        if (!empty($updateData['email'])) {
             $currentEmail = auth()->user()->email;
-            if ($currentEmail !== $updateData['email']){
+            if ($currentEmail !== $updateData['email']) {
                 $isExist = !!$this->userAuthInterface->checkEmailExist($updateData['email']);
-                if ($isExist){
+                if ($isExist) {
                     return ['message' => 'Email đã tồn tại!', 'status' => Response::HTTP_FORBIDDEN];
                 }
             } else {

@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
 
         $randomAddress = [
-            //nông cống
             [
                 ['name' => 'Thanh Hóa', 'code' => 38],
                 ['name' => 'Nông Cống', 'code' => 404],
@@ -141,7 +138,6 @@ class DatabaseSeeder extends Seeder
 
                 ]
             ],
-            //bố trạch
             [
                 ['name' => 'Quảng Bình', 'code' => 44],
                 ['name' => 'Bố Trạch', 'code' => 455],
@@ -260,7 +256,6 @@ class DatabaseSeeder extends Seeder
                     ]
                 ]
             ],
-            //liên chiểu
             [
                 ['name' => 'Đà Nẵng', 'code' => 48],
                 ['name' => 'Liên Chiểu', 'code' => 490],
@@ -371,25 +366,25 @@ class DatabaseSeeder extends Seeder
                 'birthday' => '2020-12-01',
             ],
         ];
-//        for ($i = 1; $i <= 50; $i++) {
-//            $user = new User();
-//            $person = $randomName[rand(0, count($randomName) - 1)];
-//            $address = $randomAddress[rand(0, count($randomAddress) - 1)];
-//            $ward = $address[2][rand(0, count($address[2]) - 1)];
-//            foreach ($person as $key => $value) {
-//                $user->$key = $value;
-//            }
-//
-//            $user->email = "client$i@gmail.com";
-//            $user->password = bcrypt('123456');
-//            $user->description = 'Vui là chính';
-//            $user->active = 1;
-//            $user->address = $ward['name'] . ' - ' . $address[1]['name'] . ' - ' . $address[0]['name'];
-//            $user->province_code = $address[0]['code'];
-//            $user->district_code = $address[1]['code'];
-//            $user->ward_code = $ward['code'];
-//            $user->save();
-//        }
+        for ($i = 1; $i <= 50; $i++) {
+            $user = new User();
+            $person = $randomName[rand(0, count($randomName) - 1)];
+            $address = $randomAddress[rand(0, count($randomAddress) - 1)];
+            $ward = $address[2][rand(0, count($address[2]) - 1)];
+            foreach ($person as $key => $value) {
+                $user->$key = $value;
+            }
+
+            $user->email = "client$i@gmail.com";
+            $user->password = bcrypt('123456');
+            $user->description = 'Vui là chính';
+            $user->active = 1;
+            $user->address = $ward['name'] . ' - ' . $address[1]['name'] . ' - ' . $address[0]['name'];
+            $user->province_code = $address[0]['code'];
+            $user->district_code = $address[1]['code'];
+            $user->ward_code = $ward['code'];
+            $user->save();
+        }
 
         $role = [
             [
@@ -516,18 +511,18 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-//        DB::table('roles')->insert($role);
-//        DB::table('admins')->insert($defaultSupperUser);
+        DB::table('roles')->insert($role);
+        DB::table('admins')->insert($defaultSupperUser);
 
         $this->call([
-//            StoresCategoriesTableSeeder::class,
-//            FoodTagsTableSeeder ::class,
-//            StoresTableSeeder::class,
-//
-//            FoodsTableSeeder::class,
-//
-//            FoodTagDetailTableSeeder::class,
-//            CommentsTableSeeder::class,
+            StoresCategoriesTableSeeder::class,
+            FoodTagsTableSeeder ::class,
+            StoresTableSeeder::class,
+
+            FoodsTableSeeder::class,
+
+            FoodTagDetailTableSeeder::class,
+            CommentsTableSeeder::class,
             PromotionTableSeeder::class,
         ]);
     }

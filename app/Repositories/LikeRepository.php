@@ -31,6 +31,7 @@ class LikeRepository implements LikeInterface
             $islike->delete();
         }
     }
+
     public function getLikes(array $foodIds)
     {
         if (!empty($foodIds)) {

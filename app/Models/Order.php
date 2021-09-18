@@ -26,7 +26,8 @@ class Order extends Model
         'order_status'
     ];
 
-    public function orderDetail(){
+    public function orderDetail()
+    {
         return $this
             ->belongstoMany(Food::class, 'order_detail', 'order_id', 'food_id');
     }

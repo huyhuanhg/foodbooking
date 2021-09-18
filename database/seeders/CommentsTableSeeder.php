@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
-use App\Models\Food;
-use App\Models\Promotion;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Seeder;

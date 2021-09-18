@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Food;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class FoodsTableSeeder extends Seeder
 {
@@ -174,7 +173,7 @@ class FoodsTableSeeder extends Seeder
             foreach ($foods as $food) {
                 $newFood = new Food();
                 $newFood->store_id = $i;
-                $newFood->price = rand(10, 100) * 1000;
+                $newFood->price = rand(10, 500) * 1000;
                 $newFood->food_not_mark = vi_not_mark($food['food_name']);
                 $newFood->promotion = rand(0, 1);
                 foreach ($food as $key => $value) {

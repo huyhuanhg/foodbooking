@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Rate;
 use App\Repositories\Interfaces\RateInterface;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Response;
 
 class RateRepository implements RateInterface
 {

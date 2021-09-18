@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Store;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class StoresTableSeeder extends Seeder
 {
