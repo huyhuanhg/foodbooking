@@ -20,6 +20,7 @@ class Food extends Model
     protected $fillable = [
         'store_id',
         'food_name',
+        'food_not_mark',
         'food_active',
         'food_image',
         'promotion',
@@ -33,9 +34,12 @@ class Food extends Model
     {
         return $this->hasOne(Store::class, 'store_id');
     }
-    public function foodTags(){
+
+    public function foodTags()
+    {
         return $this->belongstoMany(FoodTag::class, 'food_tag_detail', 'food_id', 'tag_id');
     }
+
     public function getAll($currentPage = 1, $limit = 10)
     {
         return Food::join('categories', 'foods.category_id', 'categories.id')
@@ -131,7 +135,9 @@ class Food extends Model
     {
         return Food::select(DB::raw('COUNT(id) AS total'))->first();
     }
-    public function addDiscount(){
+
+    public function addDiscount()
+    {
         return $this->join(DB::raw("
                 (SELECT child.id, (
                     CASE

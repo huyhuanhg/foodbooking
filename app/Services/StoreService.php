@@ -22,7 +22,7 @@ class StoreService
     }
 
 
-    public function getStoreList($request, $limit = 12)
+    public function getStoreList($request)
     {
         $stores = $this->store->getStores(
             $request->group ?? '',
@@ -30,7 +30,7 @@ class StoreService
             $request->sort_type ?? -1,
             $request->category ?? 0,
             $request->page ?? 1,
-            $limit,
+            $request->limit ?? 24,
             $request->user ?? 0,
             $request->search ?? ''
         );
@@ -68,6 +68,7 @@ class StoreService
         foreach ($storeList as $store) {
             $lastComment = $commentList->where('store_id', $store->id)->first();
             if (!empty($lastComment)) {
+                $store->total_comment = $lastComment->total_comment;
                 $store->setAttribute('last_comment',
                     $lastComment->only(
                         'content',

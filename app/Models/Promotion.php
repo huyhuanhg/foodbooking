@@ -16,9 +16,12 @@ class Promotion extends Model
     protected $primaryKey = 'food_id';
     protected $fillable = [
         'food_id',
+        'store_id',
         'is_percent',
         'discount',
         'max_discount',
+        'start_time',
+        'end_time'
     ];
 
     public function getPromotionPaginate($currentPage = 1, $limit = 10)

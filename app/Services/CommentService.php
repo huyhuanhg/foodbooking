@@ -16,12 +16,12 @@ class CommentService
         $this->image = $image;
     }
 
-    public function getList($request, $limit = 10)
+    public function getList($request)
     {
         $comments = $this->comment->getComments(
             $request->store ?? -1,
             $request->user_id ?? -1,
-            $limit,
+            $request->limit ?? 15,
             $request->page ?? 1
         );
         $ids = [];

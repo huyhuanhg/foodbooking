@@ -87,9 +87,8 @@ class FoodRepository implements FoodInterface
         }
 
         if ($search) {
-            $food = $food->where('foods.food_name', 'LIKE', "%$search%");
+            $food = $food->where('foods.food_not_mark', 'LIKE', "%$search%");
         }
-//        return $search;
         return $food->paginate(
             $limit,
             [

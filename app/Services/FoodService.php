@@ -17,7 +17,7 @@ class FoodService
         $this->promotion = $promotion;
     }
 
-    public function getFoodList($request, $limit = 12)
+    public function getFoodList($request)
     {
         $foodsList = $this->food->getFoods(
             $request->store ?? -1,
@@ -26,7 +26,7 @@ class FoodService
             $request->sort_type ?? 0,
             $request->tags ?? [],
             $request->page ?? 1,
-            $limit,
+            $request->limit ?? 24,
             $request->user ?? -1,
             $request->search ?? ''
         );

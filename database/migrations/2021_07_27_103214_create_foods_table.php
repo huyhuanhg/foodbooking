@@ -20,6 +20,7 @@ class CreateFoodsTable extends Migration
 
             $table->unsignedInteger("store_id");//của cửa hàng
             $table->string('food_name', 200);
+            $table->string('food_not_mark', 200);
             $table->tinyInteger('food_active')->default(1);//tình trạng
             $table->string('food_image', 100)->nullable();
             $table->tinyInteger('promotion')->default(0);//đang khuyến mãi không?
