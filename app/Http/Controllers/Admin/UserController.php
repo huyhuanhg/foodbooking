@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //
     private $objUser;
 
     public function __construct()

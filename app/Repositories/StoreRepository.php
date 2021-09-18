@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Store;
-use App\Models\User;
 use App\Repositories\Interfaces\StoreInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -40,14 +39,11 @@ class StoreRepository implements StoreInterface
             $stores = $stores->join('bookmarks', 'bookmarks.store_id', 'stores.id')
                 ->where('bookmarks.user_id', $userId);
         }
-        if ($search) {
-            $stores = $stores->where('stores.store_name', 'LIKE', "%$search%");
-        }
         if ($category > 0) {
             $stores = $stores->where('stores.store_category', $category);
         }
         if ($search) {
-            $stores = $stores->where('stores.store_name', 'LIKE', "%$search%");
+            $stores = $stores->where('stores.store_not_mark', 'LIKE', "%$search%");
         }
         if ($sort) {
             if ($sort === 'total_order') {

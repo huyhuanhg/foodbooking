@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Client\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserLoginRequest\UserLoginRequest;
+use App\Http\Requests\UserLoginRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -29,7 +29,9 @@ class LoginController extends Controller
 
 
     }
-    public function do_login(UserLoginRequest $request){
+
+    public function do_login(UserLoginRequest $request)
+    {
         dd($request->all());
         $credentials = $request->only(['email', 'password']);
         if (Auth::attempt($credentials)) {

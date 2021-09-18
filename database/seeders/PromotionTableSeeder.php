@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Food;
+use App\Models\Promotion;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class PromotionTableSeeder extends Seeder
 {
@@ -15,22 +15,22 @@ class PromotionTableSeeder extends Seeder
      */
     public function run()
     {
-        $promotions = [];
-
-        for ($i = 30; $i > 18; $i--) {
-            $food = Food::find($i);
-            $promotion = [
-                'store_id' => $food->store_id,
-                'food_id' => $food->id,
-                'is_percent' => 1,
-                'discount' => rand(10, 30),
-                'max_discount' => rand(10, 50) * 1000,
-                'start_time' => '2021-09-04 00:00:00',
-                'end_time' => '2021-09-14 00:00:00',
-            ];
-            array_push($promotions, $promotion);
+        $foodPromotions = Food::select('id', 'store_id', 'price')->where('promotion', 1)->get();
+        foreach ($foodPromotions as $food) {
+            $price = $food->price / 1000;
+            $isPercent = rand(0, 1);
+            $discount = $isPercent === 1 ? (rand(1, 10) * 5) : (rand(1, floor($price / 2)) * 1000);
+            $maxDiscount = $isPercent === 1 ? rand(floor($price / 5), floor($price / 2)) * 1000 : null;
+            $promotion = new Promotion();
+            $promotion->store_id = $food->store_id;
+            $promotion->food_id = $food->id;
+            $promotion->is_percent = $isPercent;
+            $promotion->discount = $discount;
+            if (isset($maxDiscount)) {
+                $promotion->max_discount = $maxDiscount;
+            }
+            $promotion->start_time = now();
+            $promotion->save();
         }
-
-        DB::table('promotions')->insert($promotions);
     }
 }

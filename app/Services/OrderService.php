@@ -24,14 +24,14 @@ class OrderService
         $this->foodInterface = $foodInterface;
     }
 
-    public function getList($request, $userId = 0, $limit = 10)
+    public function getList($request, $userId = 0)
     {
         $storeId = $request->store_id ?? 0;
         $orders = $this->orderInterface->getList(
             $userId,
             $request->page ?? 1,
             $storeId,
-            $limit
+            $request->limit ?? 10
         );
         if (!$orders) {
             return [

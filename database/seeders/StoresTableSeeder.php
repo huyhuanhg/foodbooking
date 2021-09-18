@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Store;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class StoresTableSeeder extends Seeder
 {
@@ -19,438 +19,471 @@ class StoresTableSeeder extends Seeder
         $demoStores = [
             [
                 'store_name' => 'Quán ăn vặt đóng hộp',
-                'store_not_mark' => "quan-an-vat-dong-hop",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/an-vat-1.jpeg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '15:00',
-                'close_time' => '21:00',
-                'avg_rate' => 0,
-                'store_description' => "Quán ăn vặt đóng hộp",
-                'store_active' => 1,
+                'store_description' => "Quán ăn vặt đóng hộp"
             ],
             [
                 'store_name' => 'Bánh tráng kẹp Mis-Thy',
-                'store_not_mark' => "banh-trang-kep-mis-thy",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
+
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/banh-trang-kep.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '17:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Bánh tráng kẹp Mis-Thy",
-                'store_active' => 1,
+                'store_description' => "Bánh tráng kẹp Mis-Thy"
             ],
             [
                 'store_name' => 'Cafe Thiên Đường',
-                'store_not_mark' => "cafe-thien-duong",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/cafe-1.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '14:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Cafe Thiên Đường",
-                'store_active' => 1,
+                'store_description' => "Cafe Thiên Đường"
             ],
             [
                 'store_name' => 'Cafe Lung Linh',
-                'store_not_mark' => "cafe-lung-linh",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/cafe-2.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '15:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Cafe Lung Linh",
-                'store_active' => 1,
+                'store_description' => "Cafe Lung Linh"
             ],
             [
                 'store_name' => 'Tiệm bánh ngọt',
-                'store_not_mark' => "tiem-banh-ngot",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/cheese.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Chuyên bánh sinh nhật, bánh ngọt, bánh kem, bánh bông lan, ...",
-                'store_active' => 1,
+                'store_description' => "Chuyên bánh sinh nhật, bánh ngọt, bánh kem, bánh bông lan, ..."
             ],
             [
                 'store_name' => 'CHRIS Cheese Hotdog',
-                'store_not_mark' => "chris-cheese-hotdog",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/cheese-hotdog.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "CHRIS Cheese Hotdog",
-                'store_active' => 1,
+                'store_description' => "CHRIS Cheese Hotdog"
             ],
             [
                 'store_name' => 'Kim Bắp Hàn Quốc',
-                'store_not_mark' => "kim-bap-han-quoc",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/kim-bap.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '15:00',
-                'close_time' => '21:00',
-                'avg_rate' => 0,
-                'store_description' => "Kim Bắp Hàn Quốc",
-                'store_active' => 1,
+                'store_description' => "Kim Bắp Hàn Quốc"
             ],
             [
                 'store_name' => 'Mì Quảng Ba Vị',
-                'store_not_mark' => "mi-quang-ba-vi",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/mi-quang-ba-vi.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '17:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Mì Quảng Ba Vị",
-                'store_active' => 1,
+                'store_description' => "Mì Quảng Ba Vị"
             ],
             [
                 'store_name' => 'Món chiên Thiên Kim',
-                'store_not_mark' => "mon-chien-thien-kim",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/mon-chien.jpeg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '14:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Chuyên các món ăn chiên giòn",
-                'store_active' => 1,
+                'store_description' => "Chuyên các món ăn chiên giòn"
             ],
             [
                 'store_name' => 'Quán ăn Thần Tiên',
-                'store_not_mark' => "quan-an-than-tien",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-an.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '15:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Quán ăn Thần Tiên",
-                'store_active' => 1,
+                'store_description' => "Quán ăn Thần Tiên"
             ],
             [
                 'store_name' => 'Nhà hàng Vạn Lộc',
-                'store_not_mark' => "nha-hang-van-loc",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-an-2.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Vui lòng khách đến vừa lòng khách đi!",
-                'store_active' => 1,
+                'store_description' => "Vui lòng khách đến vừa lòng khách đi!"
             ],
             [
                 'store_name' => 'Cafe Thôi Kệ',
-                'store_not_mark' => "cafe-thoi-ke",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/thoi-ke.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Bỏ qua mọi thứ, thôi kệ mà chơi",
-                'store_active' => 1,
+                'store_description' => "Bỏ qua mọi thứ, thôi kệ mà chơi"
             ],
             [
                 'store_name' => 'Nhà hàng Năm Xưa',
-                'store_not_mark' => "nha-hang-nam-xua",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-co.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Cơm sường Tấm Cám',
-                'store_not_mark' => "com-suon-tam-cam",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-com-suon.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Mì Quảng Hoàng Gia',
-                'store_not_mark' => "mi-quang-hoang-gia",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-mi-quang.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Pizza The Love',
-                'store_not_mark' => "pizza-the-love",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-pizza.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Trà sữa King',
-                'store_not_mark' => "tra-sua-king",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/quan-tra-sua-king.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Bánh kem Út Mô Tô',
-                'store_not_mark' => "banh-kem-ut-mo-to",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tiem-banh-kem-ut-mo-to.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Bánh ngọt Như Ý',
-                'store_not_mark' => "banh-ngot-nhu-y",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tiem-banh-ngot.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Quán Rau má Thanh Hóa',
-                'store_not_mark' => "quan-rau-ma-thanh-hoa",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tiem-rau-ma.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'HIGHLANDS',
-                'store_not_mark' => "highlands",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tra-sua-1.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Nước ngon cho bạn',
-                'store_not_mark' => "nuo-ngon-cho-ban",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tra-sua-2.jpeg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Bà Béo',
-                'store_not_mark' => "ba-beo",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Thôn Đông - Vạn Trạch - Bố Trạch - Quảng Bình',
                 'phone_contact' => '0985356050',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tra-sua-ba-beo.jpg',
-                'store_province_code' => 44,
-                'store_district_code' => 455,
-                'store_ward_code'=>19168,
                 'store_specific_address' => 'Thôn Đông',
-                'open_time' => '07:00',
-                'close_time' => '23:00',
-                'avg_rate' => 0,
-                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!",
-                'store_active' => 1,
+                'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'XingFu Cha',
-                'store_not_mark' => "xingfu-cha",
-                'store_category' => Category::all()->random()->id,
-                'store_address' => 'Quỳnh Tiến - Tượng Văn - Nông Cống - Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'owner' => 2,
                 'store_image' => '/images/uploads/store-avatar/tra-sua-xingfu.jpg',
-                'store_province_code' => 38,
-                'store_district_code' => 404,
-                'store_ward_code'=>16357,
                 'store_specific_address' => 'Quỳnh Tiến',
-                'open_time' => '07:00',
-                'close_time' => '22:00',
-                'avg_rate' => 0,
-                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất",
-                'store_active' => 1,
+                'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
         ];
+        $randomAddress = [
+            //nông cống
+            [
+                ['name' => 'Thanh Hóa', 'code' => 38],
+                ['name' => 'Nông Cống', 'code' => 404],
+                [
+                    [
+                        "name" => "TT Nông Cống",
+                        "code" => 16279,
+                    ],
+                    [
+                        "name" => "Tân Phúc",
+                        "code" => 16282,
+                    ],
+                    [
+                        "name" => "Tân Thọ",
+                        "code" => 16285,
+                    ],
+                    [
+                        "name" => "Hoàng Sơn",
+                        "code" => 16288,
+                    ],
+                    [
+                        "name" => "Tân Khang",
+                        "code" => 16291,
+                    ],
+                    [
+                        "name" => "Hoàng Giang",
+                        "code" => 16294,
+                    ],
+                    [
+                        "name" => "Trung Chính",
+                        "code" => 16297,
+                    ],
+                    [
+                        "name" => "Trung Thành",
+                        "code" => 16303,
+                    ],
+                    [
+                        "name" => "Tế Thắng",
+                        "code" => 16309,
+                    ],
+                    [
+                        "name" => "Tế Lợi",
+                        "code" => 16315,
+                    ],
+                    [
+                        "name" => "Tế Nông",
+                        "code" => 16318,
+                    ],
+                    [
+                        "name" => "Minh Nghĩa",
+                        "code" => 16321,
+                    ],
+                    [
+                        "name" => "Minh Khôi",
+                        "code" => 16324,
+                    ],
+                    [
+                        "name" => "Vạn Hòa",
+                        "code" => 16327,
+                    ],
+                    [
+                        "name" => "Trường Trung",
+                        "code" => 16330,
+                    ],
+                    [
+                        "name" => "Vạn Thắng",
+                        "code" => 16333,
+                    ],
+                    [
+                        "name" => "Trường Giang",
+                        "code" => 16336,
+                    ],
+                    [
+                        "name" => "Vạn Thiện",
+                        "code" => 16339,
+                    ],
+                    [
+                        "name" => "Thăng Long",
+                        "code" => 16342,
+                    ],
+                    [
+                        "name" => "Trường Minh",
+                        "code" => 16345,
+                    ],
+                    [
+                        "name" => "Trường Sơn",
+                        "code" => 16348,
+                    ],
+                    [
+                        "name" => "Thăng Bình",
+                        "code" => 16351,
+                    ],
+                    [
+                        "name" => "Công Liêm",
+                        "code" => 16354,
+                    ],
+                    [
+                        "name" => "Tượng Văn",
+                        "code" => 16357,
+                    ],
+                    [
+                        "name" => "Thăng Thọ",
+                        "code" => 16360,
+                    ],
+                    [
+                        "name" => "Tượng Lĩnh",
+                        "code" => 16363,
+                    ],
+                    [
+                        "name" => "Tượng Sơn",
+                        "code" => 16366,
+                    ],
+                    [
+                        "name" => "Công Chính",
+                        "code" => 16369,
+                    ],
+                    [
+                        "name" => "Yên Mỹ",
+                        "code" => 16375,
+                    ]
 
-        DB::table('stores')->insert($demoStores);
+                ]
+            ],
+            //bố trạch
+            [
+                ['name' => 'Quảng Bình', 'code' => 44],
+                ['name' => 'Bố Trạch', 'code' => 455],
+                [
+                    [
+                        "name" => "TT Hoàn Lão",
+                        "code" => 19111
+                    ],
+                    [
+                        "name" => "TT NT Việt Trung",
+                        "code" => 19114
+                    ],
+                    [
+                        "name" => "Xuân Trạch",
+                        "code" => 19117
+                    ],
+                    [
+                        "name" => "Mỹ Trạch",
+                        "code" => 19120
+                    ],
+                    [
+                        "name" => "Hạ Trạch",
+                        "code" => 19123
+                    ],
+                    [
+                        "name" => "Bắc Trạch",
+                        "code" => 19126
+                    ],
+                    [
+                        "name" => "Lâm Trạch",
+                        "code" => 19129
+                    ],
+                    [
+                        "name" => "Thanh Trạch",
+                        "code" => 19132
+                    ],
+                    [
+                        "name" => "Liên Trạch",
+                        "code" => 19135
+                    ],
+                    [
+                        "name" => "Phúc Trạch",
+                        "code" => 19138
+                    ],
+                    [
+                        "name" => "Cự Nẫm",
+                        "code" => 19141
+                    ],
+                    [
+                        "name" => "Hải Phú",
+                        "code" => 19144
+                    ],
+                    [
+                        "name" => "Thượng Trạch",
+                        "code" => 19147
+                    ],
+                    [
+                        "name" => "Sơn Lộc",
+                        "code" => 19150
+                    ],
+                    [
+                        "name" => "Hưng Trạch",
+                        "code" => 19156
+                    ],
+                    [
+                        "name" => "Đồng Trạch",
+                        "code" => 19159
+                    ],
+                    [
+                        "name" => "Đức Trạch",
+                        "code" => 19162
+                    ],
+                    [
+                        "name" => "TT Phong Nha",
+                        "code" => 19165
+                    ],
+                    [
+                        "name" => "Vạn Trạch",
+                        "code" => 19168
+                    ],
+                    [
+                        "name" => "Phú Định",
+                        "code" => 19174
+                    ],
+                    [
+                        "name" => "Trung Trạch",
+                        "code" => 19177
+                    ],
+                    [
+                        "name" => "Tây Trạch",
+                        "code" => 19180
+                    ],
+                    [
+                        "name" => "Hòa Trạch",
+                        "code" => 19183
+                    ],
+                    [
+                        "name" => "Đại Trạch",
+                        "code" => 19186
+                    ],
+                    [
+                        "name" => "Nhân Trạch",
+                        "code" => 19189
+                    ],
+                    [
+                        "name" => "Tân Trạch",
+                        "code" => 19192
+                    ],
+                    [
+                        "name" => "Nam Trạch",
+                        "code" => 19195
+                    ],
+                    [
+                        "name" => "Lý Trạch",
+                        "code" => 19198
+                    ]
+                ]
+            ],
+            //liên chiểu
+            [
+                ['name' => 'Đà Nẵng', 'code' => 48],
+                ['name' => 'Liên Chiểu', 'code' => 490],
+                [
+                    [
+                        "name" => "Hòa Hiệp Bắc",
+                        "code" => 20194
+                    ],
+                    [
+                        "name" => "Hòa Hiệp Nam",
+                        "code" => 20195
+                    ],
+                    [
+                        "name" => "Hòa Khánh Bắc",
+                        "code" => 20197
+                    ],
+                    [
+                        "name" => "Hòa Khánh Nam",
+                        "code" => 20198
+                    ],
+                    [
+                        "name" => "Hòa Minh",
+                        "code" => 20200
+                    ]
+
+                ]
+            ]
+        ];
+        for ($i = 1; $i < 4; $i++) {
+            foreach ($demoStores as $demoStore) {
+                $address = $randomAddress[rand(0, count($randomAddress) - 1)];
+                $ward = $address[2][rand(0, count($address[2]) - 1)];
+                $randMin = rand(0, 1) * 30;
+                $store = new Store();
+                $store->store_category = Category::all()->random()->id;
+                $store->store_address = $demoStore['store_specific_address'] . ' - ' . $ward['name'] . ' - ' . $address[1]['name'] . ' - ' . $address[0]['name'];;
+                $store->store_province_code = $address[0]['code'];
+                $store->store_district_code = $address[1]['code'];
+                $store->store_ward_code = $ward['code'];
+                $store->owner = rand(2, 6);
+                $store->open_time = str_pad(rand(7, 15), 2, '0', STR_PAD_LEFT) . ':' . ($randMin === 0 ? '00' : $randMin);
+                $store->close_time = rand(18, 23) . ':' . ($randMin === 0 ? '00' : $randMin);
+                $store->store_not_mark = vi_not_mark($demoStore['store_name']);
+                foreach ($demoStore as $key => $value) {
+                    if ($key == 'store_name') {
+                        $store->$key = $value . ($i === 1 ? ' I' : ($i === 2 ? ' II' : ' III'));
+                    } else {
+                        $store->$key = $value;
+                    }
+                }
+                $store->save();
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ class CreateCommentPictureTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments("id");
-            $table->string("picture_path", 50);
+            $table->string("picture_path", 100);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,8 @@ class FoodTagDetailTableSeeder extends Seeder
     public function run()
     {
         $foodTagDetail = [];
-
-        for ($i = 1; $i < 31; $i++) {
+        $foodCount = Food::all()->count();
+        for ($i = 1; $i <= $foodCount; $i++) {
             $tagId1 = rand(1, 12);
             $tagId2 = rand(1, 12);
             while ($tagId1 === $tagId2) {

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    //
     private $objStore;
 
     public function __construct()

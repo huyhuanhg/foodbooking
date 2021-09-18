@@ -42,7 +42,7 @@ class CommentRepository implements CommentInterface
                     'comments.content',
                     'stores.store_not_mark',
                     'stores.store_name',
-                    'stores.store_avatar',
+                    'stores.store_image',
                 ],
                 'Danh sách bình luận',
                 $page
@@ -62,9 +62,14 @@ class CommentRepository implements CommentInterface
     {
         return
             $this->comment->select(
-                'comments.store_id', 'comments.content', 'users.first_name', 'users.last_name', 'users.avatar'
+                'comments.store_id',
+                'comments.content',
+                'users.first_name',
+                'users.last_name',
+                'users.avatar',
+                'sub_cm.total_comment'
             )->join(DB::raw('(
-                        SELECT MAX(id) max_id
+                        SELECT MAX(id) max_id, COUNT(comments.id) as total_comment
                         FROM comments
                         WHERE store_id IN (' . implode(',', $storeIdList) . ')
                         GROUP BY store_id) AS sub_cm'), 'sub_cm.max_id', 'comments.id')

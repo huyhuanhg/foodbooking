@@ -14,10 +14,10 @@ class UploadImageRequest extends Request
     public function messages()
     {
         return [
-            'image.required'=>'k tồn tại',
-            'image.image'=>'k phải ảnh',
-            'image.mimes'=>'k Loại không đúng',
-            'image.max'=>'k quá tải',
+            'image.required' => 'k tồn tại',
+            'image.image' => 'k phải ảnh',
+            'image.mimes' => 'k Loại không đúng',
+            'image.max' => 'k quá tải',
         ];
     }
 }

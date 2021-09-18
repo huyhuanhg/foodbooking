@@ -7,7 +7,6 @@ use App\Http\Requests\Api\ApiUserLoginRequest;
 use App\Http\Requests\Api\ApiUserRegisterRequest;
 use App\Http\Requests\Api\EmailRequest;
 use App\Services\AuthService;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -59,15 +58,15 @@ class AuthController extends Controller
     {
         $user = auth()->user();
         $total_cart = $this->authService->getTotalCart($user);
-        return response()->json($user->setAttribute('carts' , $total_cart));
+        return response()->json($user->setAttribute('carts', $total_cart));
     }
 
     protected function createToken($token, $cartTotal = null)
     {
         $user = auth()->user();
-        if ($cartTotal){
+        if ($cartTotal) {
             $total_cart = $this->authService->getTotalCart($user);
-            $user = $user->setAttribute('carts' , $total_cart);
+            $user = $user->setAttribute('carts', $total_cart);
         }
         return response()->json([
             'access_token' => $token,
