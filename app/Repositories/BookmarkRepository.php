@@ -31,7 +31,7 @@ class BookmarkRepository implements BookmarkInterface
                 'store_id',
                 'store_name',
                 'store_not_mark',
-                'store_avatar',
+                'store_image',
                 'store_address',
                 'store_description',
                 'store_categories.store_cate_name',

@@ -27,4 +27,13 @@ class CommentRequest extends Request
             'content' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'store_id.required' => 'Cửa hàng không được bỏ trống!',
+            'store_id.exists' => 'Cửa hàng không tồn tại!',
+            'content.required' => 'Vui lòng nhập nội dung bình luận!',
+        ];
+    }
 }

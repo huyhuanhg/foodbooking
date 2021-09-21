@@ -59,7 +59,8 @@ class UserController extends Controller
                 'province_code',
                 'district_code',
                 'ward_code',
-                'birthday'
+                'birthday',
+                'description'
             ])
         );
         return response()->json($response, $response['status'] ?? Response::HTTP_OK);
