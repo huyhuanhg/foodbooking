@@ -8,7 +8,7 @@ class UploadImagesRequest extends Request
     {
         return [
             'images' => 'required|array|max:8',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
