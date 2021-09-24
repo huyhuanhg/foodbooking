@@ -24,6 +24,7 @@ class Food extends Model
         'food_image',
         'promotion',
         'price',
+        'discount',
         'food_profit',
         'food_consume',
         'food_description',

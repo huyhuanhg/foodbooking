@@ -24,9 +24,10 @@ class CreateFoodsTable extends Migration
             $table->tinyInteger('food_active')->default(1);//tình trạng
             $table->string('food_image', 100)->nullable();
             $table->tinyInteger('promotion')->default(0);//đang khuyến mãi không?
-            $table->float("price");//giá bán trước khuyến mãi
+            $table->float("price", 7, 0);//giá bán trước khuyến mãi
+            $table->float("discount", 7, 0);//giá bán sau khuyến mãi
 
-            $table->float('food_profit')->default(0);//số tiền lợi nhuận
+            $table->double('food_profit')->default(0);//số tiền lợi nhuận
             $table->integer("food_consume")->default(0); //số lượng tiêu thụ
             $table->text("food_description")->nullable();
 

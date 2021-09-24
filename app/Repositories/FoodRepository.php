@@ -57,26 +57,6 @@ class FoodRepository implements FoodInterface
 
         }
 
-        $food = $food->join(DB::raw("
-                (SELECT child.id, (
-                    CASE
-                    	WHEN promotions.is_percent = 1
-                        THEN (
-                        	CASE
-                            	WHEN (price * promotions.discount / 100) < promotions.max_discount
-                            	THEN (price - price * promotions.discount / 100)
-                            	ELSE promotions.max_discount
-                            END
-                        )
-                        ELSE
-                    		(CASE
-                    				WHEN promotions.is_percent = 0
-                                    THEN (price - promotions.discount)
-                                    ELSE child.price
-                    		END)
-
-                    END) discount FROM `foods` child
-                LEFT JOIN promotions ON promotions.food_id = child.id) sub"), 'sub.id', 'foods.id');
 
         if ($sort && $sortType !== 0) {
             if ($sort === 'price') {
@@ -97,11 +77,11 @@ class FoodRepository implements FoodInterface
                 'foods.food_name',
                 'foods.food_image',
                 'foods.price',
+                'foods.discount',
                 'foods.food_consume',
                 'foods.food_description',
                 'stores.store_name',
                 'stores.store_not_mark',
-                'sub.discount',
             ],
             'Danh sách món ăn',
             $page

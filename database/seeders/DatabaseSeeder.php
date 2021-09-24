@@ -289,7 +289,7 @@ class DatabaseSeeder extends Seeder
         $randomName = [
             [
                 'first_name' => 'Huy',
-                'last_name' => "Huấn",
+                'last_name' => 'Huấn',
                 'avatar' => '/images/uploads/user-avatar/user-1.jpeg',
                 'birthday' => '1995-01-10',
                 'phone' => '0935906860',
@@ -368,6 +368,23 @@ class DatabaseSeeder extends Seeder
                 'birthday' => '2020-12-01',
             ],
         ];
+        $user = new User();
+        $user->first_name = 'Huy';
+        $user->last_name = 'Huấn';
+        $user->avatar = '/images/uploads/user-avatar/user-1.jpeg';
+        $user->birthday = '1995-01-10';
+        $user->phone = '0935906860';
+        $user->gender = 1;
+        $user->email = "client@gmail.com";
+        $user->password = bcrypt('123456');
+        $user->description = 'Đam mê ăn uống';
+        $user->active = 1;
+        $user->address = 'Vạn Trạch - Bố Trạch - Quảng Bình';
+        $user->province_code = 44;
+        $user->district_code = 455;
+        $user->ward_code = 19168;
+        $user->save();
+
         for ($i = 1; $i <= 50; $i++) {
             $user = new User();
             $person = $randomName[rand(0, count($randomName) - 1)];
@@ -526,6 +543,11 @@ class DatabaseSeeder extends Seeder
             FoodTagDetailTableSeeder::class,
             CommentsTableSeeder::class,
             PromotionTableSeeder::class,
+
+            BookmarkTableSeeder::class,
+            LikeTableSeeder::class,
+            RateTableSeeder::class,
+            OrderTableSeeder::class,
         ]);
     }
 }

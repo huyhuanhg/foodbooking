@@ -30,7 +30,6 @@ class FoodService
             $request->user ?? -1,
             $request->search ?? ''
         );
-
         $foodTags = $this->foodTab->getTags();
 
         return [

@@ -20,169 +20,168 @@ class StoresTableSeeder extends Seeder
             [
                 'store_name' => 'Quán ăn vặt đóng hộp',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/an-vat-1.jpeg',
+                'store_image' => '/images/uploads/store-images/an-vat-1.jpeg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Quán ăn vặt đóng hộp"
             ],
             [
                 'store_name' => 'Bánh tráng kẹp Mis-Thy',
-
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/banh-trang-kep.jpg',
+                'store_image' => '/images/uploads/store-images/banh-trang-kep.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Bánh tráng kẹp Mis-Thy"
             ],
             [
                 'store_name' => 'Cafe Thiên Đường',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/cafe-1.jpg',
+                'store_image' => '/images/uploads/store-images/cafe-1.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Cafe Thiên Đường"
             ],
             [
                 'store_name' => 'Cafe Lung Linh',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/cafe-2.jpg',
+                'store_image' => '/images/uploads/store-images/cafe-2.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Cafe Lung Linh"
             ],
             [
                 'store_name' => 'Tiệm bánh ngọt',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/cheese.jpg',
+                'store_image' => '/images/uploads/store-images/cheese.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Chuyên bánh sinh nhật, bánh ngọt, bánh kem, bánh bông lan, ..."
             ],
             [
                 'store_name' => 'CHRIS Cheese Hotdog',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/cheese-hotdog.jpg',
+                'store_image' => '/images/uploads/store-images/cheese-hotdog.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "CHRIS Cheese Hotdog"
             ],
             [
                 'store_name' => 'Kim Bắp Hàn Quốc',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/kim-bap.jpg',
+                'store_image' => '/images/uploads/store-images/kim-bap.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Kim Bắp Hàn Quốc"
             ],
             [
                 'store_name' => 'Mì Quảng Ba Vị',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/mi-quang-ba-vi.jpg',
+                'store_image' => '/images/uploads/store-images/mi-quang-ba-vi.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Mì Quảng Ba Vị"
             ],
             [
                 'store_name' => 'Món chiên Thiên Kim',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/mon-chien.jpeg',
+                'store_image' => '/images/uploads/store-images/mon-chien.jpeg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Chuyên các món ăn chiên giòn"
             ],
             [
                 'store_name' => 'Quán ăn Thần Tiên',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/quan-an.jpg',
+                'store_image' => '/images/uploads/store-images/quan-an.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Quán ăn Thần Tiên"
             ],
             [
                 'store_name' => 'Nhà hàng Vạn Lộc',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/quan-an-2.jpg',
+                'store_image' => '/images/uploads/store-images/quan-an-2.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Vui lòng khách đến vừa lòng khách đi!"
             ],
             [
                 'store_name' => 'Cafe Thôi Kệ',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/thoi-ke.jpg',
+                'store_image' => '/images/uploads/store-images/thoi-ke.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Bỏ qua mọi thứ, thôi kệ mà chơi"
             ],
             [
                 'store_name' => 'Nhà hàng Năm Xưa',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/quan-co.jpg',
+                'store_image' => '/images/uploads/store-images/quan-co.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Cơm sường Tấm Cám',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/quan-com-suon.jpg',
+                'store_image' => '/images/uploads/store-images/quan-com-suon.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Mì Quảng Hoàng Gia',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/quan-mi-quang.jpg',
+                'store_image' => '/images/uploads/store-images/quan-mi-quang.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Pizza The Love',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/quan-pizza.jpg',
+                'store_image' => '/images/uploads/store-images/quan-pizza.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Trà sữa King',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/quan-tra-sua-king.jpg',
+                'store_image' => '/images/uploads/store-images/quan-tra-sua-king.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Bánh kem Út Mô Tô',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/tiem-banh-kem-ut-mo-to.jpg',
+                'store_image' => '/images/uploads/store-images/tiem-banh-kem-ut-mo-to.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Bánh ngọt Như Ý',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/tiem-banh-ngot.jpg',
+                'store_image' => '/images/uploads/store-images/tiem-banh-ngot.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Quán Rau má Thanh Hóa',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/tiem-rau-ma.jpg',
+                'store_image' => '/images/uploads/store-images/tiem-rau-ma.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'HIGHLANDS',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/tra-sua-1.jpg',
+                'store_image' => '/images/uploads/store-images/tra-sua-1.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'Nước ngon cho bạn',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/tra-sua-2.jpeg',
+                'store_image' => '/images/uploads/store-images/tra-sua-2.jpeg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],
             [
                 'store_name' => 'Bà Béo',
                 'phone_contact' => '0985356050',
-                'store_image' => '/images/uploads/store-avatar/tra-sua-ba-beo.jpg',
+                'store_image' => '/images/uploads/store-images/tra-sua-ba-beo.jpg',
                 'store_specific_address' => 'Thôn Đông',
                 'store_description' => "Vì lý tưởng duy nhất, phục vụ khách hàng bằng cả tấm lòng!"
             ],
             [
                 'store_name' => 'XingFu Cha',
                 'phone_contact' => '0982184651',
-                'store_image' => '/images/uploads/store-avatar/tra-sua-xingfu.jpg',
+                'store_image' => '/images/uploads/store-images/tra-sua-xingfu.jpg',
                 'store_specific_address' => 'Quỳnh Tiến',
                 'store_description' => "Kinh doanh chỉ là đam mê, khách hàng vui lòng mới là niềm vui lớn nhất"
             ],

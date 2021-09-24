@@ -307,7 +307,7 @@
             $('#foodId').value = id;
             $('#foodName').value = data.getAttribute('data-food-name');
             $('#price').value = data.getAttribute('data-food-price');
-            $('#foodAvatarImg').src = data.getAttribute('data-food-avatar');
+            $('#foodAvatarImg').src = data.getAttribute('data-food-images');
             $('#category').value = data.getAttribute('data-food-category-id');
             $('#store').value = data.getAttribute('data-food-store-id');
             $('#foodActive').value = data.getAttribute('data-food-active');
@@ -414,7 +414,7 @@
             $('#foodAvatarLabel').removeAttribute('file-name');
             $('#foodAvatarImg').src = '/images/default/no-image-food.jpg';
         })
-        $('#food-avatar').onchange = function (e) {
+        $('#food-images').onchange = function (e) {
             deleteImageRequest("{{access_token()}}")
             if (e.target.files.length !== 0) {
                 var loadingSpan = document.createElement('div');
@@ -429,7 +429,7 @@
                     header: {
                         'Authorization': `Bearer {{access_token()}}}`
                     },
-                    data: {'food_avatar': $('#food-avatar').files[0]},
+                    data: {'food_avatar': $('#food-images').files[0]},
                     success: (data) => {
                         $('#foodAvatarImg').removeAttribute('scr');
                         $('#foodAvatarImg').setAttribute('src', data.path);

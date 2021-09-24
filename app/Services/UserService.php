@@ -26,7 +26,9 @@ class UserService
     {
         $imageInfo = $this->imageInterface->upload($image, '/images/uploads/user-avatar');
         $currentPath = $this->userInterface->changeAvatar($imageInfo['path']);
-        $this->imageInterface->delete($currentPath);
+        if (!empty($currentPath)) {
+            $this->imageInterface->delete($currentPath);
+        }
         return $imageInfo['path'];
     }
 

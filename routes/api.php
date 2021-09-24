@@ -70,6 +70,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Client\Api',
 ], function () {
     Route::patch('/user', 'UserController@update');
+    Route::post('/user-avatar', 'UserController@uploadAvatar');
     Route::patch('/user-email', 'UserController@updateEmail');
     Route::patch('/user-phone', 'UserController@updatePhone');
     Route::patch('/user-full-name', 'UserController@updateFullName');
@@ -93,7 +94,6 @@ Route::group([
     Route::resource('/bookmark', 'BookmarkController')->except(['edit', 'create', 'update']);
     Route::patch('/bookmark', 'BookmarkController@update');
 
-    Route::post('/user-avatar', 'UserController@uploadAvatar');
     Route::post('/comment-pictures', 'CommentController@uploadPicture');
     Route::post('/comment-pictures-d', 'CommentController@deletePictures');
     Route::post('/comment-picture-d', 'CommentController@deletePicture');

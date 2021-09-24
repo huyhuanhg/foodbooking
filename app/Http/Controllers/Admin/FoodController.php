@@ -92,9 +92,9 @@ class FoodController extends Controller
         }
 
         $imageName = time() . '.' . $request->food_avatar->extension();
-        $request->food_avatar->move(public_path('/images/uploads/food-avatar'), $imageName);
+        $request->food_avatar->move(public_path('/images/uploads/food-images'), $imageName);
         return response()->json([
-            'path' => "/images/uploads/food-avatar/$imageName",
+            'path' => "/images/uploads/food-images/$imageName",
             'fileName' => $imageName,
         ]);
     }

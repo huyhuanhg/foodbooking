@@ -31,6 +31,20 @@ class PromotionTableSeeder extends Seeder
             }
             $promotion->start_time = now();
             $promotion->save();
+
+            if ($isPercent !== 0) {
+                $newPrice = $discount * $food->price / 100;
+                if ($newPrice <= $maxDiscount) {
+                    $discount = $food->price - $newPrice;
+                } else {
+                    $discount = $food->price - $maxDiscount;
+                }
+            } else {
+                $discount = $food->price - $discount;
+            }
+            $f = Food::find($food->id);
+            $f->discount = $discount;
+            $f->save();
         }
     }
 }

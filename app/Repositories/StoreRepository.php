@@ -47,9 +47,9 @@ class StoreRepository implements StoreInterface
         }
         if ($sort) {
             if ($sort === 'total_order') {
-                $stores = $stores->orderBy("$sort", $sortType !== -1 ? "DESC" : "ASC");
+                $stores = $stores->orderBy("$sort", $sortType === -1 ? "DESC" : "ASC");
             } else {
-                $stores = $stores->orderBy("stores.$sort", $sortType !== -1 ? "DESC" : "ASC");
+                $stores = $stores->orderBy("stores.$sort", $sortType === -1 ? "DESC" : "ASC");
             }
         }
         return $stores->paginate(

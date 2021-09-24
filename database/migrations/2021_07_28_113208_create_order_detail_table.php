@@ -19,9 +19,9 @@ class CreateOrderDetailTable extends Migration
             $table->unsignedInteger("order_id");
             $table->unsignedInteger("food_id");
             $table->unsignedInteger("store_id");
-            $table->float("uni_price");//giá gốc
+            $table->float("uni_price", 8, 0);//giá gốc
             $table->integer("quantity");//số lượng
-            $table->float("discount")->nullable();//giảm giá
+            $table->float("discount", 8, 0)->nullable();//giảm giá
             $table->primary(array('order_id', 'food_id'));
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
