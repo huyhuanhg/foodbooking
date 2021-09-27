@@ -30,12 +30,8 @@ class FoodService
             $request->user ?? -1,
             $request->search ?? ''
         );
-        $foodTags = $this->foodTab->getTags();
 
-        return [
-            'foods' => $foodsList,
-            'tags' => $foodTags,
-        ];
+        return $foodsList;
     }
 
     public function getPromotionInitial($limit = 12)

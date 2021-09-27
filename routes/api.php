@@ -49,6 +49,9 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Client\Api',
 ], function () {
 
+    Route::get('/food-tag', 'FoodTagController@index');
+    Route::get('/categories', 'CategoryController@index');
+
     Route::get('/foods', 'FoodController@index');
     Route::get('/stores', 'StoreController@index');
     Route::get('/stores/{store}', 'StoreController@show');

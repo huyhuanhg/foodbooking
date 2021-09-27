@@ -32,6 +32,9 @@ class CartService
     public function update($request)
     {
         $detail = $this->cart->update(Food::find($request['food']), $request['action'] ?? 1);
+        if (array_key_exists('status', $detail)) {
+            return $detail;
+        }
         $detail['pivot']['quantity'] += $request['action'] ?? 1;
         $detail['pivot'] = $detail['pivot']->only('quantity');
         $carts = $this->cart->getList();

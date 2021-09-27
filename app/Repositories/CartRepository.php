@@ -41,9 +41,16 @@ class CartRepository implements CartInterface
                 return $createInfo;
             } else {
                 $quantity = $cartDetail->pluck('pivot')->first()->quantity + $action;
-                $cart->cartDetail()->detach($food->id);
-                $cart->cartDetail()->attach($food->id, ['store_id' => $food->store_id, 'quantity' => $quantity]);
-                return $cartDetail->first()->only('id', 'food_name', 'food_image', 'pivot');
+                if ($quantity > 0) {
+                    $cart->cartDetail()->detach($food->id);
+                    $cart->cartDetail()->attach($food->id, ['store_id' => $food->store_id, 'quantity' => $quantity]);
+                    return $cartDetail->first()->only('id', 'food_name', 'food_image', 'pivot');
+                } else {
+                    return [
+                        'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                        'message' => 'Error Quantity!'
+                    ];
+                }
             }
         } catch (\Exception $e) {
             return [

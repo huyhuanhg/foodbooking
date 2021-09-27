@@ -40,11 +40,7 @@ class StoreService
             $lastComment = $this->comment->lastCommentByIds($storeIdList);
             $this->addLastComment($stores, $lastComment);
         }
-        $categories = $this->category->getCategories();
-        return [
-            'stores' => $stores,
-            'categories' => $categories,
-        ];
+        return $stores;
     }
 
     public function getStoreDetail($store, $request)
