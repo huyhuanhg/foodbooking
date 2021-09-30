@@ -97,6 +97,9 @@ Route::group([
     Route::resource('/bookmark', 'BookmarkController')->except(['edit', 'create', 'update']);
     Route::patch('/bookmark', 'BookmarkController@update');
 
+    Route::post('/comment-upload-picture-single', 'CommentController@uploadPictureSingle');
+
+
     Route::post('/comment-pictures', 'CommentController@uploadPicture');
     Route::post('/comment-pictures-d', 'CommentController@deletePictures');
     Route::post('/comment-picture-d', 'CommentController@deletePicture');

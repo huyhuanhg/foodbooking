@@ -14,8 +14,8 @@ class DeleteImageRequest extends Request
     public function messages()
     {
         return [
-            'path.required' => 'k tồn tại',
-            'path.string' => 'k phải chuỗi',
+            'path.required' => 'Vui lòng nhập đường dẫn!',
+            'path.string' => 'Đường dẫn phải là chuỗi!',
         ];
     }
 }

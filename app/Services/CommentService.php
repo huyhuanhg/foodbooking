@@ -59,6 +59,11 @@ class CommentService
         }
     }
 
+    public function uploadPictureSingle($image)
+    {
+        return $this->image->upload($image, '/images/uploads/comment-pictures');
+    }
+
     protected function syncPicture($comments, $pictureList)
     {
         if (empty($pictureList)) {

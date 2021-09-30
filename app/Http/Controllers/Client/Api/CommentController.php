@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ApiCommentRequest;
 use App\Http\Requests\Api\ApiDeleteImageRequest;
 use App\Http\Requests\Api\ApiDeleteImagesRequest;
+use App\Http\Requests\Api\ApiUploadImageRequest;
 use App\Http\Requests\Api\ApiUploadImagesRequest;
 use App\Repositories\Interfaces\ImageInterface;
 use App\Services\CommentService;
@@ -51,5 +52,11 @@ class CommentController extends Controller
     {
         $this->commentService->deletePictures($request->paths);
         return response()->json([]);
+    }
+
+    public function uploadPictureSingle(ApiUploadImageRequest $request)
+    {
+        $response = $this->commentService->uploadPictureSingle($request->image);
+        return response()->json($response, $response['status'] ?? Response::HTTP_OK);
     }
 }

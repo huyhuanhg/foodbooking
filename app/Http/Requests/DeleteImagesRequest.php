@@ -15,9 +15,9 @@ class DeleteImagesRequest extends Request
     public function messages()
     {
         return [
-            'paths.required' => 'k tồn tại',
-            'paths.array' => 'k phải mảng',
-            'paths.max' => 'quá tải',
+            'paths.required' => 'Danh sách không tồn tại!',
+            'paths.array' => 'Danh sách không phải mảng',
+            'paths.max' => 'Danh sách tối đa 8 phần tử',
         ];
     }
 }
