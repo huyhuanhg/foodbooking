@@ -5,6 +5,7 @@ namespace App\Repositories\Interfaces;
 interface OrderInterface
 {
     public function getList(
+        string $timezone,
         int $userId,
         int $page,
         int $store,

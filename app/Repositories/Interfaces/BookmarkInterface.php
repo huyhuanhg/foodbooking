@@ -5,7 +5,7 @@ namespace App\Repositories\Interfaces;
 
 interface BookmarkInterface
 {
-    public function getList(array $storeIds, int $page, int $limit);
+    public function getList(string $timezone, array $storeIds, int $page, int $limit);
 
     public function getByStoreId(int $storeId);
 

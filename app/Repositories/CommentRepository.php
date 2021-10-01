@@ -17,8 +17,9 @@ class CommentRepository implements CommentInterface
         $this->commentPicture = $commentPicture;
     }
 
-    public function getComments(int $storeId, int $userId, int $limit, int $page)
+    public function getComments(string $timezone, int $storeId, int $userId, int $limit, int $page)
     {
+        date_default_timezone_set($timezone);
         $comment = $this->comment;
         if ($storeId === -1) {
             if ($userId !== -1) {
@@ -46,7 +47,7 @@ class CommentRepository implements CommentInterface
                 ],
                 'Danh sách bình luận',
                 $page
-            );;
+            );
     }
 
     public function getPictures(array $commentIds)

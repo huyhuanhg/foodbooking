@@ -6,7 +6,7 @@ interface CommentInterface
 {
     public function lastCommentByIds(array $storeIdList);
 
-    public function getComments(int $storeId, int $userId, int $limit, int $page);
+    public function getComments(string$timezone, int $storeId, int $userId, int $limit, int $page);
 
     public function getPictures(array $commentIds);
 
