@@ -18,7 +18,7 @@ class OrderRepository implements OrderInterface
 
     public function getList(string $timezone, int $userId, int $page, int $store, int $limit)
     {
-        date_default_timezone_set($timezone);
+//        date_default_timezone_set($timezone);
         if ($userId === 0 && $store === 0) {
             return;
         }
