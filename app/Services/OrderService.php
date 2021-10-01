@@ -28,6 +28,7 @@ class OrderService
     {
         $storeId = $request->store_id ?? 0;
         $orders = $this->orderInterface->getList(
+            $request->timezone ?? 'UTC',
             $userId,
             $request->page ?? 1,
             $storeId,

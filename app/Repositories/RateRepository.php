@@ -15,8 +15,9 @@ class RateRepository implements RateInterface
         $this->rate = $rate;
     }
 
-    public function getList(int $page, int $limit)
+    public function getList(string $timezone, int $page, int $limit)
     {
+        date_default_timezone_set($timezone);
         return $this->rate
             ->join('stores', 'stores.id', 'store_rates.store_id')
             ->join('store_categories', 'store_categories.id', 'stores.store_category')

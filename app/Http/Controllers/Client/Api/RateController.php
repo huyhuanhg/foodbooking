@@ -19,7 +19,7 @@ class RateController extends Controller
 
     public function index(Request $request)
     {
-        $response = $this->rateService->getList($request->only('page', 'limit'));
+        $response = $this->rateService->getList($request);
         return response()->json($response, $response['status'] ?? Response::HTTP_OK);
     }
 

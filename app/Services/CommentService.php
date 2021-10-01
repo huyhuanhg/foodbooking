@@ -19,6 +19,7 @@ class CommentService
     public function getList($request)
     {
         $comments = $this->comment->getComments(
+            $request->timezone ?? 'UTC',
             $request->store ?? -1,
             $request->user_id ?? -1,
             $request->limit ?? 15,

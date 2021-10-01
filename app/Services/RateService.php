@@ -17,7 +17,11 @@ class RateService
 
     public function getList($request)
     {
-        return $this->rate->getList($request['page'] ?? 1, $request['limit'] ?? 20);
+        return $this->rate->getList(
+            $request->timezone ?? 'UTC',
+            $request->page ?? 1,
+            $request->limit ?? 20
+        );
     }
 
     public function create($request)
