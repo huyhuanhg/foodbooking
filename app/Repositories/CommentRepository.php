@@ -19,7 +19,7 @@ class CommentRepository implements CommentInterface
 
     public function getComments(string $timezone, int $storeId, int $userId, int $limit, int $page)
     {
-        date_default_timezone_set($timezone);
+//        date_default_timezone_set($timezone);
         $comment = $this->comment;
         if ($storeId === -1) {
             if ($userId !== -1) {

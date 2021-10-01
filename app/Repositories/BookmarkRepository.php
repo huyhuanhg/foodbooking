@@ -17,7 +17,7 @@ class BookmarkRepository implements BookmarkInterface
 
     public function getList(string $timezone, array $storeIds, int $page, int $limit)
     {
-        date_default_timezone_set($timezone);
+//        date_default_timezone_set($timezone);
         $bookmarks = $this->bookmark->join('stores', 'stores.id', 'bookmarks.store_id')
             ->join('store_categories', 'store_categories.id', 'stores.store_category')
             ->where('user_id', auth()->user()->id);
