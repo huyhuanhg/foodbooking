@@ -21,6 +21,8 @@ class LikeService
             return $likes->map(function ($like) {
                 return $like->food_id;
             });
+        } else {
+            return [];
         }
     }
 
