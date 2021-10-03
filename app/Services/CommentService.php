@@ -36,11 +36,16 @@ class CommentService
 
     public function create($request)
     {
-        return $this->comment->create(
+        $comment = $this->comment->create(
             $request->store_id,
             $request->content,
             $request->paths ?? []
         );
+        $user = auth()->user();
+        $comment->setAttribute('first_name', $user->first_name);
+        $comment->setAttribute('last_name', $user->last_name);
+        $comment->setAttribute('user_avatar', $user->avatar);
+        return $comment;
     }
 
     public function uploadPictures($images)
