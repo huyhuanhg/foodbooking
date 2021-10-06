@@ -23,7 +23,7 @@ class FoodService
             $request->store ?? -1,
             $request->group ?? "",
             $request->sort ?? "created_at",
-            $request->sort_type ?? 0,
+            $request->sort_type ?? -1,
             $request->tags ?? [],
             $request->page ?? 1,
             $request->limit ?? 24,

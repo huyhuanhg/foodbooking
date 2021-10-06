@@ -49,16 +49,15 @@ class FoodRepository implements FoodInterface
         }
 
         if (!empty($tags)) {
-            $tags = implode(',', $tags);
-            $food = $food->join(
-                DB::raw("(SELECT ftd.food_id FROM food_tag_detail ftd WHERE ftd.tag_id in (${tags})  GROUP BY ftd.food_id) f_tags"),
-                'f_tags.food_id', 'foods.id'
-            );
-
+            $food = $food->whereExists(function ($query) use ($tags) {
+                $query->select(DB::raw(1))
+                    ->from('food_tag_detail')
+                    ->whereColumn('food_tag_detail.food_id', 'foods.id')->whereIn('food_tag_detail.tag_id', $tags);
+            });
         }
 
 
-        if ($sort && $sortType !== 0) {
+        if ($sort) {
             if ($sort === 'price') {
                 $food = $food->orderBy('discount', $sortType < 0 ? "DESC" : "ASC");
             } else {
