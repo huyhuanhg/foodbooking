@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -368,42 +370,42 @@ class DatabaseSeeder extends Seeder
                 'birthday' => '2020-12-01',
             ],
         ];
-        $user = new User();
-        $user->first_name = 'Huy';
-        $user->last_name = 'Huấn';
-        $user->avatar = '/images/uploads/user-avatar/user-1.jpeg';
-        $user->birthday = '1995-01-10';
-        $user->phone = '0935906860';
-        $user->gender = 1;
-        $user->email = "client@gmail.com";
-        $user->password = bcrypt('123456');
-        $user->description = 'Đam mê ăn uống';
-        $user->active = 1;
-        $user->address = 'Vạn Trạch - Bố Trạch - Quảng Bình';
-        $user->province_code = 44;
-        $user->district_code = 455;
-        $user->ward_code = 19168;
-        $user->save();
-
-        for ($i = 1; $i <= 50; $i++) {
-            $user = new User();
-            $person = $randomName[rand(0, count($randomName) - 1)];
-            $address = $randomAddress[rand(0, count($randomAddress) - 1)];
-            $ward = $address[2][rand(0, count($address[2]) - 1)];
-            foreach ($person as $key => $value) {
-                $user->$key = $value;
-            }
-
-            $user->email = "client$i@gmail.com";
-            $user->password = bcrypt('123456');
-            $user->description = 'Vui là chính';
-            $user->active = 1;
-            $user->address = $ward['name'] . ' - ' . $address[1]['name'] . ' - ' . $address[0]['name'];
-            $user->province_code = $address[0]['code'];
-            $user->district_code = $address[1]['code'];
-            $user->ward_code = $ward['code'];
-            $user->save();
-        }
+//        $user = new User();
+//        $user->first_name = 'Huy';
+//        $user->last_name = 'Huấn';
+//        $user->avatar = '/images/uploads/user-avatar/user-1.jpeg';
+//        $user->birthday = '1995-01-10';
+//        $user->phone = '0935906860';
+//        $user->gender = 1;
+//        $user->email = "client@gmail.com";
+//        $user->password = bcrypt('123456');
+//        $user->description = 'Đam mê ăn uống';
+//        $user->active = 1;
+//        $user->address = 'Vạn Trạch - Bố Trạch - Quảng Bình';
+//        $user->province_code = 44;
+//        $user->district_code = 455;
+//        $user->ward_code = 19168;
+//        $user->save();
+//
+//        for ($i = 1; $i <= 50; $i++) {
+//            $user = new User();
+//            $person = $randomName[rand(0, count($randomName) - 1)];
+//            $address = $randomAddress[rand(0, count($randomAddress) - 1)];
+//            $ward = $address[2][rand(0, count($address[2]) - 1)];
+//            foreach ($person as $key => $value) {
+//                $user->$key = $value;
+//            }
+//
+//            $user->email = "client$i@gmail.com";
+//            $user->password = bcrypt('123456');
+//            $user->description = 'Vui là chính';
+//            $user->active = 1;
+//            $user->address = $ward['name'] . ' - ' . $address[1]['name'] . ' - ' . $address[0]['name'];
+//            $user->province_code = $address[0]['code'];
+//            $user->district_code = $address[1]['code'];
+//            $user->ward_code = $ward['code'];
+//            $user->save();
+//        }
 
         $role = [
             [
@@ -530,24 +532,40 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        DB::table('roles')->insert($role);
-        DB::table('admins')->insert($defaultSupperUser);
+//        DB::table('roles')->insert($role);
+//        DB::table('admins')->insert($defaultSupperUser);
 
-        $this->call([
-            StoresCategoriesTableSeeder::class,
-            FoodTagsTableSeeder ::class,
-            StoresTableSeeder::class,
-
-            FoodsTableSeeder::class,
-
-            FoodTagDetailTableSeeder::class,
-            CommentsTableSeeder::class,
-            PromotionTableSeeder::class,
-
-            BookmarkTableSeeder::class,
-            LikeTableSeeder::class,
-            RateTableSeeder::class,
-            OrderTableSeeder::class,
-        ]);
+//        $this->call([
+//            StoresCategoriesTableSeeder::class,
+//            FoodTagsTableSeeder ::class,
+//            StoresTableSeeder::class,
+//
+//            FoodsTableSeeder::class,
+//
+//            FoodTagDetailTableSeeder::class,
+//            CommentsTableSeeder::class,
+//            PromotionTableSeeder::class,
+//
+//            BookmarkTableSeeder::class,
+//            LikeTableSeeder::class,
+//            RateTableSeeder::class,
+//            OrderTableSeeder::class,
+//        ]);
+        $stores = Store::all();
+        $before = strtotime('2021-08-06 00:00:00');
+        foreach ($stores as $store) {
+            $created_at = date('Y-m-d H:i:s', rand($before, time()));
+            $store->created_at = $created_at;
+            $store->updated_at = $created_at;
+            $store->save();
+        };
+        $foods = Food::all();
+        foreach ($foods as $food) {
+            $store = Store::find($food->store_id);
+            $created_at = date('Y-m-d H:i:s', rand(strtotime($store->created_at), time()));
+            $food->created_at = $created_at;
+            $food->updated_at = $created_at;
+            $food->save();
+        };
     }
 }

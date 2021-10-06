@@ -31,10 +31,8 @@ class StoreRepository implements StoreInterface
         string $search
     )
     {
-        $stores = $this->store->leftJoin('comments', 'comments.store_id', 'stores.id')
-            ->leftJoin('foods', 'foods.store_id', 'stores.id')
-            ->leftJoin('order_detail', 'order_detail.store_id', 'stores.id')
-            ->groupBy('stores.id');
+        $stores = $this->store->leftJoin('foods', 'foods.store_id', 'stores.id')
+            ->leftJoin('order_detail', 'order_detail.store_id', 'stores.id');
         if ($group === 'bookmark' && $userId > 0) {
             $stores = $stores->join('bookmarks', 'bookmarks.store_id', 'stores.id')
                 ->where('bookmarks.user_id', $userId);
@@ -52,6 +50,7 @@ class StoreRepository implements StoreInterface
                 $stores = $stores->orderBy("stores.$sort", $sortType === -1 ? "DESC" : "ASC");
             }
         }
+        $stores = $stores->groupBy('stores.id');
         return $stores->paginate(
             $limit,
             [
@@ -62,7 +61,6 @@ class StoreRepository implements StoreInterface
                 'stores.store_address',
                 'stores.store_image',
                 'stores.avg_rate',
-                DB::raw('count(comments.id) as total_comment'),
                 DB::raw('count(foods.store_id) as total_food'),
                 DB::raw('count(order_detail.store_id) as total_order')
             ],
